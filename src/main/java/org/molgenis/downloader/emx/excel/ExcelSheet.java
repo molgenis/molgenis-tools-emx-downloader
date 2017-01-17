@@ -1,0 +1,42 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.molgenis.downloader.emx.excel;
+
+import java.io.IOException;
+import java.util.List;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.molgenis.downloader.api.EMXDataStore;
+
+/**
+ *
+ * @author david
+ */
+public class ExcelSheet implements EMXDataStore {
+
+    private final Sheet sheet;
+    private int rowNumber;
+
+    public ExcelSheet(final Workbook workbook, final String name) {
+        sheet = workbook.createSheet(name);
+        rowNumber = 0;
+    }
+
+    @Override
+    public void writeRow(List<String> values) throws IOException {
+        final Row row = sheet.createRow(rowNumber);
+        rowNumber++;
+        for (int index = 0; index < values.size(); index++) {
+            final String record = values.get(index);
+            if (record != null && !record.trim().isEmpty()) {
+                final Cell cell = row.createCell(index);
+                cell.setCellValue(record.trim());
+            }
+        }
+    }
+}

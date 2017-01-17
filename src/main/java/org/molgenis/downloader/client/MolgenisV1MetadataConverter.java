@@ -1,0 +1,152 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.molgenis.downloader.client;
+
+import java.net.URI;
+import java.util.Map;
+import org.molgenis.downloader.api.metadata.Attribute;
+import org.molgenis.downloader.api.metadata.Backend;
+import org.molgenis.downloader.api.metadata.DataType;
+import org.molgenis.downloader.api.metadata.Entity;
+import org.molgenis.downloader.api.metadata.Language;
+import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.api.metadata.Tag;
+
+/**
+ *
+ * @author david
+ */
+class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
+
+    final MetadataRepository repository;
+
+    public MolgenisV1MetadataConverter(final MetadataRepository metadataRepository) {
+        repository = metadataRepository;
+    }
+
+    @Override
+    public Tag toTag(final Map<Attribute, String> data) {
+        Tag tag = repository.createTag(getString(data, "identifier"));
+        setString(data, "label", tag::setLabel);
+        setData(data, "objectIRI", URI::create, tag::setObjectIRI);
+        setData(data, "relationIRI", URI::create, tag::setRelationIRI);
+        setString(data, "relationLabel", tag::setRelationLabel);
+        setString(data, "codeSystem", tag::setCodeSystem);
+        return tag;
+    }
+
+    @Override
+    public Attribute toAttribute(final Map<Attribute, String> data) {
+        Attribute att = repository.createAttribute(getString(data, "identifier"));
+        setString(data, "name", att::setName);
+        setData(data, "dataType", DataType::from, att::setDataType);
+        setList(data, "parts", repository::createAttribute, part -> {
+                part.setCompound(att);
+                att.addPart(part);
+            });
+        setData(data, "refEntity", repository::createEntity, att::setRefEntity);
+        setString(data, "expression", att::setExpression);
+        setBoolean(data, "nillable", att::setOptional);
+        setBoolean(data, "auto", att::setAuto);
+        setBoolean(data, "visible", att::setVisible);
+        setString(data, "label", att::setLabel);
+        setString(data, "description", att::setDescription);
+        setBoolean(data, "aggregateable", att::setAggregateable);
+        setString(data, "enumOptions", att::setEnumOptions);
+        setInteger(data, "rangeMin", att::setRangeMin);
+        setInteger(data, "rangeMax", att::setRangeMax);
+        setBoolean(data, "readOnly", att::setReadOnly);
+        setBoolean(data, "unique", att::setUnique);
+        setList(data, "tags", repository::createTag, att::addTag);
+        setString(data, "visibleExpression", att::setVisibleExpression);
+        setString(data, "validationExpression", att::setValidationExpression);
+        setString(data, "defaultValue", att::setDefaultValue);
+        repository.getLanguages().forEach(lang -> {
+            setString(data, "description-" + lang.getCode(), description -> att.addDescription(description, lang));
+        });
+        repository.getLanguages().forEach(lang -> {
+            setString(data, "label-" + lang.getCode(), label -> att.addLabel(label, lang));
+        });
+        return att;
+    }
+
+    @Override
+    public Package toPackage(final Map<Attribute, String> data) {
+        final Package pkg = repository.createPkg(getString(data, "fullName"));
+        setString(data, "description", pkg::setDescription);
+        setData(data, "parent", repository::createPkg, pkg::setParent);
+        setList(data, "tags", repository::createTag, pkg::addTag);
+        return pkg;
+    }
+
+    @Override
+    public Entity toEntity(final Map<Attribute, String> data) {
+        final Entity ent = repository.createEntity(getString(data, "fullName"));
+        setData(data, "backend", Backend::from, ent::setBackend);
+        setData(data, "package", repository::createPkg, ent::setPkg);
+        setData(data, "idAttribute", repository::createAttribute, att -> {
+            ent.setIdAttribute(att);
+            att.setIdAttribute(true);
+        });
+        setData(data, "labelAttribute", repository::createAttribute, att -> {
+            ent.setLabelAttribute(att);
+            att.setLabelAttribute(true);
+        });
+        setList(data, "lookupAttributes", repository::createAttribute, att -> {
+            ent.addAttribute(att);
+            att.setLookupAttribute(true);
+        });
+        setBoolean(data, "abstract", ent::setAbstractClass);
+        setString(data, "label", ent::setLabel);
+        setData(data, "extends", repository::createEntity, ent::setBase);
+        setString(data, "description", ent::setDescription);
+        setList(data, "tags", repository::createTag, ent::addTag);
+        setList(data, "attributes", repository::createAttribute, att -> {
+                ent.addAttribute(att);
+                updateReference(ent, att);
+            });
+        setBoolean(data, "rowLevelSecured", ent::setRowLevelSecured);
+        repository.getLanguages().forEach(lang -> {
+            setString(data, "description-" + lang.getCode(), description -> ent.addDescription(description, lang));
+        });
+        repository.getLanguages().forEach(lang -> {
+            setString(data, "label-" + lang.getCode(), label -> ent.addLabel(label, lang));
+        });
+        return ent;
+    }
+
+    @Override
+    public Language toLanguage(Map<Attribute, String> data) {
+        final Language lng = repository.createLanguage(getString(data, "code"));
+        setString(data, "name", lng::setName);
+        return lng;
+    }
+    
+    @Override
+    public String getTagsRepository() {
+        return "tags";
+    }
+
+    @Override
+    public String getPackagesRepository() {
+        return "packages";
+    }
+
+    @Override
+    public String getEnitiesRepository() {
+        return "entities";
+    }
+
+    @Override
+    public String getAttributesRepository() {
+        return "attributes";
+    }
+
+    @Override
+    public String getLanguagesRepository() {
+        return "languages";
+    }
+}
