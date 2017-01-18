@@ -5,115 +5,104 @@
  */
 package org.molgenis.downloader;
 
+import java.io.File;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+
+import joptsimple.*;
 import org.apache.http.client.HttpClient;
 import org.molgenis.downloader.client.HttpClientFactory;
 import org.molgenis.downloader.api.MolgenisClient;
 import org.molgenis.downloader.emx.EMXClient;
 import org.molgenis.downloader.client.MolgenisRestApiClient;
 
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+
+import static java.util.Arrays.asList;
+
 /**
- *
  * @author david
  */
-public class Downloader {
+public class Downloader
+{
 
-    private final Path outFile;
-    private List<String> entities;
-    private URI url;
-    private boolean includeMetaData;
-    private boolean insecureSSL;
-    private String username;
-    private String password;
+	public static final String OUT_FILE = "outFile";
+	public static final String URL = "url";
+	public static final String META = "meta";
+	public static final String USER = "user";
+	public static final String PASSWORD = "password";
+	public static final String INSECURE_SSL = "insecureSSL";
 
-    public static void main(final String[] args) {
-        try {
-            final Downloader app = new Downloader(args);
-            app.run();
-        } catch (final Exception ex) {
-            System.console().format("An error occurred: %s\n",
-                    ex.getLocalizedMessage()).flush();
-        }
-    }
+	public static void main(final String[] args)
+	{
+		try
+		{
+			final Downloader app = new Downloader();
+			OptionParser parser = createOptionParser();
+			OptionSet options = parser.parse(args);
+			app.run(options, parser);
+		}
+		catch (final Exception ex)
+		{
+			System.console().format("An error occurred: %s\n", ex.getLocalizedMessage()).flush();
+		}
+	}
 
-    private Downloader(final String[] args) throws ParseException, URISyntaxException {
-        final DefaultParser parser = new DefaultParser();
-        final Options options = createCmdLineOptions();
-        try {
-            final CommandLine parseResult = parser.parse(options, args);
-            entities = parseResult.getArgList();
-            outFile = Paths.get(parseResult.getOptionValue("o"));
-            url = new URI(parseResult.getOptionValue("u"));
-            includeMetaData = parseResult.hasOption("m");
-            username = parseResult.getOptionValue("U");
-            password = parseResult.getOptionValue("P");
-            insecureSSL = parseResult.hasOption("I");
+	private static OptionParser createOptionParser()
+	{
+		OptionParser parser = new OptionParser();
+		parser.acceptsAll(asList("o", OUT_FILE), "Name of the file to write the data to.").withRequiredArg()
+				.ofType(File.class);
+		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class);
+		parser.acceptsAll(asList("m", META), "Write the metadata for the entities to the output file.");
+		parser.acceptsAll(asList("U", USER), "MOLGENIS username to login with to download the data.").withRequiredArg()
+				.ofType(String.class);
+		parser.acceptsAll(asList("P", PASSWORD), "Password for the MOLGENIS user to login");
+		parser.acceptsAll(asList("I", INSECURE_SSL), "Ignore SSL certicate chain errors and hostname mismatches.");
 
-        } catch (final ParseException | URISyntaxException ex) {
-            final HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("java -jar downloader.jar [options] [entity1 [entity2 [entity3] …]]", options);
-            throw ex;
-        }
-    }
+		return parser;
+	}
 
-    private Options createCmdLineOptions() {
-        final Options options = new Options();
-        final Option outFileOption = Option.builder("o")
-                .argName("Output file").hasArg().longOpt("outFile")
-                .desc("Name of the file to write the data to.").required().build();
-        final Option urlOption = Option.builder("u")
-                .argName("URL").hasArg().longOpt("url")
-                .desc("URL of the MOLGENIS instance").required().build();
-        final Option metaOption = Option.builder("m")
-                .argName("Write metadata").longOpt("meta")
-                .desc("Write the metadata for the entities to the output file.").build();
-        final Option userOption = Option.builder("U")
-                .argName("Username").hasArg().longOpt("user")
-                .desc("MOLGENIS username to login with to download the data.").build();
-        final Option passwordOption = Option.builder("P")
-                .argName("Password").hasArg().longOpt("password")
-                .desc("Password for the MOLGENIS user to login").build();
-        final Option insecureSSLOption = Option.builder("I")
-                .argName("Ignore SSL errors").longOpt("insecureSSL")
-                .desc("Ignore SSL certicate chain errors and hostname mismatches.").build();
-        options.addOption(outFileOption)
-                .addOption(urlOption)
-                .addOption(metaOption)
-                .addOption(userOption)
-                .addOption(passwordOption)
-                .addOption(insecureSSLOption);
-        return options;
-    }
+	private void run(OptionSet options, OptionParser parser) throws Exception
+	{
+		OptionSpec<String> entitiesOption = parser.nonOptions().ofType(String.class);
 
-    private void run() throws Exception {
-        final HttpClient client = HttpClientFactory.create(insecureSSL);
+		File outFile = (File) options.valueOf(OUT_FILE);
+		List<String> entities = options.valuesOf(entitiesOption);
+		URI url = options.hasArgument(URL) ? new URI((String) options.valueOf(URL)) : null;
+		boolean includeMetaData = options.has(META);
+		boolean insecureSSL = options.has(INSECURE_SSL);
+		String username = (String) options.valueOf(USER);
+		String password = (String) options.valueOf(PASSWORD);
 
-        try (final MolgenisClient molgenis = new MolgenisRestApiClient(client, url)) {
+		final HttpClient client = HttpClientFactory.create(insecureSSL);
 
-            if (username != null) {
-                if (password == null) {
-                    System.console().writer().append("Password: ").flush();
-                    password = String.copyValueOf(System.console().readPassword());
-                }
-                molgenis.login(username, password);
-            }
-            try (final EMXClient emx = new EMXClient(molgenis)) {
-                boolean hasErrors = emx.downloadEMX(entities, outFile, includeMetaData);
-                if (hasErrors) {
-                    System.console().format("Errors occurred while writing EMX\n").flush();
-                    emx.getErrors().forEach(ex -> System.console().format("Exception: %s\n", ex.getLocalizedMessage()).flush());
-                }
-            }
-        }
-    }
+		//TODO: check for arguments
+
+		try (final MolgenisClient molgenis = new MolgenisRestApiClient(client, url))
+		{
+
+			if (username != null)
+			{
+				if (password == null)
+				{
+					System.console().writer().append("Password: ").flush();
+					password = String.copyValueOf(System.console().readPassword());
+				}
+				molgenis.login(username, password);
+			}
+			try (final EMXClient emx = new EMXClient(molgenis))
+			{
+				boolean hasErrors = emx.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData);
+				if (hasErrors)
+				{
+					System.console().format("Errors occurred while writing EMX\n").flush();
+					emx.getErrors().forEach(
+							ex -> System.console().format("Exception: %s\n", ex.getLocalizedMessage()).flush());
+				}
+			}
+		}
+	}
 }
