@@ -21,7 +21,7 @@ public class Package implements Metadata {
     private final Set<Tag> tags;
     private String label;
 
-    public Package(final String name) {
+    private Package(final String name) {
         tags = new HashSet<>();        
         this.name = name;
     }

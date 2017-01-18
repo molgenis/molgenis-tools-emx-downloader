@@ -15,15 +15,15 @@ import org.molgenis.downloader.api.metadata.Entity;
  */
 public interface EMXWriter {
     
-    public EntityConsumer createConsumerForEntity(final Entity entity) throws IOException;
+    EntityConsumer createConsumerForEntity(final Entity entity) throws IOException;
     
-    public MetadataConsumer createMetadataConsumer() throws IOException;
+    MetadataConsumer createMetadataConsumer();
     
     EMXDataStore createDataStore(final String name) throws IOException;
     
-    boolean hasErrors();
+    boolean hasExceptions();
     
-    List<Exception> getErrors();
+    List<Exception> getExceptions();
     
-    void logError(final Exception ex);
+    void addException(final Exception ex);
 }

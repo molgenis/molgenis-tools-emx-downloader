@@ -16,9 +16,9 @@ import org.molgenis.downloader.api.metadata.MolgenisVersion;
  */
 public interface MolgenisClient extends AutoCloseable {
 
-    boolean login(final String username, final String password) throws Exception;
+    void login(final String username, final String password);
 
-    boolean logout() throws Exception;
+    boolean logout();
     
     void streamEntityData(final String name, final EntityConsumer consumer);
     

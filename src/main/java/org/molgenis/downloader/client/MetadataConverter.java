@@ -16,7 +16,7 @@ import org.molgenis.downloader.api.metadata.Tag;
  *
  * @author david
  */
-public interface MetadataConverter {
+interface MetadataConverter {
 
     Attribute toAttribute(final Map<Attribute, String> data);
 

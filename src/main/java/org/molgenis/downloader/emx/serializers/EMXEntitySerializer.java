@@ -11,10 +11,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
-import org.molgenis.downloader.api.metadata.Backend;
-import org.molgenis.downloader.api.metadata.Entity;
-import org.molgenis.downloader.api.metadata.Language;
+import org.molgenis.downloader.api.metadata.*;
 import org.molgenis.downloader.api.metadata.Package;
+
 import static java.util.stream.Collectors.joining;
 
 /**
@@ -22,7 +21,7 @@ import static java.util.stream.Collectors.joining;
  * @author david
  */
 public class EMXEntitySerializer implements EntitySerializer<Entity> {
-    public static final String[] FIELDS = { "name", "package", "extends",
+    private static final String[] FIELDS = { "name", "package", "extends",
          "abstract", "backend", "tags", "label", "description" };
     
     private final Collection<Language> languages;
@@ -40,10 +39,8 @@ public class EMXEntitySerializer implements EntitySerializer<Entity> {
         result.add(Boolean.toString(entity.isAbstractClass()));
         // MYSQL and POSTGRESQL backends are the defaults for MOLGENIS 1 and 2 respectively
         // should not be listed.
-        result.add(Optional.ofNullable(entity.getBackend()).filter(backend -> {
-            return !(backend.equals(Backend.MYSQL) || backend.equals(Backend.POSTGRESQL));
-        }).map(Backend::getBackend).orElse(""));
-        result.add(entity.getTags().stream().map(tag -> tag.getId()).collect(joining(",")));
+        result.add(Optional.ofNullable(entity.getBackend()).filter(backend -> !(backend.equals(Backend.MYSQL) || backend.equals(Backend.POSTGRESQL))).map(Backend::getBackend).orElse(""));
+        result.add(entity.getTags().stream().map(Tag::getId).collect(joining(",")));
         result.add(entity.getLabel());
         result.add(entity.getDescription());
         languages.forEach(language -> {

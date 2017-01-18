@@ -11,11 +11,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
-import org.molgenis.downloader.api.metadata.Attribute;
-import org.molgenis.downloader.api.metadata.Entity;
-import org.molgenis.downloader.api.metadata.Language;
+import org.molgenis.downloader.api.metadata.*;
+
 import static java.util.stream.Collectors.joining;
-import org.molgenis.downloader.api.metadata.MolgenisVersion;
 
 /**
  *
@@ -30,7 +28,9 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         "visible", "unique", "partOfAttribute", "expression",
         "validationExpression", "tags", "description",};
 
-    public static final MolgenisVersion MIN_VERSION_FOR_MAPPEDBY = new MolgenisVersion(2, 0, 0);
+    private static final MolgenisVersion MIN_VERSION_FOR_MAPPEDBY = new MolgenisVersion(2, 0, 0);
+    public static final String AUTO = "AUTO";
+    public static final String MAPPED_BY = "mappedBy";
 
     private final MolgenisVersion version;
     private final Collection<Language> languages;
@@ -53,7 +53,7 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         final boolean isAutoIdAttriubte = att.isAuto();
         final boolean isIdAttribute = att.isIdAttribute();
         if (isIdAttribute && isAutoIdAttriubte) {
-            result.add("AUTO");
+            result.add(AUTO);
         } else {
             result.add(Boolean.toString(isIdAttribute));
         }
@@ -77,9 +77,9 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         result.add(Optional.ofNullable(att.getCompound()).map(Attribute::getName).orElse(""));
         result.add(att.getExpression());
         result.add(att.getValidationExpression());
-        result.add(att.getTags().stream().map(tag -> tag.getId()).collect(joining(",")));
+        result.add(att.getTags().stream().map(Tag::getId).collect(joining(",")));
         result.add(att.getDescription());
-        if (fields().contains("mappedBy")) {
+        if (fields().contains(MAPPED_BY)) {
             result.add(Optional.ofNullable(att.getMappedBy()).map(by -> by.getEntity().getFullName()).orElse(""));
         }
 //      Not yet supported attributes
@@ -96,7 +96,7 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
     public List<String> fields() {
         final List<String> fields = new ArrayList<>(Arrays.asList(FIELDS));
         if (version.equalsOrLargerThan(MIN_VERSION_FOR_MAPPEDBY)) {
-            fields.add("mappedBy");
+            fields.add(MAPPED_BY);
         }
 
         languages.forEach(language -> {

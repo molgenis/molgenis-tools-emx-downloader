@@ -46,14 +46,13 @@ public class MolgenisRestApiClient implements MolgenisClient {
     private final MetadataConverter converter;
     private final URI uri;
     private String token;
-    
-    private final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
 
     public MolgenisRestApiClient(final HttpClient client, final URI uri) throws IOException, URISyntaxException {
         this.client = client;
         this.uri = uri;
         final MolgenisVersion version = version();
         repository = new MetadataRepository();
+        MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
         if (version.smallerThan(VERSION_2)) {
             converter = new MolgenisV1MetadataConverter(repository);
         } else {
@@ -62,11 +61,11 @@ public class MolgenisRestApiClient implements MolgenisClient {
     }
 
     @Override
-    public final boolean login(final String username, final String password) {
+    public final void login(final String username, final String password) {
         final JSONObject login = new JSONObject();
         login.put("username", username);
         login.put("password", password);
-        JSONObject response = null;
+        JSONObject response;
         token = null;
         try {
             final HttpPost request = new HttpPost(new URI(uri + "/api/v1/login"));
@@ -81,7 +80,6 @@ public class MolgenisRestApiClient implements MolgenisClient {
         } catch (final JSONException | IOException | URISyntaxException ex) {
             System.console().format("An error occurred while logging in: %s.\n", ex.getLocalizedMessage()).flush();
         }
-        return token != null;
     }
 
     @Override
@@ -108,8 +106,7 @@ public class MolgenisRestApiClient implements MolgenisClient {
     public Entity getEntity(final String name) throws IOException, URISyntaxException {
         final JSONObject json = download(new URI(uri + "/api/v2/" + name));
         final JSONObject meta = json.getJSONObject("meta");
-        final Entity entity = entityFromJSON(meta);
-        return entity;
+        return entityFromJSON(meta);
     }
 
     @Override
@@ -121,12 +118,10 @@ public class MolgenisRestApiClient implements MolgenisClient {
             final JSONObject meta = json.getJSONObject("meta");
             final Entity entity = entityFromJSON(meta);
 
-            String nextHref = null;
+            String nextHref;
             do {
                 final JSONArray items = json.getJSONArray("items");
-                items.iterator().forEachRemaining((Object item) -> {
-                    consumer.accept(getAttributes((JSONObject) item, entity.getAttributes()));
-                });
+                items.iterator().forEachRemaining((Object item) -> consumer.accept(getAttributes((JSONObject) item, entity.getAttributes())));
 
                 nextHref = json.optString("nextHref");
                 if (notNullOrEmpty(nextHref)) {
@@ -161,7 +156,7 @@ public class MolgenisRestApiClient implements MolgenisClient {
         }
     }
 
-    private JSONObject download(final URI uri) throws JSONException, IOException, URISyntaxException, ParseException {
+    private JSONObject download(final URI uri) throws JSONException, IOException, ParseException {
         HttpGet request = new HttpGet(uri);
         if (token != null) {
             request.setHeader("x-molgenis-token", token);

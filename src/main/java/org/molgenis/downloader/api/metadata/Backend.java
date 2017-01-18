@@ -27,7 +27,7 @@ public enum Backend {
     
     private final String backend;
     
-    private Backend(final String name) {
+    Backend(final String name) {
         backend = name;
     }
 

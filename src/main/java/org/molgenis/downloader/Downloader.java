@@ -26,7 +26,7 @@ import org.molgenis.downloader.client.MolgenisRestApiClient;
  *
  * @author david
  */
-public class Application {
+public class Downloader {
 
     private final Path outFile;
     private List<String> entities;
@@ -38,7 +38,7 @@ public class Application {
 
     public static void main(final String[] args) {
         try {
-            final Application app = new Application(args);
+            final Downloader app = new Downloader(args);
             app.run();
         } catch (final Exception ex) {
             System.console().format("An error occurred: %s\n",
@@ -46,7 +46,7 @@ public class Application {
         }
     }
 
-    private Application(final String[] args) throws ParseException, URISyntaxException {
+    private Downloader(final String[] args) throws ParseException, URISyntaxException {
         final DefaultParser parser = new DefaultParser();
         final Options options = createCmdLineOptions();
         try {

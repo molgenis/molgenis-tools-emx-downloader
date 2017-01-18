@@ -18,7 +18,7 @@ import org.molgenis.downloader.api.metadata.Tag;
  * @author david
  */
 public class EMXTagSerializer implements EntitySerializer<Tag> {
-    public static final String[] FIELDS = { "identifier", "label", "relationLabel", "objectIRI", "relationIRI", "codeSystem" };
+    private static final String[] FIELDS = { "identifier", "label", "relationLabel", "objectIRI", "relationIRI", "codeSystem" };
     
     @Override
     public List<String> serialize(final Tag tag) {

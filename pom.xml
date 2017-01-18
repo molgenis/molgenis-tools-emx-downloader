@@ -16,7 +16,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.molgenis.downloader.Application</mainClass>
+                            <mainClass>org.molgenis.downloader.Downloader</mainClass>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                         <manifestEntries>

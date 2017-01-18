@@ -19,10 +19,11 @@ import org.molgenis.downloader.api.EMXDataStore;
  */
 public class TSVFile implements AutoCloseable, EMXDataStore {
 
-    final CSVPrinter printer;
+    public static final String TSV = ".tsv";
+    private final CSVPrinter printer;
 
     public TSVFile(final FileSystem fs, final String name) throws IOException {
-        printer = new CSVPrinter(Files.newBufferedWriter(fs.getPath("/" + name + ".tsv")), CSVFormat.TDF);
+        printer = new CSVPrinter(Files.newBufferedWriter(fs.getPath("/" + name + TSV)), CSVFormat.TDF);
     }
 
     @Override
