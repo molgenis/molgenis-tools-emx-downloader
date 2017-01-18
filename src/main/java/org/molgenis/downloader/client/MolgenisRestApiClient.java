@@ -35,6 +35,8 @@ import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
 
+import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
+
 /**
  *
  * @author david
@@ -78,7 +80,7 @@ public class MolgenisRestApiClient implements MolgenisClient {
                 token = response.getString("token");
             }
         } catch (final JSONException | IOException | URISyntaxException ex) {
-            System.console().format("An error occurred while logging in: %s.\n", ex.getLocalizedMessage()).flush();
+            writeToConsole("An error occurred while logging in: %s.\n", ex);
         }
     }
 
@@ -91,7 +93,7 @@ public class MolgenisRestApiClient implements MolgenisClient {
         try {
             return client.execute(request).getStatusLine().getStatusCode() == 200;
         } catch (IOException ex) {
-            System.console().format("An error occurred while logging out: %s.\n", ex.getLocalizedMessage()).flush();
+            writeToConsole("An error occurred while logging out: %s.\n", ex);
             return false;
         }
     }
