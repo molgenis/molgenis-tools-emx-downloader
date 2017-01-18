@@ -1,0 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.molgenis.downloader.client;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import org.molgenis.downloader.api.metadata.Attribute;
+import org.molgenis.downloader.api.metadata.Entity;
+
+/**
+ *
+ * @author david
+ */
+public abstract class AbstractMetadataConverter implements MetadataConverter {
+
+    protected void updateReference(final Entity ent, final Attribute att) {
+        att.setEntity(ent);
+        att.getParts().forEach((Attribute part) -> updateReference(ent, part));
+    }
+
+    protected String getString(final Map<Attribute, String> data, final String field) {
+        return data.get(Attribute.from(field));
+    }
+
+    protected void setInteger(final Map<Attribute, String> data, final String field, final Consumer<Integer> consumer) {
+        setData(data, field, (s -> !s.isEmpty()), Integer::valueOf, consumer);
+    }
+
+    protected void setBoolean(final Map<Attribute, String> data, final String field, final Consumer<Boolean> consumer) {
+        setData(data, field, Boolean::valueOf, consumer);
+    }
+
+    protected void setString(final Map<Attribute, String> data, final String field, final Consumer<String> consumer) {
+        setData(data, field, (string -> !string.isEmpty()), (string -> string), consumer);
+    }
+
+    protected <R> void setData(final Map<Attribute, String> data, final String field, Function<String, R> mapper, Consumer<R> consumer) {
+        setData(data, field, (string -> !string.isEmpty()), mapper, consumer);
+    }
+
+    protected <R> void setList(final Map<Attribute, String> data, final String field, Function<String, R> mapper, Consumer<R> consumer) {
+        getList(data, field).ifPresent(value -> Arrays.stream(value).map(mapper).forEach(consumer));
+    }
+
+    private Optional<String[]> getList(final Map<Attribute, String> data, final String field) {
+        return Optional.ofNullable(data.get(Attribute.from(field))).filter(string -> !string.isEmpty()).map(s -> s.split(","));
+    }
+
+    private <R> void setData(final Map<Attribute, String> data, final String field,
+            final Predicate<String> filter, final Function<String, R> mapper, final Consumer<R> consumer) {
+
+        Optional.ofNullable(data.get(Attribute.from(field))).filter(filter).map(mapper).ifPresent(consumer);
+    }
+}
