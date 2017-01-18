@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.emx.serializers;
 
 import java.util.ArrayList;
@@ -16,10 +12,7 @@ import org.molgenis.downloader.api.metadata.Package;
 
 import static java.util.stream.Collectors.joining;
 
-/**
- *
- * @author david
- */
+
 public class EMXEntitySerializer implements EntitySerializer<Entity> {
     private static final String[] FIELDS = { "name", "package", "extends",
          "abstract", "backend", "tags", "label", "description" };

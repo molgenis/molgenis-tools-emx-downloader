@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader;
 
 import java.io.File;
@@ -27,14 +23,14 @@ import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
  */
 class Downloader
 {
-
-	private static final String OUT_FILE = "outFile";
 	private static final String URL = "url";
 	private static final String META = "meta";
 	private static final String ACCOUNT = "account";
 	private static final String PASSWORD = "password";
 	private static final String INSECURE_SSL = "insecureSSL";
 	private static final String ARGUMENTS = "[arguments]";
+	private static final String FILE = "outputFile";
+	private static final String OVERWRITE = "overwrite";
 
 	public static void main(final String[] args)
 	{
@@ -54,8 +50,9 @@ class Downloader
 	private static OptionParser createOptionParser()
 	{
 		OptionParser parser = new OptionParser();
-		parser.acceptsAll(asList("o", OUT_FILE), "Name of the file to write the data to.").withRequiredArg()
+		parser.acceptsAll(asList("f", FILE), "Name of the file to write the data to.").withRequiredArg()
 				.ofType(File.class);
+		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the exisiting file if it exists.");
 		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class);
 		parser.acceptsAll(asList("m", META), "Write the metadata for the entities to the output file.");
 		parser.acceptsAll(asList("a", ACCOUNT), "MOLGENIS username to login with to download the data.").withRequiredArg()
@@ -68,13 +65,14 @@ class Downloader
 
 	private void run(OptionSet options, OptionParser parser) throws Exception
 	{
-		File outFile = (File) options.valueOf(OUT_FILE);
+		File outFile = (File) options.valueOf(FILE);
 		List<String> entities = (List<String>) options.valuesOf(ARGUMENTS);
 		URI url = options.hasArgument(URL) ? new URI((String) options.valueOf(URL)) : null;
 		boolean includeMetaData = options.has(META);
 		boolean insecureSSL = options.has(INSECURE_SSL);
 		String username = (String) options.valueOf(ACCOUNT);
 		String password = (String) options.valueOf(PASSWORD);
+		boolean overwrite = options.has(OVERWRITE);
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
 
@@ -101,13 +99,13 @@ class Downloader
 				}
 				molgenis.login(username, password);
 			}
-			try (final EMXClient emx = new EMXClient(molgenis))
+			try (final EMXClient emxClient = new EMXClient(molgenis))
 			{
-				boolean hasErrors = emx.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData);
+				boolean hasErrors = emxClient.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite);
 				if (hasErrors)
 				{
 					writeToConsole("Errors occurred while writing EMX\n");
-					emx.getErrors().forEach(ex -> writeToConsole("Exception: %s\n", ex));
+					emxClient.getErrors().forEach(ex -> writeToConsole("Exception: %s\n", ex));
 				}
 			}
 		}

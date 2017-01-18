@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.emx.serializers;
 
 import java.net.URI;
@@ -13,10 +9,7 @@ import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.Tag;
 
-/**
- *
- * @author david
- */
+
 public class EMXTagSerializer implements EntitySerializer<Tag> {
     private static final String[] FIELDS = { "identifier", "label", "relationLabel", "objectIRI", "relationIRI", "codeSystem" };
     

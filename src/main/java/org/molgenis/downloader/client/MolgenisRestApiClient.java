@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.client;
 
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
@@ -37,10 +33,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
-/**
- *
- * @author david
- */
+
 public class MolgenisRestApiClient implements MolgenisClient {
 
     private final HttpClient client;

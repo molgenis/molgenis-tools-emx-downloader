@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.MetadataRepository;
@@ -15,10 +11,7 @@ import org.molgenis.downloader.api.metadata.Language;
 import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.api.metadata.Tag;
 
-/**
- *
- * @author david
- */
+
 class FilteredMetadataRepository implements MetadataRepository {
 
     private final Set<Entity> ents;

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.EMXWriter;
@@ -16,10 +12,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.api.EMXDataStore;
 
-/**
- *
- * @author david
- */
+
 public class EMXFileWriter implements EMXWriter {
 
     private final MolgenisVersion version;

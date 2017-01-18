@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.client;
 
 import org.molgenis.downloader.api.metadata.Attribute;
@@ -12,10 +8,6 @@ import org.molgenis.downloader.api.metadata.Tag;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
-/**
- *
- * @author david
- */
 public class MetadataRepositoryTest {
     
     @Test

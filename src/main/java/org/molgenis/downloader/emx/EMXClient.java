@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.EMXBackend;
@@ -17,10 +13,7 @@ import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.MolgenisClient;
 import org.molgenis.downloader.emx.tsv.ZipFileBackend;
 
-/**
- *
- * @author david
- */
+
 public class EMXClient implements AutoCloseable {
 
     private static final String XLSX = ".xlsx";
@@ -33,8 +26,9 @@ public class EMXClient implements AutoCloseable {
         errors = new ArrayList<>();
     }
 
-    public boolean downloadEMX(final List<String> entities, final Path location, final boolean includeMetadata) throws Exception {
-        try (final EMXBackend backend = createBackend(location)) {
+    public boolean downloadEMX(final List<String> entities, final Path path, final boolean includeMetadata,
+            boolean overwrite) throws Exception {
+        try (final EMXBackend backend = createBackend(path, overwrite)) {
             final EMXFileWriter writer = new EMXFileWriter(backend, molgenis.version());
             final List<String> target = new ArrayList<>(entities);
             if (includeMetadata) {
@@ -58,12 +52,12 @@ public class EMXClient implements AutoCloseable {
         return errors;
     }
 
-    private EMXBackend createBackend(final Path location) throws IOException, URISyntaxException {
+    private EMXBackend createBackend(final Path location, boolean overwrite) throws IOException, URISyntaxException {
         final EMXBackend backend;
         if (location.toString().endsWith(XLSX) || location.toString().endsWith(XLS)) {
-            backend = new ExcelBackend(location);
+            backend = new ExcelBackend(location, overwrite);
         } else {
-            backend = new ZipFileBackend(location);
+            backend = new ZipFileBackend(location, overwrite);
         }
         return backend;
     }
