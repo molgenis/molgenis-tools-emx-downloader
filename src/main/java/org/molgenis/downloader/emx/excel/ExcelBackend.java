@@ -5,8 +5,10 @@
  */
 package org.molgenis.downloader.emx.excel;
 
+import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,21 +23,21 @@ import org.molgenis.downloader.api.EMXDataStore;
 public class ExcelBackend implements EMXBackend {
 
     private final Workbook workbook;
-    private final Path file;
+    private final Path path;
 
-    public ExcelBackend(final Path location) throws FileAlreadyExistsException {
-        if (location.toFile().exists()) {
-            throw new FileAlreadyExistsException(location.toString(), null,
+    public ExcelBackend(final Path path) throws FileAlreadyExistsException {
+        if (path.toFile().exists()) {
+            throw new FileAlreadyExistsException(path.toString(), null,
                     "File already exists.");
         }
         workbook = new XSSFWorkbook();
-        file = location;
+        this.path = path;
     }
 
 
     @Override
     public void close() throws Exception {
-        workbook.write(Files.newOutputStream(file));
+        workbook.write(Files.newOutputStream(path));
         workbook.close();
     }
 
