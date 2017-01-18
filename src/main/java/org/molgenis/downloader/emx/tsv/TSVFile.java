@@ -9,30 +9,36 @@ import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.util.List;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
+
+import au.com.bytecode.opencsv.CSVWriter;
+
 import org.molgenis.downloader.api.EMXDataStore;
 
 /**
- *
  * @author david
  */
-public class TSVFile implements AutoCloseable, EMXDataStore {
+public class TSVFile implements AutoCloseable, EMXDataStore
+{
 
-    public static final String TSV = ".tsv";
-    private final CSVPrinter printer;
+	public static final String TSV = ".tsv";
+	public static final char TAB = '\t';
 
-    public TSVFile(final FileSystem fs, final String name) throws IOException {
-        printer = new CSVPrinter(Files.newBufferedWriter(fs.getPath("/" + name + TSV)), CSVFormat.TDF);
-    }
+	private final CSVWriter csvWriter;
 
-    @Override
-    public void close() throws Exception {
-        printer.close();
-    }
+	public TSVFile(final FileSystem fs, final String name) throws IOException
+	{
+		csvWriter = new CSVWriter(Files.newBufferedWriter(fs.getPath("/" + name + TSV)), TAB);
+	}
 
-    @Override
-    public void writeRow(final List<String> values) throws IOException {
-        printer.printRecord(values);
-    }
+	@Override
+	public void close() throws Exception
+	{
+		csvWriter.close();
+	}
+
+	@Override
+	public void writeRow(final List<String> values) throws IOException
+	{
+		csvWriter.writeNext(values.toArray(new String[values.size()]));
+	}
 }
