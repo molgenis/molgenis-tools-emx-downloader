@@ -25,10 +25,10 @@ import org.molgenis.downloader.api.EMXDataStore;
  */
 class EMXMetadataConsumer implements MetadataConsumer {
 
-    public static final String ATTRIBUTES = "attributes";
-    public static final String ENTITIES = "entities";
-    public static final String PACKAGES = "packages";
-    public static final String TAGS = "tags";
+    private static final String ATTRIBUTES = "attributes";
+    private static final String ENTITIES = "entities";
+    private static final String PACKAGES = "packages";
+    private static final String TAGS = "tags";
     private final MolgenisVersion version;
     private final EMXWriter writer;
 

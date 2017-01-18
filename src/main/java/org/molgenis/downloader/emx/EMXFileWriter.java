@@ -8,7 +8,6 @@ package org.molgenis.downloader.emx;
 import org.molgenis.downloader.api.EMXWriter;
 import org.molgenis.downloader.api.EMXBackend;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.molgenis.downloader.api.EntityConsumer;

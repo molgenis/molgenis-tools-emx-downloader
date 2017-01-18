@@ -20,8 +20,8 @@ import org.molgenis.downloader.api.EMXDataStore;
 public class TSVFile implements AutoCloseable, EMXDataStore
 {
 
-	public static final String TSV = ".tsv";
-	public static final char TAB = '\t';
+	private static final String TSV = ".tsv";
+	private static final char TAB = '\t';
 
 	private final CSVWriter csvWriter;
 

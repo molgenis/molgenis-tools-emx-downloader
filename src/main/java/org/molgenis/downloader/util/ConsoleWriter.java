@@ -11,7 +11,7 @@ public class ConsoleWriter
 		else
 		{
 			System.out.print(message);
-			if (e != null) System.out.print(e);
+			if (e != null) System.err.print(e.getLocalizedMessage());
 			System.out.print("\n");
 		}
 	}

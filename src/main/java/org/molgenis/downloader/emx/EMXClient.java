@@ -23,8 +23,8 @@ import org.molgenis.downloader.emx.tsv.ZipFileBackend;
  */
 public class EMXClient implements AutoCloseable {
 
-    public static final String XLSX = ".xlsx";
-    public static final String XLS = ".xls";
+    private static final String XLSX = ".xlsx";
+    private static final String XLS = ".xls";
     private final MolgenisClient molgenis;
     private final List<Exception> errors;
 

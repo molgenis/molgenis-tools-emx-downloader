@@ -25,16 +25,16 @@ import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 /**
  * @author david
  */
-public class Downloader
+class Downloader
 {
 
-	public static final String OUT_FILE = "outFile";
-	public static final String URL = "url";
-	public static final String META = "meta";
-	public static final String ACCOUNT = "account";
-	public static final String PASSWORD = "password";
-	public static final String INSECURE_SSL = "insecureSSL";
-	public static final String ARGUMENTS = "[arguments]";
+	private static final String OUT_FILE = "outFile";
+	private static final String URL = "url";
+	private static final String META = "meta";
+	private static final String ACCOUNT = "account";
+	private static final String PASSWORD = "password";
+	private static final String INSECURE_SSL = "insecureSSL";
+	private static final String ARGUMENTS = "[arguments]";
 
 	public static void main(final String[] args)
 	{

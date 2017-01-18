@@ -29,8 +29,8 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         "validationExpression", "tags", "description",};
 
     private static final MolgenisVersion MIN_VERSION_FOR_MAPPEDBY = new MolgenisVersion(2, 0, 0);
-    public static final String AUTO = "AUTO";
-    public static final String MAPPED_BY = "mappedBy";
+    private static final String AUTO = "AUTO";
+    private static final String MAPPED_BY = "mappedBy";
 
     private final MolgenisVersion version;
     private final Collection<Language> languages;

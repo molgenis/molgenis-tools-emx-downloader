@@ -5,10 +5,8 @@
  */
 package org.molgenis.downloader.emx.excel;
 
-import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 
 import org.apache.poi.ss.usermodel.Workbook;
