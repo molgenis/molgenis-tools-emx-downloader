@@ -1,4 +1,3 @@
-
 package org.molgenis.downloader;
 
 import java.io.File;
@@ -14,8 +13,10 @@ import org.molgenis.downloader.client.MolgenisRestApiClient;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
+import joptsimple.OptionException;
 
 import static java.util.Arrays.asList;
+import static org.molgenis.downloader.util.ConsoleWriter.writeHelp;
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
 /**
@@ -38,12 +39,21 @@ class Downloader
 		{
 			final Downloader app = new Downloader();
 			OptionParser parser = createOptionParser();
-			OptionSet options = parser.parse(args);
-			app.run(options, parser);
+			OptionSet options = null;
+			try
+			{
+				options = parser.parse(args);
+				app.run(options);
+			}
+			catch (OptionException ex)
+			{
+				writeToConsole("An error occurred:", ex);
+				writeHelp(parser);
+			}
 		}
 		catch (final Exception ex)
 		{
-			writeToConsole("An error occurred: %s\n", ex);
+			writeToConsole("An error occurred:", ex);
 		}
 	}
 
@@ -51,19 +61,21 @@ class Downloader
 	{
 		OptionParser parser = new OptionParser();
 		parser.acceptsAll(asList("f", FILE), "Name of the file to write the data to.").withRequiredArg()
-				.ofType(File.class);
+				.ofType(File.class).required();
 		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the exisiting file if it exists.");
-		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class);
+		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class)
+				.required();
 		parser.acceptsAll(asList("m", META), "Write the metadata for the entities to the output file.");
-		parser.acceptsAll(asList("a", ACCOUNT), "MOLGENIS username to login with to download the data.").withRequiredArg()
+		parser.acceptsAll(asList("a", ACCOUNT), "MOLGENIS username to login with to download the data.")
+				.withRequiredArg().ofType(String.class).required();
+		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login").withRequiredArg()
 				.ofType(String.class);
-		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login").withRequiredArg().ofType(String.class);
 		parser.acceptsAll(asList("i", INSECURE_SSL), "Ignore SSL certicate chain errors and hostname mismatches.");
 
 		return parser;
 	}
 
-	private void run(OptionSet options, OptionParser parser) throws Exception
+	private void run(OptionSet options) throws Exception
 	{
 		File outFile = (File) options.valueOf(FILE);
 		List<String> entities = (List<String>) options.valuesOf(ARGUMENTS);
@@ -75,8 +87,6 @@ class Downloader
 		boolean overwrite = options.has(OVERWRITE);
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
-
-		//TODO: check for arguments
 
 		try (final MolgenisClient molgenis = new MolgenisRestApiClient(client, url))
 		{
@@ -101,7 +111,8 @@ class Downloader
 			}
 			try (final EMXClient emxClient = new EMXClient(molgenis))
 			{
-				boolean hasErrors = emxClient.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite);
+				boolean hasErrors = emxClient
+						.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite);
 				if (hasErrors)
 				{
 					writeToConsole("Errors occurred while writing EMX\n");

@@ -18,9 +18,6 @@ import org.molgenis.downloader.api.EMXDataStore;
 
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
-/**
- * @author david
- */
 public class ZipFileBackend implements EMXBackend
 {
 
