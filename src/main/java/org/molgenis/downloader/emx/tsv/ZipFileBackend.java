@@ -24,19 +24,10 @@ public class ZipFileBackend implements EMXBackend
 	private FileSystem fs;
 	private final List<TSVFile> files;
 
-	public ZipFileBackend(final Path path, boolean overwrite) throws IOException, URISyntaxException
+	public ZipFileBackend(final Path path) throws IOException, URISyntaxException
 	{
 		files = new ArrayList<>();
 		final Map<String, String> env = new HashMap<>();
-		if (Files.exists(path))
-		{
-			if (overwrite) Files.delete(path);
-			else
-			{
-				writeToConsole(String.format("File %s already exists, please use the '-o' option to overwrite.", path));
-				return;
-			}
-		}
 		env.put("create", "true");
 		env.put("encoding", StandardCharsets.UTF_8.toString());
 		final URI uri = new URI("jar:file:" + path.toAbsolutePath());
