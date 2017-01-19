@@ -3,6 +3,9 @@ package org.molgenis.downloader.client;
 
 import java.net.URI;
 import java.util.Map;
+
+import org.molgenis.downloader.api.MetadataRepository;
+import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Backend;
 import org.molgenis.downloader.api.metadata.DataType;
@@ -14,9 +17,9 @@ import org.molgenis.downloader.api.metadata.Tag;
 
 class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
 
-    private final MetadataRepository repository;
+    private final WriteableMetadataRepository repository;
 
-    public MolgenisV2MetadataConverter(MetadataRepository metadataRepository) {
+    public MolgenisV2MetadataConverter(WriteableMetadataRepository metadataRepository) {
         repository = metadataRepository;
     }
 
@@ -62,7 +65,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
     public Entity toEntity(Map<Attribute, String> data) {
         final Entity ent = repository.createEntity(getString(data, "fullName"));
         setData(data, "backend", Backend::from, ent::setBackend);
-        setData(data, "package", repository::createPkg, ent::setPkg);
+        setData(data, "package", repository::createPackage, ent::setPackage);
         setBoolean(data, "isAbstract", ent::setAbstractClass);
         setString(data, "label", ent::setLabel);
         setData(data, "extends", repository::createEntity, ent::setBase);
@@ -79,10 +82,10 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
 
     @Override
     public Package toPackage(Map<Attribute, String> data) {
-        final Package pkg = repository.createPkg(getString(data, "fullName"));
+        final Package pkg = repository.createPackage(getString(data, "fullName"));
         setString(data, "label", pkg::setLabel);
         setString(data, "description", pkg::setDescription);
-        setData(data, "parent", repository::createPkg, pkg::setParent);
+        setData(data, "parent", repository::createPackage, pkg::setParent);
         setList(data, "tags", repository::createTag, pkg::addTag);
         return pkg;
     }
