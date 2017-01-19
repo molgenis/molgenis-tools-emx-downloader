@@ -20,5 +20,5 @@ public interface MetadataRepository {
     Collection<Package> getPackages();
 
     Collection<Tag> getTags();
-    
+
 }
