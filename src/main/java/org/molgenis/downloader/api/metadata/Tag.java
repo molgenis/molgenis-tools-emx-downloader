@@ -46,20 +46,21 @@ public class Tag implements Metadata {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Tag other = (Tag) obj;
-        return Objects.equals(this.id, other.id);
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tag tag = (Tag) o;
+
+        if (id != null ? !id.equals(tag.id) : tag.id != null) return false;
+        if (label != null ? !label.equals(tag.label) : tag.label != null) return false;
+        if (objectIRI != null ? !objectIRI.equals(tag.objectIRI) : tag.objectIRI != null) return false;
+        if (relationIRI != null ? !relationIRI.equals(tag.relationIRI) : tag.relationIRI != null) return false;
+        if (relationLabel != null ? !relationLabel.equals(tag.relationLabel) : tag.relationLabel != null) return false;
+        return codeSystem != null ? codeSystem.equals(tag.codeSystem) : tag.codeSystem == null;
     }
-   
+
     public Tag(final String id) {
         this.id = id;
     }
