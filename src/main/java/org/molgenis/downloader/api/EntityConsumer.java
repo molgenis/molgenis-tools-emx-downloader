@@ -14,9 +14,9 @@ import org.molgenis.downloader.api.metadata.Attribute;
  * @author david
  */
 public interface EntityConsumer extends AutoCloseable, Consumer<Map<Attribute, String>> {
-        
+
     @Override
-    public default void close() throws Exception {
-        
+	default void close() throws Exception {
+
     }
 }

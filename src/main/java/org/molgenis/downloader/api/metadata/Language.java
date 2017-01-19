@@ -17,7 +17,7 @@ public class Language {
     private String name;
     private Boolean active;
 
-    public Language(String code) {
+    private Language(String code) {
         this.code = code;
     }
     

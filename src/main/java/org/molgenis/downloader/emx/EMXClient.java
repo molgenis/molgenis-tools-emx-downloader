@@ -23,8 +23,10 @@ import org.molgenis.downloader.emx.tsv.ZipFileBackend;
  */
 public class EMXClient implements AutoCloseable {
 
-    final MolgenisClient molgenis;
-    final List<Exception> errors;
+    private static final String XLSX = ".xlsx";
+    private static final String XLS = ".xls";
+    private final MolgenisClient molgenis;
+    private final List<Exception> errors;
 
     public EMXClient(final MolgenisClient client) {
         molgenis = client;
@@ -47,8 +49,8 @@ public class EMXClient implements AutoCloseable {
                     molgenis.streamEntityData(name, consumer);
                 }
             }
-            errors.addAll(writer.getErrors());
-            return writer.hasErrors();
+            errors.addAll(writer.getExceptions());
+            return writer.hasExceptions();
         }
     }
 
@@ -58,7 +60,7 @@ public class EMXClient implements AutoCloseable {
 
     private EMXBackend createBackend(final Path location) throws IOException, URISyntaxException {
         final EMXBackend backend;
-        if (location.toString().endsWith(".xlsx") || location.toString().endsWith(".xls")) {
+        if (location.toString().endsWith(XLSX) || location.toString().endsWith(XLS)) {
             backend = new ExcelBackend(location);
         } else {
             backend = new ZipFileBackend(location);

@@ -6,6 +6,7 @@
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.EMXWriter;
+import org.molgenis.downloader.api.metadata.Metadata;
 import org.molgenis.downloader.emx.serializers.EMXAttributeSerializer;
 import org.molgenis.downloader.emx.serializers.EMXTagSerializer;
 import org.molgenis.downloader.emx.serializers.EMXPackageSerializer;
@@ -15,7 +16,6 @@ import java.util.Collection;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.MetadataRepository;
-import org.molgenis.downloader.api.metadata.Metadata;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.api.EMXDataStore;
 
@@ -23,8 +23,12 @@ import org.molgenis.downloader.api.EMXDataStore;
  *
  * @author david
  */
-public class EMXMetadataConsumer implements MetadataConsumer {
+class EMXMetadataConsumer implements MetadataConsumer {
 
+    private static final String ATTRIBUTES = "attributes";
+    private static final String ENTITIES = "entities";
+    private static final String PACKAGES = "packages";
+    private static final String TAGS = "tags";
     private final MolgenisVersion version;
     private final EMXWriter writer;
 
@@ -37,18 +41,18 @@ public class EMXMetadataConsumer implements MetadataConsumer {
     public void accept(final MetadataRepository repository) {
         try {
             EMXAttributeSerializer attributesSerializer = new EMXAttributeSerializer(version, repository.getLanguages());
-            writeMetadata("attributes", attributesSerializer, repository.getAttributes());
+            writeMetadata(ATTRIBUTES, attributesSerializer, repository.getAttributes());
 
             EMXEntitySerializer entitiesSerializer = new EMXEntitySerializer(repository.getLanguages());
-            writeMetadata("entities", entitiesSerializer, repository.getEntities());
+            writeMetadata(ENTITIES, entitiesSerializer, repository.getEntities());
 
             EMXPackageSerializer packagesSerializer = new EMXPackageSerializer();
-            writeMetadata("packages", packagesSerializer, repository.getPackages());
+            writeMetadata(PACKAGES, packagesSerializer, repository.getPackages());
 
             EMXTagSerializer tagSerializer = new EMXTagSerializer();
-            writeMetadata("tags", tagSerializer, repository.getTags());
+            writeMetadata(TAGS, tagSerializer, repository.getTags());
         } catch (final IOException ex) {
-            writer.logError(ex);
+            writer.addException(ex);
         }
     }
     

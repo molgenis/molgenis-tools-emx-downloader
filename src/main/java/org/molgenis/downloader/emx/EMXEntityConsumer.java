@@ -17,7 +17,7 @@ import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.EMXDataStore;
 
-public class EMXEntityConsumer implements EntityConsumer {
+class EMXEntityConsumer implements EntityConsumer {
 
     private final List<Attribute> attributes;
     private final EMXDataStore sheet;
@@ -26,7 +26,7 @@ public class EMXEntityConsumer implements EntityConsumer {
     public EMXEntityConsumer(final EMXWriter writer, final Entity entity) throws IOException {
         this.writer = writer;
         attributes = setAttributes(entity);
-        final List<String> values = getAttributes().stream().map(att -> att.getName()).collect(Collectors.toList());
+        final List<String> values = getAttributes().stream().map(Attribute::getName).collect(Collectors.toList());
 
         sheet = writer.createDataStore(entity.getFullName());
         sheet.writeRow(values);
@@ -46,11 +46,11 @@ public class EMXEntityConsumer implements EntityConsumer {
         try {
             sheet.writeRow(values);
         } catch (final IOException ex) {
-            writer.logError(ex);
+            writer.addException(ex);
         }
     }
     
-    public final List<Attribute> getAttributes() {
+    private List<Attribute> getAttributes() {
         return attributes;
     }
 

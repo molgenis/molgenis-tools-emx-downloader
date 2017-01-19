@@ -67,7 +67,7 @@ public class Tag implements Metadata {
         return Objects.equals(this.id, other.id);
     }
    
-    public Tag(final String id) {
+    private Tag(final String id) {
         this.id = id;
     }
     

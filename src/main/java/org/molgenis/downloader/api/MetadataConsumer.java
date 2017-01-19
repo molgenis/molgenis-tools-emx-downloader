@@ -15,7 +15,7 @@ public interface MetadataConsumer extends AutoCloseable, Consumer<MetadataReposi
 
     @Override
     default void close() throws Exception {
-        
+
     }
-    
+
 }

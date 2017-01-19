@@ -8,7 +8,6 @@ package org.molgenis.downloader.emx;
 import org.molgenis.downloader.api.EMXWriter;
 import org.molgenis.downloader.api.EMXBackend;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.molgenis.downloader.api.EntityConsumer;
@@ -27,7 +26,8 @@ public class EMXFileWriter implements EMXWriter {
     private final List<Exception> errors;
     private final EMXBackend backend;
 
-    public EMXFileWriter(final EMXBackend store, final MolgenisVersion molgenisVersion) throws IOException, URISyntaxException {
+    public EMXFileWriter(final EMXBackend store, final MolgenisVersion molgenisVersion)
+	{
         version = molgenisVersion;
         errors = new ArrayList<>();
         backend = store;
@@ -39,7 +39,8 @@ public class EMXFileWriter implements EMXWriter {
     }
 
     @Override
-    public MetadataConsumer createMetadataConsumer() throws IOException {
+    public MetadataConsumer createMetadataConsumer()
+	{
         return new EMXMetadataConsumer(this, version);
     }
 
@@ -49,17 +50,17 @@ public class EMXFileWriter implements EMXWriter {
     }
 
     @Override
-    public boolean hasErrors() {
+    public boolean hasExceptions() {
         return !errors.isEmpty();
     }
 
     @Override
-    public List<Exception> getErrors() {
+    public List<Exception> getExceptions() {
         return errors;
     }
 
     @Override
-    public void logError(final Exception ex) {
+    public void addException(final Exception ex) {
         errors.add(ex);
     }
 }

@@ -9,12 +9,13 @@ import org.molgenis.downloader.api.MetadataRepository;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 import org.molgenis.downloader.api.MetadataConsumer;
+import org.molgenis.downloader.api.metadata.Entity;
 
 /**
  *
  * @author david
  */
-public class MetadataFilter implements MetadataConsumer {
+class MetadataFilter implements MetadataConsumer {
 
     private final MetadataConsumer consumer;
     private final List<String> entities;
@@ -35,7 +36,7 @@ public class MetadataFilter implements MetadataConsumer {
         return target.getEntities().stream()
                 .filter(ent -> !entities.contains(ent.getFullName()))
                 .filter(ent -> !ent.isAbstractClass())
-                .map(ent -> ent.getFullName())
+                .map(Entity::getFullName)
                 .collect(toList());
     }
 }

@@ -6,10 +6,8 @@
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.MetadataRepository;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Entity;
@@ -70,7 +68,7 @@ class FilteredMetadataRepository implements MetadataRepository {
 
     @Override
     public final Collection<Attribute> getAttributes() {
-        return atts.stream().sorted((x, y) -> x.getEntity().getFullName().compareTo(y.getEntity().getFullName())).collect(Collectors.toList());
+        return atts.stream().sorted(Comparator.comparing(x -> x.getEntity().getFullName())).collect(Collectors.toList());
     }
 
     @Override
@@ -91,12 +89,12 @@ class FilteredMetadataRepository implements MetadataRepository {
 
     @Override
     public final Collection<Package> getPackages() {
-        return pkgs.stream().sorted((x, y) -> x.getName().compareTo(y.getName())).collect(Collectors.toList());
+        return pkgs.stream().sorted(Comparator.comparing(Package::getName)).collect(Collectors.toList());
     }
 
     @Override
     public final Collection<Tag> getTags() {
-        return tags.stream().sorted((x, y) -> x.getId().compareTo(y.getId())).collect(Collectors.toSet());
+        return tags.stream().sorted(Comparator.comparing(Tag::getId)).collect(Collectors.toSet());
     }
 
     @Override

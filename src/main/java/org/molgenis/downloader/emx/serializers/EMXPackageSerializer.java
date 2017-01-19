@@ -12,13 +12,14 @@ import java.util.Optional;
 import static java.util.stream.Collectors.joining;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.api.metadata.Tag;
 
 /**
  *
  * @author david
  */
 public class EMXPackageSerializer implements EntitySerializer<Package> {
-    public static final String[] FIELDS = {
+    private static final String[] FIELDS = {
         "name", "description", "label", "parent", "tags"
     };
             
@@ -29,7 +30,7 @@ public class EMXPackageSerializer implements EntitySerializer<Package> {
         result.add(pkg.getDescription());
         result.add(pkg.getLabel());
         result.add(Optional.ofNullable(pkg.getParent()).map(Package::getName).orElse(""));
-        result.add(pkg.getTags().stream().map(tag -> tag.getId()).collect(joining(",")));
+        result.add(pkg.getTags().stream().map(Tag::getId).collect(joining(",")));
         return result;
     }
 

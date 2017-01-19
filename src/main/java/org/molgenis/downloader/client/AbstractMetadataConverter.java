@@ -18,34 +18,36 @@ import org.molgenis.downloader.api.metadata.Entity;
  *
  * @author david
  */
-public abstract class AbstractMetadataConverter implements MetadataConverter {
+abstract class AbstractMetadataConverter implements MetadataConverter {
 
-    protected void updateReference(final Entity ent, final Attribute att) {
+    void updateReference(final Entity ent, final Attribute att) {
         att.setEntity(ent);
         att.getParts().forEach((Attribute part) -> updateReference(ent, part));
     }
 
-    protected String getString(final Map<Attribute, String> data, final String field) {
+    String getString(final Map<Attribute, String> data, final String field) {
         return data.get(Attribute.from(field));
     }
 
-    protected void setInteger(final Map<Attribute, String> data, final String field, final Consumer<Integer> consumer) {
+    void setInteger(final Map<Attribute, String> data, final String field, final Consumer<Integer> consumer) {
         setData(data, field, (s -> !s.isEmpty()), Integer::valueOf, consumer);
     }
 
-    protected void setBoolean(final Map<Attribute, String> data, final String field, final Consumer<Boolean> consumer) {
+    void setBoolean(final Map<Attribute, String> data, final String field, final Consumer<Boolean> consumer) {
         setData(data, field, Boolean::valueOf, consumer);
     }
 
-    protected void setString(final Map<Attribute, String> data, final String field, final Consumer<String> consumer) {
+    void setString(final Map<Attribute, String> data, final String field, final Consumer<String> consumer) {
         setData(data, field, (string -> !string.isEmpty()), (string -> string), consumer);
     }
 
-    protected <R> void setData(final Map<Attribute, String> data, final String field, Function<String, R> mapper, Consumer<R> consumer) {
+    <R> void setData(final Map<Attribute, String> data, final String field, Function<String, R> mapper,
+			Consumer<R> consumer) {
         setData(data, field, (string -> !string.isEmpty()), mapper, consumer);
     }
 
-    protected <R> void setList(final Map<Attribute, String> data, final String field, Function<String, R> mapper, Consumer<R> consumer) {
+    <R> void setList(final Map<Attribute, String> data, final String field, Function<String, R> mapper,
+			Consumer<R> consumer) {
         getList(data, field).ifPresent(value -> Arrays.stream(value).map(mapper).forEach(consumer));
     }
 

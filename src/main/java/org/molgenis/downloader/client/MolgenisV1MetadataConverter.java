@@ -21,7 +21,7 @@ import org.molgenis.downloader.api.metadata.Tag;
  */
 class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
 
-    final MetadataRepository repository;
+    private final MetadataRepository repository;
 
     public MolgenisV1MetadataConverter(final MetadataRepository metadataRepository) {
         repository = metadataRepository;
@@ -64,12 +64,8 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
         setString(data, "visibleExpression", att::setVisibleExpression);
         setString(data, "validationExpression", att::setValidationExpression);
         setString(data, "defaultValue", att::setDefaultValue);
-        repository.getLanguages().forEach(lang -> {
-            setString(data, "description-" + lang.getCode(), description -> att.addDescription(description, lang));
-        });
-        repository.getLanguages().forEach(lang -> {
-            setString(data, "label-" + lang.getCode(), label -> att.addLabel(label, lang));
-        });
+        repository.getLanguages().forEach(lang -> setString(data, "description-" + lang.getCode(), description -> att.addDescription(description, lang)));
+        repository.getLanguages().forEach(lang -> setString(data, "label-" + lang.getCode(), label -> att.addLabel(label, lang)));
         return att;
     }
 
@@ -109,12 +105,8 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
                 updateReference(ent, att);
             });
         setBoolean(data, "rowLevelSecured", ent::setRowLevelSecured);
-        repository.getLanguages().forEach(lang -> {
-            setString(data, "description-" + lang.getCode(), description -> ent.addDescription(description, lang));
-        });
-        repository.getLanguages().forEach(lang -> {
-            setString(data, "label-" + lang.getCode(), label -> ent.addLabel(label, lang));
-        });
+        repository.getLanguages().forEach(lang -> setString(data, "description-" + lang.getCode(), description -> ent.addDescription(description, lang)));
+        repository.getLanguages().forEach(lang -> setString(data, "label-" + lang.getCode(), label -> ent.addLabel(label, lang)));
         return ent;
     }
 

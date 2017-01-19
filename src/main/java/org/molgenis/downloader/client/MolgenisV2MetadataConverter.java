@@ -21,7 +21,7 @@ import org.molgenis.downloader.api.metadata.Tag;
  */
 class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
 
-    final MetadataRepository repository;
+    private final MetadataRepository repository;
 
     public MolgenisV2MetadataConverter(MetadataRepository metadataRepository) {
         repository = metadataRepository;
@@ -79,12 +79,8 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
             ent.addAttribute(att);
             updateReference(ent, att);
         });
-        repository.getLanguages().forEach(lang -> {
-            setString(data, "description-" + lang.getCode(), description -> ent.addDescription(description, lang));
-        });
-        repository.getLanguages().forEach(lang -> {
-            setString(data, "label-" + lang.getCode(), label -> ent.addLabel(label, lang));
-        });
+        repository.getLanguages().forEach(lang -> setString(data, "description-" + lang.getCode(), description -> ent.addDescription(description, lang)));
+        repository.getLanguages().forEach(lang -> setString(data, "label-" + lang.getCode(), label -> ent.addLabel(label, lang)));
         return ent;
     }
 
