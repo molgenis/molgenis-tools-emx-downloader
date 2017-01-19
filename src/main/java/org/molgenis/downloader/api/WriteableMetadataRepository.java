@@ -18,7 +18,7 @@ public interface WriteableMetadataRepository extends MetadataRepository {
 
     Language createLanguage(final String code);
 
-    Package createPkg(final String fullName);
+    Package createPackage(final String fullName);
 
     Tag createTag(final String identifier);
     
