@@ -2,6 +2,7 @@ package org.molgenis.downloader.client;
 
 import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
+import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.api.metadata.Tag;
 import org.testng.annotations.BeforeClass;
@@ -86,5 +87,49 @@ public class MolgenisV1MetadataConverterTest
 		expected.setObjectIRI(URI.create("objectIRI"));
 
 		assertEquals(actual, expected);
+	}
+
+	@Test
+	public void toAttributeTest()
+	{	when(metadataRepository.createAttribute("identifier")).thenReturn(new Attribute("identifier"));
+
+		Map<Attribute, String> map = new HashMap<>();
+		map.put(new Attribute("identifier"), "identifier");
+		map.put(new Attribute("name"), "name");
+		map.put(new Attribute("dataType"), "STRING");
+		map.put(new Attribute("parts"), "");
+		map.put(new Attribute("refEntity"), "");
+		map.put(new Attribute("nillable"), "TRUE");
+		map.put(new Attribute("auto"), "FALSE");
+		map.put(new Attribute("visible"), "TRUE");
+		map.put(new Attribute("label"), "label");
+		map.put(new Attribute("description"), "description");
+		map.put(new Attribute("aggregateable"), "TRUE");
+		map.put(new Attribute("enumOptions"), "");
+		map.put(new Attribute("rangeMin"), "");
+		map.put(new Attribute("rangeMax"), "");
+		map.put(new Attribute("readOnly"), "FALSE");
+		map.put(new Attribute("unique"), "FALSE");
+		map.put(new Attribute("tags"), "");
+		map.put(new Attribute("visibleExpression"), "");
+		map.put(new Attribute("validateExpression"), "");
+		map.put(new Attribute("defaultValue"), "");
+
+		Attribute actual = converter.toAttribute(map);
+		Attribute expected = new Attribute("identifier");
+		expected.setId("identifier");
+		expected.setName("name");
+		expected.setDataType(DataType.STRING);
+		expected.setAuto(false);
+		expected.setVisible(true);
+		expected.setLabel("label");
+		expected.setDescription("description");
+		expected.setAggregateable(true);
+		expected.setEnumOptions("");
+		expected.setReadOnly(false);
+		expected.setUnique(false);
+
+		assertEquals(actual, expected);
+
 	}
 }
