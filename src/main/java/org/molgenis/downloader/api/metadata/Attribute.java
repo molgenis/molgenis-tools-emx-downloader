@@ -17,7 +17,7 @@ public final class Attribute implements Metadata {
     private Entity refEntity;
     private boolean idAttribute;
     private boolean lookupAttribute;
-    private boolean optional;
+    private boolean nillable;
     private boolean auto;
     private boolean visible;
     private boolean readOnly;
@@ -206,8 +206,8 @@ public final class Attribute implements Metadata {
         return dataType;
     }
 
-    public boolean isOptional() {
-        return optional;
+    public boolean isNillable() {
+        return nillable;
     }
 
     public String getEnumOptions() {
@@ -242,8 +242,8 @@ public final class Attribute implements Metadata {
         this.lookupAttribute = lookupAttribute;
     }
 
-    public void setOptional(boolean optional) {
-        this.optional = optional;
+    public void setNilleble(boolean nillable) {
+        this.nillable = nillable;
     }
 
     public void setAuto(boolean auto) {
@@ -331,7 +331,7 @@ public final class Attribute implements Metadata {
     {
         return "Attribute{" + "entity=" + entity + ", id='" + id + '\'' + ", name='" + name + '\'' + ", dataType="
                 + dataType + ", refEntity=" + refEntity + ", idAttribute=" + idAttribute + ", lookupAttribute="
-                + lookupAttribute + ", optional=" + optional + ", auto=" + auto + ", visible=" + visible + ", readOnly="
+                + lookupAttribute + ", nillable=" + nillable + ", auto=" + auto + ", visible=" + visible + ", readOnly="
                 + readOnly + ", unique=" + unique + ", aggregateable=" + aggregateable + ", labelAttribute="
                 + labelAttribute + ", enumOptions='" + enumOptions + '\'' + ", expression='" + expression + '\''
                 + ", label='" + label + '\'' + ", description='" + description + '\'' + ", visibleExpression='"
