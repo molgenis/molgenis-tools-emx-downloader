@@ -14,7 +14,7 @@ public class Package implements Metadata {
     private final Set<Tag> tags;
     private String label;
 
-    private Package(final String name) {
+    public Package(final String name) {
         tags = new HashSet<>();        
         this.name = name;
     }
@@ -90,5 +90,12 @@ public class Package implements Metadata {
     
     public void addTag(final Tag tag) {
         tags.add(tag);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Package{" + "name='" + name + '\'' + ", description='" + description + '\'' + ", parent=" + parent
+                + ", tags=" + tags + ", label='" + label + '\'' + '}';
     }
 }

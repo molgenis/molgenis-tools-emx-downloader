@@ -60,7 +60,7 @@ public class Tag implements Metadata {
         return Objects.equals(this.id, other.id);
     }
    
-    private Tag(final String id) {
+    public Tag(final String id) {
         this.id = id;
     }
     
@@ -70,7 +70,7 @@ public class Tag implements Metadata {
         }
         return new Tag(id);
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -93,5 +93,12 @@ public class Tag implements Metadata {
 
     public void setCodeSystem(String codeSystem) {
         this.codeSystem = codeSystem;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Tag{" + "id='" + id + '\'' + ", label='" + label + '\'' + ", objectIRI=" + objectIRI + ", relationIRI="
+                + relationIRI + ", relationLabel='" + relationLabel + '\'' + ", codeSystem='" + codeSystem + '\'' + '}';
     }
 }

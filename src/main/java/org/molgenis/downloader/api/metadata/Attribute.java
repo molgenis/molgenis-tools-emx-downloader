@@ -325,4 +325,19 @@ public final class Attribute implements Metadata {
     public void addLabel(final String label, final Language language) {
         labels.put(language, label);
     }
+
+    @Override
+    public String toString()
+    {
+        return "Attribute{" + "entity=" + entity + ", id='" + id + '\'' + ", name='" + name + '\'' + ", dataType="
+                + dataType + ", refEntity=" + refEntity + ", idAttribute=" + idAttribute + ", lookupAttribute="
+                + lookupAttribute + ", optional=" + optional + ", auto=" + auto + ", visible=" + visible + ", readOnly="
+                + readOnly + ", unique=" + unique + ", aggregateable=" + aggregateable + ", labelAttribute="
+                + labelAttribute + ", enumOptions='" + enumOptions + '\'' + ", expression='" + expression + '\''
+                + ", label='" + label + '\'' + ", description='" + description + '\'' + ", visibleExpression='"
+                + visibleExpression + '\'' + ", validationExpression='" + validationExpression + '\''
+                + ", defaultValue='" + defaultValue + '\'' + ", orderBy='" + orderBy + '\'' + ", mappedBy=" + mappedBy
+                + ", rangeMin=" + rangeMin + ", rangeMax=" + rangeMax + ", tags=" + tags + ", labels=" + labels
+                + ", descriptions=" + descriptions + ", parts=" + parts + ", compound=" + compound + '}';
+    }
 }
