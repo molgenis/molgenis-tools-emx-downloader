@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.api.metadata;
 
 import java.util.Collections;
@@ -10,10 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- *
- * @author david
- */
+
 public class Package implements Metadata {
     private String name;
     private String description;
@@ -21,7 +14,7 @@ public class Package implements Metadata {
     private final Set<Tag> tags;
     private String label;
 
-    private Package(final String name) {
+    public Package(final String name) {
         tags = new HashSet<>();        
         this.name = name;
     }
@@ -97,5 +90,12 @@ public class Package implements Metadata {
     
     public void addTag(final Tag tag) {
         tags.add(tag);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Package{" + "name='" + name + '\'' + ", description='" + description + '\'' + ", parent=" + parent
+                + ", tags=" + tags + ", label='" + label + '\'' + '}';
     }
 }

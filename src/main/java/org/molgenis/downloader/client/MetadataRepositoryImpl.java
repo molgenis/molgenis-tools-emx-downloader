@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.client;
 
 import org.molgenis.downloader.api.WriteableMetadataRepository;
@@ -15,11 +11,8 @@ import org.molgenis.downloader.api.metadata.Language;
 import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.api.metadata.Tag;
 
-/**
- *
- * @author david
- */
-class MetadataRepository implements WriteableMetadataRepository {
+
+public class MetadataRepositoryImpl implements WriteableMetadataRepository {
 
     private final Map<String, Tag> tags;
     private final Map<String, Package> packages;
@@ -27,7 +20,7 @@ class MetadataRepository implements WriteableMetadataRepository {
     private final Map<String, Attribute> attributes;
     private final Map<String, Language> languages;
 
-    public MetadataRepository() {
+    public MetadataRepositoryImpl() {
         tags = new LinkedHashMap<>();
         packages = new LinkedHashMap<>();
         entities = new LinkedHashMap<>();
@@ -70,7 +63,7 @@ class MetadataRepository implements WriteableMetadataRepository {
     }
 
     @Override
-    public Package createPkg(final String fullName) {
+    public Package createPackage(final String fullName) {
         return packages.computeIfAbsent(fullName, Package::from);
     }
     

@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.client;
 
 import java.net.URI;
 import java.util.Map;
+
+import org.molgenis.downloader.api.MetadataRepository;
+import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Backend;
 import org.molgenis.downloader.api.metadata.DataType;
@@ -15,15 +14,12 @@ import org.molgenis.downloader.api.metadata.Language;
 import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.api.metadata.Tag;
 
-/**
- *
- * @author david
- */
+
 class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
 
-    private final MetadataRepository repository;
+    private final WriteableMetadataRepository repository;
 
-    public MolgenisV1MetadataConverter(final MetadataRepository metadataRepository) {
+    public MolgenisV1MetadataConverter(final WriteableMetadataRepository metadataRepository) {
         repository = metadataRepository;
     }
 
@@ -71,9 +67,9 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
 
     @Override
     public Package toPackage(final Map<Attribute, String> data) {
-        final Package pkg = repository.createPkg(getString(data, "fullName"));
+        final Package pkg = repository.createPackage(getString(data, "fullName"));
         setString(data, "description", pkg::setDescription);
-        setData(data, "parent", repository::createPkg, pkg::setParent);
+        setData(data, "parent", repository::createPackage, pkg::setParent);
         setList(data, "tags", repository::createTag, pkg::addTag);
         return pkg;
     }
@@ -82,7 +78,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     public Entity toEntity(final Map<Attribute, String> data) {
         final Entity ent = repository.createEntity(getString(data, "fullName"));
         setData(data, "backend", Backend::from, ent::setBackend);
-        setData(data, "package", repository::createPkg, ent::setPkg);
+        setData(data, "package", repository::createPackage, ent::setPackage);
         setData(data, "idAttribute", repository::createAttribute, att -> {
             ent.setIdAttribute(att);
             att.setIdAttribute(true);

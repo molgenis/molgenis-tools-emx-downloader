@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.client;
 
 import org.molgenis.downloader.api.metadata.Attribute;
@@ -12,15 +8,11 @@ import org.molgenis.downloader.api.metadata.Tag;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
-/**
- *
- * @author david
- */
-public class MetadataRepositoryTest {
+public class MetadataRepositoryImplTest {
     
     @Test
     public void testCreateNewAttribute() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         Attribute att = repository.createAttribute("test");
         assertNotNull(att);
         assertEquals(att.getId(), "test");
@@ -29,7 +21,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testRetrieveExistingAttribute() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createAttribute("test");
         Attribute att = repository.createAttribute("test");
         assertNotNull(att);
@@ -40,7 +32,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testUpdateExistingAttribute() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createAttribute("test");
         Attribute att1 = repository.createAttribute("test");
         att1.setLabel("test");
@@ -54,7 +46,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testCreateNewEntity() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         Entity ent = repository.createEntity("test");
         assertNotNull(ent);
         assertEquals(ent.getFullName(), "test");
@@ -63,7 +55,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testRetrieveExistingEntity() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createEntity("test");
         Entity ent = repository.createEntity("test");
         assertNotNull(ent);
@@ -74,7 +66,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testEntityByName() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createEntity("test_entity");
         Entity ent = repository.createEntity("entity", "test");
         assertNotNull(ent);
@@ -85,7 +77,7 @@ public class MetadataRepositoryTest {
     
     @Test
     public void testUpdateExistingEntity() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createEntity("test");
         Entity ent1 = repository.createEntity("test");
         ent1.setLabel("test");
@@ -99,8 +91,8 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testCreateNewPackage() {
-        MetadataRepository repository = new MetadataRepository();
-        Package pkg = repository.createPkg("test");
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
+        Package pkg = repository.createPackage("test");
         assertNotNull(pkg);
         assertEquals(pkg.getName(), "test");
         assertTrue(repository.getPackages().contains(pkg));
@@ -108,9 +100,9 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testRetrieveExistingPackage() {
-        MetadataRepository repository = new MetadataRepository();
-        repository.createPkg("test");
-        Package pkg = repository.createPkg("test");
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
+        repository.createPackage("test");
+        Package pkg = repository.createPackage("test");
         assertNotNull(pkg);
         assertEquals(pkg.getName(), "test");
         assertTrue(repository.getPackages().contains(pkg));
@@ -119,11 +111,11 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testUpdateExistingPackage() {
-        MetadataRepository repository = new MetadataRepository();
-        repository.createPkg("test");
-        Package pkg1 = repository.createPkg("test");
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
+        repository.createPackage("test");
+        Package pkg1 = repository.createPackage("test");
         pkg1.setLabel("test");
-        Package pkg2 = repository.createPkg("test");
+        Package pkg2 = repository.createPackage("test");
         assertNotNull(pkg2);
         assertEquals(pkg2.getName(), "test");
         assertEquals(pkg2.getLabel(), "test");
@@ -132,7 +124,7 @@ public class MetadataRepositoryTest {
     }
     @Test
     public void testCreateNewTag() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         Tag tag = repository.createTag("test");
         assertNotNull(tag);
         assertEquals(tag.getId(), "test");
@@ -141,7 +133,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testRetrieveExistingTag() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createTag("test");
         Tag tag = repository.createTag("test");
         assertNotNull(tag);
@@ -152,7 +144,7 @@ public class MetadataRepositoryTest {
 
     @Test
     public void testUpdateExistingTag() {
-        MetadataRepository repository = new MetadataRepository();
+        MetadataRepositoryImpl repository = new MetadataRepositoryImpl();
         repository.createTag("test");
         Tag tag1 = repository.createTag("test");
         tag1.setLabel("test");

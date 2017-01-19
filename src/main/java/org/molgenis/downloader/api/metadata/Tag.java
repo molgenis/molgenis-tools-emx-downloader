@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.api.metadata;
 
 import java.net.URI;
 import java.util.Objects;
 
-/**
- *
- * @author david
- */
+
 public class Tag implements Metadata {
     
     private String id;
@@ -67,7 +60,7 @@ public class Tag implements Metadata {
         return Objects.equals(this.id, other.id);
     }
    
-    private Tag(final String id) {
+    public Tag(final String id) {
         this.id = id;
     }
     
@@ -77,7 +70,7 @@ public class Tag implements Metadata {
         }
         return new Tag(id);
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -100,5 +93,12 @@ public class Tag implements Metadata {
 
     public void setCodeSystem(String codeSystem) {
         this.codeSystem = codeSystem;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Tag{" + "id='" + id + '\'' + ", label='" + label + '\'' + ", objectIRI=" + objectIRI + ", relationIRI="
+                + relationIRI + ", relationLabel='" + relationLabel + '\'' + ", codeSystem='" + codeSystem + '\'' + '}';
     }
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.api.metadata;
 
 import java.util.ArrayList;
@@ -11,10 +7,7 @@ import java.util.stream.Collectors;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
-/**
- *
- * @author david
- */
+
 public class MolgenisVersionTest {
     
     @Test

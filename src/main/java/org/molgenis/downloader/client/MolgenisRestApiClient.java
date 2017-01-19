@@ -1,24 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.client;
 
-import org.molgenis.downloader.api.metadata.MolgenisVersion;
-import org.molgenis.downloader.api.EntityConsumer;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
@@ -29,22 +11,31 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.molgenis.downloader.api.EntityConsumer;
 import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.MolgenisClient;
+import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
+import org.molgenis.downloader.api.metadata.MolgenisVersion;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
-/**
- *
- * @author david
- */
+
 public class MolgenisRestApiClient implements MolgenisClient {
 
     private final HttpClient client;
-    private final MetadataRepository repository;
+    private final WriteableMetadataRepository repository;
     private final MetadataConverter converter;
     private final URI uri;
     private String token;
@@ -53,7 +44,7 @@ public class MolgenisRestApiClient implements MolgenisClient {
         this.client = client;
         this.uri = uri;
         final MolgenisVersion version = version();
-        repository = new MetadataRepository();
+        repository = new MetadataRepositoryImpl();
         MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
         if (version.smallerThan(VERSION_2)) {
             converter = new MolgenisV1MetadataConverter(repository);

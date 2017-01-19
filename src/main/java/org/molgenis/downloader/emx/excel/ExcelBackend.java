@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.emx.excel;
 
 import java.nio.file.FileAlreadyExistsException;
@@ -14,17 +10,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.molgenis.downloader.api.EMXBackend;
 import org.molgenis.downloader.api.EMXDataStore;
 
-/**
- *
- * @author david
- */
+
 public class ExcelBackend implements EMXBackend {
 
     private final Workbook workbook;
     private final Path path;
 
-    public ExcelBackend(final Path path) throws FileAlreadyExistsException {
-        if (path.toFile().exists()) {
+    public ExcelBackend(final Path path, boolean overwrite) throws FileAlreadyExistsException {
+        if (path.toFile().exists() && !overwrite) {
             throw new FileAlreadyExistsException(path.toString(), null,
                     "File already exists.");
         }

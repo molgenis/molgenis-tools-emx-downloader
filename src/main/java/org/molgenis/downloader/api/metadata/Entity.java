@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.molgenis.downloader.api.metadata;
 
 import java.util.HashMap;
@@ -12,10 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- *
- * @author david
- */
+
 public class Entity implements Metadata {
 
     private String fullName;
@@ -38,7 +31,7 @@ public class Entity implements Metadata {
         return rowLevelSecured;
     }
 
-    private Entity() {
+    public Entity() {
         attributes = new LinkedHashSet<>();
         descriptions = new HashMap<>();
         labels = new HashMap<>();
@@ -168,7 +161,7 @@ public class Entity implements Metadata {
         this.base = base;
     }
 
-    public void setPkg(Package pkg) {
+    public void setPackage(Package pkg) {
         this.pkg = pkg;
     }
 
@@ -222,5 +215,15 @@ public class Entity implements Metadata {
     
     public void addLabel(final String label, final Language language) {
         labels.put(language, label);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Entity{" + "fullName='" + fullName + '\'' + ", attributes=" + attributes + ", base=" + base + ", pkg="
+                + pkg + ", abstractClass=" + abstractClass + ", description='" + description + '\'' + ", descriptions="
+                + descriptions + ", label='" + label + '\'' + ", labels=" + labels + ", tags=" + tags + ", backend="
+                + backend + ", idAttribute=" + idAttribute + ", labelAttribute=" + labelAttribute
+                + ", lookupAttributes=" + lookupAttributes + ", rowLevelSecured=" + rowLevelSecured + '}';
     }
 }
