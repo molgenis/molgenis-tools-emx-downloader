@@ -7,6 +7,7 @@ import org.molgenis.downloader.api.metadata.Tag;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +59,31 @@ public class MolgenisV1MetadataConverterTest
 		expected.setName("name");
 		expected.setParent(parentPackage);
 		expected.addTag(expectedTag);
+
+		assertEquals(actual, expected);
+	}
+
+	@Test
+	public void toTagTest()
+	{	when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
+
+		Map<Attribute, String> map = new HashMap<>();
+		map.put(new Attribute("identifier"), "id");
+		map.put(new Attribute("label"), "label");
+		map.put(new Attribute("objectIRI"), "objectIRI");
+		map.put(new Attribute("relationIRI"), "relationIRI");
+		map.put(new Attribute("relationLabel"), "relationLabel");
+		map.put(new Attribute("codeSystem"), "codeSystem");
+
+		Tag actual = converter.toTag(map);
+		Tag expected = new Tag("id");
+
+		expected.setId("id");
+		expected.setLabel("label");
+		expected.setCodeSystem("codeSystem");
+		expected.setRelationIRI(URI.create("relationIRI"));
+		expected.setRelationLabel("relationLabel");
+		expected.setObjectIRI(URI.create("objectIRI"));
 
 		assertEquals(actual, expected);
 	}
