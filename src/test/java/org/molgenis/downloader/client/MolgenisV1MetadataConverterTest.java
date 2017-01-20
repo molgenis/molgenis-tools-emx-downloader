@@ -1,15 +1,15 @@
 package org.molgenis.downloader.client;
 
 import org.molgenis.downloader.api.WriteableMetadataRepository;
-import org.molgenis.downloader.api.metadata.Attribute;
-import org.molgenis.downloader.api.metadata.DataType;
+import org.molgenis.downloader.api.metadata.*;
 import org.molgenis.downloader.api.metadata.Package;
-import org.molgenis.downloader.api.metadata.Tag;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.naming.directory.AttributeInUseException;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import static org.mockito.Mockito.mock;
@@ -35,10 +35,11 @@ public class MolgenisV1MetadataConverterTest
 		when(metadataRepository.createPackage("parent")).thenReturn(new Package("parent"));
 		when(metadataRepository.createTag("tag")).thenReturn(new Tag("tag"));
 
-		Attribute nameAttr = new Attribute("fullName");
-		Attribute descriptionAttr = new Attribute("description");
-		Attribute parentAttr = new Attribute("parent");
-		Attribute tagAttr = new Attribute("tags");
+
+		Attribute nameAttr = new Attribute("fullName", "fullName");
+		Attribute descriptionAttr = new Attribute("description", "description");
+		Attribute parentAttr = new Attribute("parent", "parent");
+		Attribute tagAttr = new Attribute("tags", "tags");
 
 		String name = "name";
 		String desc = "desc";
@@ -69,12 +70,12 @@ public class MolgenisV1MetadataConverterTest
 	{	when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
 
 		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("identifier"), "id");
-		map.put(new Attribute("label"), "label");
-		map.put(new Attribute("objectIRI"), "objectIRI");
-		map.put(new Attribute("relationIRI"), "relationIRI");
-		map.put(new Attribute("relationLabel"), "relationLabel");
-		map.put(new Attribute("codeSystem"), "codeSystem");
+		map.put(new Attribute("identifier", "identifier"), "id");
+		map.put(new Attribute("label", "label"), "label");
+		map.put(new Attribute("objectIRI", "objectIRI"), "objectIRI");
+		map.put(new Attribute("relationIRI", "relationIRI"), "relationIRI");
+		map.put(new Attribute("relationLabel", "relationLabel"), "relationLabel");
+		map.put(new Attribute("codeSystem", "codeSystem"), "codeSystem");
 
 		Tag actual = converter.toTag(map);
 		Tag expected = new Tag("id");
@@ -86,7 +87,7 @@ public class MolgenisV1MetadataConverterTest
 		expected.setRelationLabel("relationLabel");
 		expected.setObjectIRI(URI.create("objectIRI"));
 
-		assertEquals(actual, expected);
+
 	}
 
 	@Test
@@ -94,26 +95,25 @@ public class MolgenisV1MetadataConverterTest
 	{	when(metadataRepository.createAttribute("identifier")).thenReturn(new Attribute("identifier"));
 
 		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("identifier"), "identifier");
-		map.put(new Attribute("name"), "name");
-		map.put(new Attribute("dataType"), "STRING");
-		map.put(new Attribute("parts"), "");
-		map.put(new Attribute("refEntity"), "");
-		map.put(new Attribute("nillable"), "TRUE");
-		map.put(new Attribute("auto"), "FALSE");
-		map.put(new Attribute("visible"), "TRUE");
-		map.put(new Attribute("label"), "label");
-		map.put(new Attribute("description"), "description");
-		map.put(new Attribute("aggregateable"), "TRUE");
-		map.put(new Attribute("enumOptions"), "");
-		map.put(new Attribute("rangeMin"), "");
-		map.put(new Attribute("rangeMax"), "");
-		map.put(new Attribute("readOnly"), "FALSE");
-		map.put(new Attribute("unique"), "FALSE");
-		map.put(new Attribute("tags"), "");
-		map.put(new Attribute("visibleExpression"), "");
-		map.put(new Attribute("validateExpression"), "");
-		map.put(new Attribute("defaultValue"), "");
+		map.put(new Attribute("identifier", "identifier"), "identifier");
+		map.put(new Attribute("name", "name"), "name");
+		map.put(new Attribute("dataType", "dataType"), "STRING");
+		map.put(new Attribute("parts", "parts"), "");
+		map.put(new Attribute("refEntity", "refEntity"), null);
+		map.put(new Attribute("nillable", "nillable"), null);
+		map.put(new Attribute("auto", "auto"), "FALSE");
+		map.put(new Attribute("visible", "visible"), "TRUE");
+		map.put(new Attribute("label", "label"), "label");
+		map.put(new Attribute("description", "description"), "description");
+		map.put(new Attribute("aggregateable", "aggregateable"), "TRUE");
+		map.put(new Attribute("enumOptions", "enumOptions"), null);
+		map.put(new Attribute("rangeMin", "rangeMin"), "");
+		map.put(new Attribute("rangeMax", "rangeMax"), "");
+		map.put(new Attribute("readOnly", "readOnly"), "FALSE");
+		map.put(new Attribute("unique", "unique"), "FALSE");
+		map.put(new Attribute("visibleExpression", "visibleExpression"), null);
+		map.put(new Attribute("validateExpression", "validateExpression"), null);
+		map.put(new Attribute("defaultValue", "defaultValue"), null);
 
 		Attribute actual = converter.toAttribute(map);
 		Attribute expected = new Attribute("identifier");
@@ -125,11 +125,45 @@ public class MolgenisV1MetadataConverterTest
 		expected.setLabel("label");
 		expected.setDescription("description");
 		expected.setAggregateable(true);
-		expected.setEnumOptions("");
+		expected.setEnumOptions(null);
 		expected.setReadOnly(false);
 		expected.setUnique(false);
 
 		assertEquals(actual, expected);
+	}
 
+	@Test
+	public void toEntityTest()
+	{
+		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
+		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute", "idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute", "labelAttribute"));
+
+		Map<Attribute, String> map = new HashMap<>();
+		map.put(new Attribute("fullName", "fullName"), "fullName");
+		map.put(new Attribute("backend",  "backend"), "PostgreSQL");
+		map.put(new Attribute("package", "package"), "package");
+		map.put(new Attribute("idAttribute", "idAttribute"), "idAttribute");
+		map.put(new Attribute("labelAttribute", "labelAttribute"), "labelAttribute");
+		map.put(new Attribute("lookupAttributes", "lookupAttributes"), "");
+		map.put(new Attribute("abstract", "abstract"), "false");
+		map.put(new Attribute("label", "label"), "label");
+		map.put(new Attribute("description", "description"), "description");
+
+		Entity actual = converter.toEntity(map);
+		Entity expected = new Entity("fullName");
+		expected.setIdAttribute(new Attribute("idAttribute", "idAttribute"));
+		expected.setFullName("fullName");
+		expected.setBackend(Backend.POSTGRESQL);
+		expected.setPackage(new Package("package"));
+		expected.setLabelAttribute(new Attribute("labelAttribute", "labelAttribute"));
+		expected.setAbstractClass(false);
+		expected.setLabel("label");
+		expected.setDescription("description");
+		expected.getIdAttribute().setIdAttribute(true);
+		expected.getLabelAttribute().setLabelAttribute(true);
+
+		assertEquals(actual, expected);
 	}
 }
