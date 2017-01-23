@@ -25,6 +25,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
 
     @Override
     public Attribute toAttribute(Map<Attribute, String> data) {
+        //FIXME: field might be refactored to identifier, to keep it the same as V1 (fix in test as well)
         final Attribute att = repository.createAttribute(getString(data, "id"));
         setString(data, "name", att::setName);
         setData(data, "type", DataType::from, att::setDataType);
@@ -92,6 +93,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
 
     @Override
     public Tag toTag(Map<Attribute, String> data) {
+        //FIXME: field might be refactored to identifier, to keep it the same as V1 (fix in test as well)
         final Tag tag = repository.createTag(getString(data, "id"));
         setString(data, "label", tag::setLabel);
         setData(data, "objectIRI", URI::create, tag::setObjectIRI);

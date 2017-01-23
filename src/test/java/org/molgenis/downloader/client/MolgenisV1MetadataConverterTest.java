@@ -87,7 +87,7 @@ public class MolgenisV1MetadataConverterTest
 		expected.setRelationLabel("relationLabel");
 		expected.setObjectIRI(URI.create("objectIRI"));
 
-
+		assertEquals(actual, expected);
 	}
 
 	@Test

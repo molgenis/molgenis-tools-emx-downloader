@@ -65,21 +65,31 @@ public class Entity implements Metadata {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Entity entity = (Entity) o;
+
+        if (abstractClass != entity.abstractClass) return false;
+        if (rowLevelSecured != entity.rowLevelSecured) return false;
+        if (fullName != null ? !fullName.equals(entity.fullName) : entity.fullName != null) return false;
+        if (attributes != null ? !attributes.equals(entity.attributes) : entity.attributes != null) return false;
+        if (base != null ? !base.equals(entity.base) : entity.base != null) return false;
+        if (pkg != null ? !pkg.equals(entity.pkg) : entity.pkg != null) return false;
+        if (description != null ? !description.equals(entity.description) : entity.description != null) return false;
+        if (descriptions != null ? !descriptions.equals(entity.descriptions) : entity.descriptions != null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (label != null ? !label.equals(entity.label) : entity.label != null) return false;
+        if (labels != null ? !labels.equals(entity.labels) : entity.labels != null) return false;
+        if (tags != null ? !tags.equals(entity.tags) : entity.tags != null) return false;
+        if (backend != entity.backend) return false;
+        if (idAttribute != null ? !idAttribute.equals(entity.idAttribute) : entity.idAttribute != null) return false;
+        if (labelAttribute != null ? !labelAttribute.equals(entity.labelAttribute) : entity.labelAttribute != null)
             return false;
-        }
-        final Entity other = (Entity) obj;
-        if (!Objects.equals(this.fullName, other.fullName)) {
-            return false;
-        }
-        return Objects.equals(this.pkg, other.pkg);
+        return lookupAttributes != null ? lookupAttributes.equals(entity.lookupAttributes) :
+                entity.lookupAttributes == null;
     }
 
     public boolean isParentOf(final Entity entity) {
