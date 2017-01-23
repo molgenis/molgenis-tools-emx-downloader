@@ -41,7 +41,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
         setData(data, "mappedBy", repository::createAttribute, att::setMappedBy);
         setString(data, "orderBy", att::setOrderBy);
         setString(data, "expression", att::setExpression);
-        setBoolean(data, "isNullable", att::setOptional);
+        setBoolean(data, "isNullable", att::setNilleble);
         setBoolean(data, "isVisible", att::setVisible);
         setString(data, "label", att::setLabel);
         setString(data, "description", att::setDescription);

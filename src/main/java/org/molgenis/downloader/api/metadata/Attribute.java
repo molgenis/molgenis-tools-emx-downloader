@@ -142,10 +142,6 @@ public final class Attribute implements Metadata {
         return visible;
     }
 
-    public boolean isHidden() {
-        return !visible;
-    }
-
     public String getLabel() {
         return label;
     }

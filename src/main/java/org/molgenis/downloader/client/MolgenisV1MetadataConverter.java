@@ -45,7 +45,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
             });
         setData(data, "refEntity", repository::createEntity, att::setRefEntity);
         setString(data, "expression", att::setExpression);
-        setBoolean(data, "nillable", att::setOptional);
+        setBoolean(data, "nillable", att::setNilleble);
         setBoolean(data, "auto", att::setAuto);
         setBoolean(data, "visible", att::setVisible);
         setString(data, "label", att::setLabel);
