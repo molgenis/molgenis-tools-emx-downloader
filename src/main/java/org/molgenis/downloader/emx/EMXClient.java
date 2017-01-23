@@ -39,7 +39,7 @@ public class EMXClient implements AutoCloseable
 	{
 		try (final EMXBackend backend = createBackend(path, overwrite))
 		{
-			final EMXFileWriter writer = new EMXFileWriter(backend, molgenis.version());
+			final EMXFileWriter writer = new EMXFileWriter(backend, molgenis.getVersion());
 			final List<String> target = new ArrayList<>(entities);
 			if (includeMetadata)
 			{

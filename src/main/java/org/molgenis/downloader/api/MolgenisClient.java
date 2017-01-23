@@ -19,5 +19,5 @@ public interface MolgenisClient extends AutoCloseable {
     
     void getMetaData(final MetadataConsumer consumer);
 
-    MolgenisVersion version() throws IOException, URISyntaxException;
+    MolgenisVersion getVersion() throws IOException, URISyntaxException;
 }

@@ -42,7 +42,7 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         result.add(att.getLabel());
         result.add(att.getDataType().name().toLowerCase());
         result.add(Optional.ofNullable(att.getRefEntity()).map(Entity::getFullName).orElse(""));
-        result.add(Boolean.toString(att.isOptional()));
+        result.add(Boolean.toString(att.isNillable()));
         final boolean isAutoIdAttriubte = att.isAuto();
         final boolean isIdAttribute = att.isIdAttribute();
         if (isIdAttribute && isAutoIdAttriubte) {
