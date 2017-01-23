@@ -107,7 +107,6 @@ public class MolgenisV2MetadataConverterTest
 		map.put(new Attribute("visible", "visible"), "TRUE");
 		map.put(new Attribute("label", "label"), "label");
 		map.put(new Attribute("description", "description"), "description");
-		//aggregateable is false in the actual
 		map.put(new Attribute("isAggregatable", "isAggregatable"), "TRUE");
 		map.put(new Attribute("enumOptions", "enumOptions"), null);
 		map.put(new Attribute("rangeMin", "rangeMin"), "");
@@ -138,6 +137,29 @@ public class MolgenisV2MetadataConverterTest
 	@Test
 	public void toEntityTest()
 	{
+		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
+		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute", "idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute", "labelAttribute"));
 
+		Map<Attribute, String> map = new HashMap<>();
+		map.put(new Attribute("fullName", "fullName"), "fullName");
+		map.put(new Attribute("backend",  "backend"), "PostgreSQL");
+		map.put(new Attribute("package", "package"), "package");
+		map.put(new Attribute("lookupAttributes", "lookupAttributes"), "");
+		map.put(new Attribute("abstract", "abstract"), "false");
+		map.put(new Attribute("label", "label"), "label");
+		map.put(new Attribute("description", "description"), "description");
+
+		Entity actual = converter.toEntity(map);
+		Entity expected = new Entity("fullName");
+		expected.setFullName("fullName");
+		expected.setBackend(Backend.POSTGRESQL);
+		expected.setPackage(new Package("package"));
+		expected.setAbstractClass(false);
+		expected.setLabel("label");
+		expected.setDescription("description");
+
+		assertEquals(actual, expected);
 	}
 }
