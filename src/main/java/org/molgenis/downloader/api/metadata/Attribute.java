@@ -41,14 +41,19 @@ public final class Attribute implements Metadata {
     private final List<Attribute> parts;
     private Attribute compound;
 
-    public Attribute(final String id) {
+    public Attribute(final String id, final String name) {
         this.id = id;
+        this.name = name;
         labels = new HashMap<>();
         descriptions = new HashMap<>();
         tags = new HashSet<>();
         parts = new ArrayList<>();        
         visible = true;
         dataType = DataType.STRING;
+    }
+    //FIXME: can we do this cleaner?
+    public Attribute(final String id) {
+       this(id, null);
     }
     
     public static Attribute from(final String id) {
@@ -68,18 +73,49 @@ public final class Attribute implements Metadata {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Attribute attribute = (Attribute) o;
+
+        if (idAttribute != attribute.idAttribute) return false;
+        if (lookupAttribute != attribute.lookupAttribute) return false;
+        if (optional != attribute.optional) return false;
+        if (auto != attribute.auto) return false;
+        if (visible != attribute.visible) return false;
+        if (readOnly != attribute.readOnly) return false;
+        if (unique != attribute.unique) return false;
+        if (aggregateable != attribute.aggregateable) return false;
+        if (labelAttribute != attribute.labelAttribute) return false;
+        if (entity != null ? !entity.equals(attribute.entity) : attribute.entity != null) return false;
+        if (id != null ? !id.equals(attribute.id) : attribute.id != null) return false;
+        if (name != null ? !name.equals(attribute.name) : attribute.name != null) return false;
+        if (dataType != attribute.dataType) return false;
+        if (refEntity != null ? !refEntity.equals(attribute.refEntity) : attribute.refEntity != null) return false;
+        if (enumOptions != null ? !enumOptions.equals(attribute.enumOptions) : attribute.enumOptions != null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (expression != null ? !expression.equals(attribute.expression) : attribute.expression != null) return false;
+        if (label != null ? !label.equals(attribute.label) : attribute.label != null) return false;
+        if (description != null ? !description.equals(attribute.description) : attribute.description != null)
             return false;
-        }
-        final Attribute other = (Attribute) obj;
-        return Objects.equals(this.id, other.id);
+        if (visibleExpression != null ? !visibleExpression.equals(attribute.visibleExpression) :
+                attribute.visibleExpression != null) return false;
+        if (validationExpression != null ? !validationExpression.equals(attribute.validationExpression) :
+                attribute.validationExpression != null) return false;
+        if (defaultValue != null ? !defaultValue.equals(attribute.defaultValue) : attribute.defaultValue != null)
+            return false;
+        if (orderBy != null ? !orderBy.equals(attribute.orderBy) : attribute.orderBy != null) return false;
+        if (mappedBy != null ? !mappedBy.equals(attribute.mappedBy) : attribute.mappedBy != null) return false;
+        if (rangeMin != null ? !rangeMin.equals(attribute.rangeMin) : attribute.rangeMin != null) return false;
+        if (rangeMax != null ? !rangeMax.equals(attribute.rangeMax) : attribute.rangeMax != null) return false;
+        if (tags != null ? !tags.equals(attribute.tags) : attribute.tags != null) return false;
+        if (labels != null ? !labels.equals(attribute.labels) : attribute.labels != null) return false;
+        if (descriptions != null ? !descriptions.equals(attribute.descriptions) : attribute.descriptions != null)
+            return false;
+        if (parts != null ? !parts.equals(attribute.parts) : attribute.parts != null) return false;
+        return compound != null ? compound.equals(attribute.compound) : attribute.compound == null;
     }
 
     public Attribute getMappedBy() {

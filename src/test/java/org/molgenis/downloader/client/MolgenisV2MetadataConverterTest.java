@@ -16,16 +16,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
-public class MolgenisV1MetadataConverterTest
+public class MolgenisV2MetadataConverterTest
 {
-	private MolgenisV1MetadataConverter converter;
+	private MolgenisV2MetadataConverter converter;
 	private WriteableMetadataRepository metadataRepository;
 
 	@BeforeClass
 	public void setup()
 	{
 		metadataRepository = mock(WriteableMetadataRepository.class);
-		converter = new MolgenisV1MetadataConverter(metadataRepository);
+		converter = new MolgenisV2MetadataConverter(metadataRepository);
 	}
 
 	@Test
@@ -67,10 +67,11 @@ public class MolgenisV1MetadataConverterTest
 
 	@Test
 	public void toTagTest()
-	{	when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
+	{
+		when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
 
 		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("identifier", "identifier"), "id");
+		map.put(new Attribute("id", "id"), "id");
 		map.put(new Attribute("label", "label"), "label");
 		map.put(new Attribute("objectIRI", "objectIRI"), "objectIRI");
 		map.put(new Attribute("relationIRI", "relationIRI"), "relationIRI");
@@ -92,10 +93,11 @@ public class MolgenisV1MetadataConverterTest
 
 	@Test
 	public void toAttributeTest()
-	{	when(metadataRepository.createAttribute("identifier")).thenReturn(new Attribute("identifier"));
+	{
+		when(metadataRepository.createAttribute("id")).thenReturn(new Attribute("id"));
 
 		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("identifier", "identifier"), "identifier");
+		map.put(new Attribute("id", "id"), "id");
 		map.put(new Attribute("name", "name"), "name");
 		map.put(new Attribute("dataType", "dataType"), "STRING");
 		map.put(new Attribute("parts", "parts"), "");
@@ -105,7 +107,7 @@ public class MolgenisV1MetadataConverterTest
 		map.put(new Attribute("visible", "visible"), "TRUE");
 		map.put(new Attribute("label", "label"), "label");
 		map.put(new Attribute("description", "description"), "description");
-		map.put(new Attribute("aggregateable", "aggregateable"), "TRUE");
+		map.put(new Attribute("isAggregatable", "isAggregatable"), "TRUE");
 		map.put(new Attribute("enumOptions", "enumOptions"), null);
 		map.put(new Attribute("rangeMin", "rangeMin"), "");
 		map.put(new Attribute("rangeMax", "rangeMax"), "");
@@ -116,8 +118,8 @@ public class MolgenisV1MetadataConverterTest
 		map.put(new Attribute("defaultValue", "defaultValue"), null);
 
 		Attribute actual = converter.toAttribute(map);
-		Attribute expected = new Attribute("identifier");
-		expected.setId("identifier");
+		Attribute expected = new Attribute("id");
+		expected.setId("id");
 		expected.setName("name");
 		expected.setDataType(DataType.STRING);
 		expected.setAuto(false);
@@ -144,8 +146,6 @@ public class MolgenisV1MetadataConverterTest
 		map.put(new Attribute("fullName", "fullName"), "fullName");
 		map.put(new Attribute("backend",  "backend"), "PostgreSQL");
 		map.put(new Attribute("package", "package"), "package");
-		map.put(new Attribute("idAttribute", "idAttribute"), "idAttribute");
-		map.put(new Attribute("labelAttribute", "labelAttribute"), "labelAttribute");
 		map.put(new Attribute("lookupAttributes", "lookupAttributes"), "");
 		map.put(new Attribute("abstract", "abstract"), "false");
 		map.put(new Attribute("label", "label"), "label");
@@ -153,16 +153,12 @@ public class MolgenisV1MetadataConverterTest
 
 		Entity actual = converter.toEntity(map);
 		Entity expected = new Entity("fullName");
-		expected.setIdAttribute(new Attribute("idAttribute", "idAttribute"));
 		expected.setFullName("fullName");
 		expected.setBackend(Backend.POSTGRESQL);
 		expected.setPackage(new Package("package"));
-		expected.setLabelAttribute(new Attribute("labelAttribute", "labelAttribute"));
 		expected.setAbstractClass(false);
 		expected.setLabel("label");
 		expected.setDescription("description");
-		expected.getIdAttribute().setIdAttribute(true);
-		expected.getLabelAttribute().setLabelAttribute(true);
 
 		assertEquals(actual, expected);
 	}
