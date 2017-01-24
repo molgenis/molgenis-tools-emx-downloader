@@ -20,7 +20,7 @@ abstract class AbstractMetadataConverter implements MetadataConverter {
 
     String getString(final Map<Attribute, String> data, final String field) {
         return data.get(Attribute.from(field));
-    }
+}
 
     void setInteger(final Map<Attribute, String> data, final String field, final Consumer<Integer> consumer) {
         setData(data, field, (s -> !s.isEmpty()), Integer::valueOf, consumer);
