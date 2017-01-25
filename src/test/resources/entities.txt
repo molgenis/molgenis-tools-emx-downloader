@@ -38,7 +38,7 @@
         "label" : "Name",
         "href" : "\/api\/v2\/biobank\/meta\/name",
         "nillable" : false,
-        "fieldType" : "TEXT",
+        "fieldType" : "STRING",
         "auto" : false,
         "unique" : false,
         "attributes" : [],
