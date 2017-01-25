@@ -69,13 +69,13 @@ public class MetadataRepositoryImpl implements WriteableMetadataRepository {
     
     @Override
     public Entity createEntity(final String fullName) {
-        return entities.computeIfAbsent(fullName, Entity::from);
+        return entities.computeIfAbsent(fullName, Entity::createEntityByName);
     }
     
     @Override
     public Entity createEntity(final String name, final String pkgName) {
         final String fullName = pkgName + "_" + name;
-        return entities.computeIfAbsent(fullName, Entity::from);
+        return entities.computeIfAbsent(fullName, Entity::createEntityByName);
     }
     
     @Override

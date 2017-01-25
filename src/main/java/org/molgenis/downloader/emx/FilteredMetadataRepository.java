@@ -54,14 +54,13 @@ class FilteredMetadataRepository implements MetadataRepository {
             atts.add(att);
             tags.addAll(att.getTags());
             att.getParts().forEach(this::traverse);
-            traverse(att.getEntity());
             traverse(att.getRefEntity());
         }
     }
 
     @Override
     public final Collection<Attribute> getAttributes() {
-        return atts.stream().sorted(Comparator.comparing(x -> x.getEntity().getFullName())).collect(Collectors.toList());
+        return atts.stream().sorted(Comparator.comparing(x -> x.getEntityFullname())).collect(Collectors.toList());
     }
 
     @Override

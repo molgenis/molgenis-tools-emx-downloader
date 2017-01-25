@@ -4,7 +4,6 @@ package org.molgenis.downloader.client;
 import java.net.URI;
 import java.util.Map;
 
-import org.molgenis.downloader.api.MetadataRepository;
 import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Backend;
@@ -29,7 +28,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
         final Attribute att = repository.createAttribute(getString(data, "id"));
         setString(data, "name", att::setName);
         setData(data, "type", DataType::from, att::setDataType);
-        setData(data, "entity", repository::createEntity, att::setEntity);
+        setString(data, "entity", att::setEntityFullname);
         setBoolean(data, "isIdAttribute", att::setIdAttribute);
         setBoolean(data, "isLabelAttribute", att::setLabelAttribute);
         setInteger(data, "lookupAttributeIndex", i -> att.setLookupAttribute(true));

@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 public final class Attribute implements Metadata {
-    private Entity entity;
+    private String entityFullname;
     private String id;
     private String name;
     private DataType dataType;
@@ -82,14 +82,14 @@ public final class Attribute implements Metadata {
 
         if (idAttribute != attribute.idAttribute) return false;
         if (lookupAttribute != attribute.lookupAttribute) return false;
-        if (optional != attribute.optional) return false;
+        if (nillable != attribute.nillable) return false;
         if (auto != attribute.auto) return false;
         if (visible != attribute.visible) return false;
         if (readOnly != attribute.readOnly) return false;
         if (unique != attribute.unique) return false;
         if (aggregateable != attribute.aggregateable) return false;
         if (labelAttribute != attribute.labelAttribute) return false;
-        if (entity != null ? !entity.equals(attribute.entity) : attribute.entity != null) return false;
+        if (entityFullname != null ? !entityFullname.equals(attribute.entityFullname) : attribute.entityFullname != null) return false;
         if (id != null ? !id.equals(attribute.id) : attribute.id != null) return false;
         if (name != null ? !name.equals(attribute.name) : attribute.name != null) return false;
         if (dataType != attribute.dataType) return false;
@@ -146,8 +146,8 @@ public final class Attribute implements Metadata {
         return compound;
     }
 
-    public Entity getEntity() {
-        return entity;
+    public String getEntityFullname() {
+        return entityFullname;
     }
 
     public Entity getRefEntity() {
@@ -246,8 +246,8 @@ public final class Attribute implements Metadata {
         return enumOptions;
     }
 
-    public void setEntity(Entity entity) {
-        this.entity = entity;
+    public void setEntityFullname(String entityFullname) {
+        this.entityFullname = entityFullname;
     }
 
     public void setId(String id) {
@@ -361,15 +361,15 @@ public final class Attribute implements Metadata {
     @Override
     public String toString()
     {
-        return "Attribute{" + "entity=" + entity + ", id='" + id + '\'' + ", name='" + name + '\'' + ", dataType="
-                + dataType + ", refEntity=" + refEntity + ", idAttribute=" + idAttribute + ", lookupAttribute="
-                + lookupAttribute + ", nillable=" + nillable + ", auto=" + auto + ", visible=" + visible + ", readOnly="
-                + readOnly + ", unique=" + unique + ", aggregateable=" + aggregateable + ", labelAttribute="
-                + labelAttribute + ", enumOptions='" + enumOptions + '\'' + ", expression='" + expression + '\''
-                + ", label='" + label + '\'' + ", description='" + description + '\'' + ", visibleExpression='"
-                + visibleExpression + '\'' + ", validationExpression='" + validationExpression + '\''
-                + ", defaultValue='" + defaultValue + '\'' + ", orderBy='" + orderBy + '\'' + ", mappedBy=" + mappedBy
-                + ", rangeMin=" + rangeMin + ", rangeMax=" + rangeMax + ", tags=" + tags + ", labels=" + labels
-                + ", descriptions=" + descriptions + ", parts=" + parts + ", compound=" + compound + '}';
+        return "Attribute{" + "entityFullname='" + entityFullname + '\'' + ", id='" + id + '\'' + ", name='" + name + '\''
+                + ", dataType=" + dataType + ", refEntity=" + refEntity + ", idAttribute=" + idAttribute
+                + ", lookupAttribute=" + lookupAttribute + ", nillable=" + nillable + ", auto=" + auto + ", visible="
+                + visible + ", readOnly=" + readOnly + ", unique=" + unique + ", aggregateable=" + aggregateable
+                + ", labelAttribute=" + labelAttribute + ", enumOptions='" + enumOptions + '\'' + ", expression='"
+                + expression + '\'' + ", label='" + label + '\'' + ", description='" + description + '\''
+                + ", visibleExpression='" + visibleExpression + '\'' + ", validationExpression='" + validationExpression
+                + '\'' + ", defaultValue='" + defaultValue + '\'' + ", orderBy='" + orderBy + '\'' + ", mappedBy="
+                + mappedBy + ", rangeMin=" + rangeMin + ", rangeMax=" + rangeMax + ", tags=" + tags + ", labels="
+                + labels + ", descriptions=" + descriptions + ", parts=" + parts + ", compound=" + compound + '}';
     }
 }

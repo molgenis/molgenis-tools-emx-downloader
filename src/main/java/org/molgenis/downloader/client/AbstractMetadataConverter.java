@@ -14,7 +14,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 abstract class AbstractMetadataConverter implements MetadataConverter {
 
     void updateReference(final Entity ent, final Attribute att) {
-        att.setEntity(ent);
+        att.setEntityFullname(ent.getFullName());
         att.getParts().forEach((Attribute part) -> updateReference(ent, part));
     }
 

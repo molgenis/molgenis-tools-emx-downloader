@@ -28,7 +28,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
@@ -281,7 +280,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		final DataType type = DataType.valueOf(meta.getString("fieldType"));
 		final String name = meta.getString("name");
 		Attribute att = new Attribute(name);
-		att.setEntity(entity);
+		att.setEntityFullname(entity.getFullName());
 		att.setName(name);
 		att.setDataType(type);
 
