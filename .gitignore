@@ -4,5 +4,6 @@ test-output/
 .classpath
 .project
 /target/
+.idea/
+downloader.iml
 .idea
-.iml
