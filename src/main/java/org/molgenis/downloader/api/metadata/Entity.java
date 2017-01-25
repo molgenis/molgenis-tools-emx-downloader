@@ -184,69 +184,82 @@ public class Entity implements Metadata
 		return attributes;
 	}
 
-	public void setFullName(String fullName)
+	public Entity setFullName(String fullName)
 	{
 		this.fullName = fullName;
+		return this;
 	}
 
-	public void setBase(Entity base)
+	public Entity setBase(Entity base)
 	{
 		this.base = base;
+		return this;
 	}
 
-	public void setPackage(Package pkg)
+	public Entity setPackage(Package pkg)
 	{
 		this.pkg = pkg;
+		return this;
 	}
 
-	public void setAbstractClass(boolean abstractClass)
+	public Entity setAbstractClass(boolean abstractClass)
 	{
 		this.abstractClass = abstractClass;
+		return this;
 	}
 
-	public void setDescription(String description)
+	public Entity setDescription(String description)
 	{
 		this.description = description;
+		return this;
 	}
 
-	public void setLabel(String label)
+	public Entity setLabel(String label)
 	{
 		this.label = label;
+		return this;
 	}
 
-	public void setBackend(Backend backend)
+	public Entity setBackend(Backend backend)
 	{
 		this.backend = backend;
+		return this;
 	}
 
-	public void setIdAttribute(Attribute idAttribute)
+	public Entity setIdAttribute(Attribute idAttribute)
 	{
 		this.idAttribute = idAttribute;
+		return this;
 	}
 
-	public void setLabelAttribute(Attribute labelAttribute)
+	public Entity setLabelAttribute(Attribute labelAttribute)
 	{
 		this.labelAttribute = labelAttribute;
+		return this;
 	}
 
-	public void setLookupAttributes(Set<Attribute> lookupAttributes)
+	public Entity setLookupAttributes(Set<Attribute> lookupAttributes)
 	{
 		this.lookupAttributes = lookupAttributes;
+		return this;
 	}
 
-	public void setRowLevelSecured(boolean rowLevelSecured)
+	public Entity setRowLevelSecured(boolean rowLevelSecured)
 	{
 		this.rowLevelSecured = rowLevelSecured;
+		return this;
 	}
 
-	public void addAttribute(final Attribute att)
+	public Entity addAttribute(final Attribute att)
 	{
 		attributes.add(att);
+		return this;
 	}
 
-	public void addLookupAttribute(final Attribute att)
+	public Entity addLookupAttribute(final Attribute att)
 	{
 		attributes.add(att);
+		return this;
 	}
 
 	public void addTag(final Tag tag)
