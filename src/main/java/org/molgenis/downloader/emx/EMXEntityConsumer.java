@@ -29,7 +29,7 @@ class EMXEntityConsumer implements EntityConsumer {
     }
 
     @Override
-    public void accept(Map<Attribute, String> data) {
+    public void accept(Map<String, String> data) {
         final List<String> values = new ArrayList<>();
         for (int index = 0; index < getAttributes().size(); index++) {
             final String value = data.get(getAttributes().get(index));

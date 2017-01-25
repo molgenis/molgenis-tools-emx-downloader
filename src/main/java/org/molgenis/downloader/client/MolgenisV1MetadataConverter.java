@@ -24,7 +24,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Tag toTag(final Map<Attribute, String> data) {
+    public Tag toTag(final Map<String, String> data) {
         Tag tag = repository.createTag(getString(data, "identifier"));
         setString(data, "label", tag::setLabel);
         setData(data, "objectIRI", URI::create, tag::setObjectIRI);
@@ -35,7 +35,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Attribute toAttribute(final Map<Attribute, String> data) {
+    public Attribute toAttribute(final Map<String, String> data) {
         Attribute att = repository.createAttribute(getString(data, "identifier"));
         setString(data, "name", att::setName);
         setData(data, "dataType", DataType::from, att::setDataType);
@@ -66,7 +66,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Package toPackage(final Map<Attribute, String> data) {
+    public Package toPackage(final Map<String, String> data) {
         final Package pkg = repository.createPackage(getString(data, "fullName"));
         setString(data, "description", pkg::setDescription);
         setData(data, "parent", repository::createPackage, pkg::setParent);
@@ -75,7 +75,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Entity toEntity(final Map<Attribute, String> data) {
+    public Entity toEntity(final Map<String, String> data) {
         final Entity ent = repository.createEntity(getString(data, "fullName"));
         setData(data, "backend", Backend::from, ent::setBackend);
         setData(data, "package", repository::createPackage, ent::setPackage);
@@ -107,7 +107,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Language toLanguage(Map<Attribute, String> data) {
+    public Language toLanguage(Map<String, String> data) {
         final Language lng = repository.createLanguage(getString(data, "code"));
         setString(data, "name", lng::setName);
         return lng;

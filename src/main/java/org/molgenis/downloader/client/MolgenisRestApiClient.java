@@ -1,5 +1,6 @@
 package org.molgenis.downloader.client;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
@@ -27,6 +28,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
@@ -96,7 +98,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	@Override
 	public final MolgenisVersion getVersion() throws IOException, URISyntaxException
 	{
-		final String data = download(new URI(uri + "/api/v2/getVersion"));
+		final String data = download(new URI(uri + "/api/v2/version"));
 		final JSONObject json = new JSONObject(data);
 		final String version = json.getString("molgenisVersion");
 
@@ -112,11 +114,11 @@ public class MolgenisRestApiClient implements MolgenisClient
 	}
 
 	@Override
-	public final void streamEntityData(final String name, final EntityConsumer consumer)
+	public final void streamEntityData(final String entityName, final EntityConsumer consumer)
 	{
 		try
 		{
-			JSONObject json = getJsonDataFromUrl(uri + "/api/v2/" + name);
+			JSONObject json = getJsonDataFromUrl(uri + "/api/v2/" + entityName);
 			final JSONObject meta = json.getJSONObject("meta");
 			final Entity entity = entityFromJSON(meta);
 
@@ -128,12 +130,12 @@ public class MolgenisRestApiClient implements MolgenisClient
 						(Object item) -> consumer.accept(getAttributes((JSONObject) item, entity.getAttributes())));
 
 				nextHref = json.optString("nextHref");
-				if (notNullOrEmpty(nextHref))
+				if (StringUtils.isNotEmpty(nextHref))
 				{
 					json = getJsonDataFromUrl(nextHref);
 				}
 			}
-			while (notNullOrEmpty(nextHref));
+			while (StringUtils.isNotEmpty(nextHref));
 
 		}
 		catch (final JSONException | IOException | URISyntaxException | ParseException ex)
@@ -191,14 +193,9 @@ public class MolgenisRestApiClient implements MolgenisClient
 		return data;
 	}
 
-	private boolean notNullOrEmpty(final String string)
+	private Map<String, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)
 	{
-		return string != null && !"".equals(string);
-	}
-
-	private Map<Attribute, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)
-	{
-		final Map<Attribute, String> data = new HashMap<>();
+		final Map<String, String> data = new HashMap<>();
 
 		attributes.forEach((Attribute attribute) ->
 		{
@@ -215,11 +212,11 @@ public class MolgenisRestApiClient implements MolgenisClient
 					final String id = refEntity.getIdAttribute().getName();
 					if (refEntity.getIdAttribute().getDataType().isNumericType())
 					{
-						data.put(attribute, Long.toString(reference.getLong(id)));
+						data.put(attribute.getName(), Long.toString(reference.getLong(id)));
 					}
 					else
 					{
-						data.put(attribute, reference.getString(id));
+						data.put(attribute.getName(), reference.getString(id));
 					}
 				}
 			}
@@ -244,18 +241,18 @@ public class MolgenisRestApiClient implements MolgenisClient
 						}
 					});
 					final String references = elements.stream().collect(Collectors.joining(","));
-					data.put(attribute, references);
+					data.put(attribute.getName(), references);
 				}
 			}
 			else if (type.equals(DataType.COMPOUND))
 			{
-				Map<Attribute, String> parts = getAttributes(input, attribute.getParts());
+				Map<String, String> parts = getAttributes(input, attribute.getParts());
 				data.putAll(parts);
 			}
 			else
 			{
 				final String value = input.optString(name);
-				data.put(attribute, value);
+				data.put(attribute.getName(), value);
 			}
 		});
 		return data;

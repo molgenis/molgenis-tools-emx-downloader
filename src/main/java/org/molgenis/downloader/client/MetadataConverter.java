@@ -11,15 +11,15 @@ import org.molgenis.downloader.api.metadata.Tag;
 
 interface MetadataConverter {
 
-    Attribute toAttribute(final Map<Attribute, String> data);
+    Attribute toAttribute(final Map<String, String> data);
 
-    Entity toEntity(final Map<Attribute, String> data);
+    Entity toEntity(final Map<String, String> data);
 
-    Package toPackage(final Map<Attribute, String> data);
+    Package toPackage(final Map<String, String> data);
 
-    Tag toTag(final Map<Attribute, String> data);
+    Tag toTag(final Map<String, String> data);
     
-    Language toLanguage(final Map<Attribute, String> data);
+    Language toLanguage(final Map<String, String> data);
     
     String getTagsRepository();
     String getPackagesRepository();
