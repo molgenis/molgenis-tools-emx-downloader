@@ -1,1 +1,61 @@
-{"href":"/api/v2/languages","meta":{"href":"/api/v2/languages","hrefCollection":"/api/v2/languages","name":"languages","label":"languages","attributes":[{"href":"/api/v2/languages/meta/code","fieldType":"STRING","name":"code","label":"code","description":"Lowercase ISO 639 alpha-2 or alpha-3 code","attributes":[],"maxLength":255,"auto":false,"nillable":false,"readOnly":true,"labelAttribute":true,"unique":true,"visible":true,"lookupAttribute":false,"aggregateable":false,"validationExpression":"/^[a-z]{2,3}$/.test($('code').value())"},{"href":"/api/v2/languages/meta/name","fieldType":"STRING","name":"name","label":"name","attributes":[],"maxLength":255,"auto":false,"nillable":false,"readOnly":false,"labelAttribute":false,"unique":false,"visible":true,"lookupAttribute":false,"aggregateable":false}],"labelAttribute":"code","idAttribute":"code","lookupAttributes":[],"isAbstract":false,"writable":true,"languageCode":"en"},"start":0,"num":100,"total":1,"items":[{"_href":"/api/v2/languages/en","code":"en","name":"English"}]}
+{
+  "meta" : {
+    "labelAttribute" : "code",
+    "label" : "languages",
+    "href" : "\/api\/v2\/languages",
+    "idAttribute" : "code",
+    "lookupAttributes" : [],
+    "languageCode" : "en",
+    "isAbstract" : false,
+    "writable" : true,
+    "hrefCollection" : "\/api\/v2\/languages",
+    "attributes" : [
+      {
+        "description" : "Lowercase ISO 639 alpha-2 or alpha-3 code",
+        "labelAttribute" : true,
+        "label" : "code",
+        "href" : "\/api\/v2\/languages\/meta\/code",
+        "nillable" : false,
+        "fieldType" : "STRING",
+        "validationExpression" : "\/^[a-z]{2,3}$\/.test($('code').value())",
+        "auto" : false,
+        "unique" : true,
+        "attributes" : [],
+        "readOnly" : true,
+        "visible" : true,
+        "maxLength" : 255,
+        "lookupAttribute" : false,
+        "name" : "code",
+        "aggregateable" : false
+      },
+      {
+        "labelAttribute" : false,
+        "label" : "name",
+        "href" : "\/api\/v2\/languages\/meta\/name",
+        "nillable" : false,
+        "fieldType" : "STRING",
+        "auto" : false,
+        "unique" : false,
+        "attributes" : [],
+        "readOnly" : false,
+        "visible" : true,
+        "maxLength" : 255,
+        "lookupAttribute" : false,
+        "name" : "name",
+        "aggregateable" : false
+      }
+    ],
+    "name" : "languages"
+  },
+  "num" : 100,
+  "items" : [
+    {
+      "_href" : "\/api\/v2\/languages\/en",
+      "name" : "English",
+      "code" : "en"
+    }
+  ],
+  "href" : "\/api\/v2\/languages",
+  "total" : 1,
+  "start" : 0
+}

@@ -1,1 +1,190 @@
-{"href":"/api/v2/packages","meta":{"href":"/api/v2/packages","hrefCollection":"/api/v2/packages","name":"packages","label":"packages","attributes":[{"href":"/api/v2/packages/meta/fullName","fieldType":"STRING","name":"fullName","label":"fullName","attributes":[],"maxLength":255,"auto":false,"nillable":false,"readOnly":true,"labelAttribute":true,"unique":true,"visible":true,"lookupAttribute":false,"aggregateable":false},{"href":"/api/v2/packages/meta/name","fieldType":"STRING","name":"name","label":"name","attributes":[],"maxLength":255,"auto":false,"nillable":true,"readOnly":false,"labelAttribute":false,"unique":false,"visible":true,"lookupAttribute":false,"aggregateable":false},{"href":"/api/v2/packages/meta/description","fieldType":"TEXT","name":"description","label":"description","attributes":[],"maxLength":65535,"auto":false,"nillable":true,"readOnly":false,"labelAttribute":false,"unique":false,"visible":true,"lookupAttribute":false,"aggregateable":false},{"href":"/api/v2/packages/meta/parent","fieldType":"XREF","name":"parent","label":"parent","attributes":[],"refEntity":{"href":"/api/v2/packages","hrefCollection":"/api/v2/packages","name":"packages","label":"packages","attributes":[{"href":"/api/v2/packages/meta/fullName","fieldType":"STRING","name":"fullName","label":"fullName","attributes":[],"maxLength":255,"auto":false,"nillable":false,"readOnly":true,"labelAttribute":true,"unique":true,"visible":true,"lookupAttribute":false,"aggregateable":false}],"labelAttribute":"fullName","idAttribute":"fullName","lookupAttributes":[],"isAbstract":false,"writable":false,"languageCode":"en"},"auto":false,"nillable":true,"readOnly":false,"labelAttribute":false,"unique":false,"visible":true,"lookupAttribute":false,"aggregateable":false},{"href":"/api/v2/packages/meta/tags","fieldType":"MREF","name":"tags","label":"tags","attributes":[],"refEntity":{"href":"/api/v2/tags","hrefCollection":"/api/v2/tags","name":"tags","label":"tags","attributes":[{"href":"/api/v2/tags/meta/identifier","fieldType":"STRING","name":"identifier","label":"identifier","attributes":[],"maxLength":255,"auto":false,"nillable":false,"readOnly":true,"labelAttribute":false,"unique":true,"visible":true,"lookupAttribute":false,"aggregateable":false},{"href":"/api/v2/tags/meta/label","fieldType":"STRING","name":"label","label":"label","attributes":[],"maxLength":255,"auto":false,"nillable":false,"readOnly":false,"labelAttribute":true,"unique":false,"visible":true,"lookupAttribute":false,"aggregateable":false}],"labelAttribute":"label","idAttribute":"identifier","lookupAttributes":[],"isAbstract":false,"writable":true,"languageCode":"en"},"auto":false,"nillable":true,"readOnly":false,"labelAttribute":false,"unique":false,"visible":true,"lookupAttribute":false,"aggregateable":false}],"labelAttribute":"fullName","idAttribute":"fullName","lookupAttributes":[],"isAbstract":false,"writable":false,"languageCode":"en"},"start":0,"num":100,"total":7,"items":[{"_href":"/api/v2/packages/base","fullName":"base","name":"base","description":"The default package","tags":[]},{"_href":"/api/v2/packages/eu_bbmri_eric","fullName":"eu_bbmri_eric","name":"eu_bbmri_eric","description":"bbmri_eric","tags":[]},{"_href":"/api/v2/packages/ldap","fullName":"ldap","name":"ldap","description":"Package to support synchronisation with LDAP","tags":[]},{"_href":"/api/v2/packages/Ontology","fullName":"Ontology","name":"Ontology","description":"This is a pacakge for storing ontology related model","tags":[]},{"_href":"/api/v2/packages/promise","fullName":"promise","name":"promise","description":"ProMISe","tags":[]},{"_href":"/api/v2/packages/settings","fullName":"settings","name":"settings","description":"Application and plugin settings","tags":[]},{"_href":"/api/v2/packages/tmf","fullName":"tmf","name":"tmf","description":"TMF Deutsches Biobanken","tags":[]}]}
+{
+  "meta" : {
+    "labelAttribute" : "fullName",
+    "label" : "packages",
+    "href" : "\/api\/v2\/packages",
+    "idAttribute" : "fullName",
+    "lookupAttributes" : [],
+    "languageCode" : "en",
+    "isAbstract" : false,
+    "writable" : false,
+    "hrefCollection" : "\/api\/v2\/packages",
+    "attributes" : [
+      {
+        "labelAttribute" : true,
+        "label" : "fullName",
+        "href" : "\/api\/v2\/packages\/meta\/fullName",
+        "nillable" : false,
+        "fieldType" : "STRING",
+        "auto" : false,
+        "unique" : true,
+        "attributes" : [],
+        "readOnly" : true,
+        "visible" : true,
+        "maxLength" : 255,
+        "lookupAttribute" : false,
+        "name" : "fullName",
+        "aggregateable" : false
+      },
+      {
+        "labelAttribute" : false,
+        "label" : "name",
+        "href" : "\/api\/v2\/packages\/meta\/name",
+        "nillable" : true,
+        "fieldType" : "STRING",
+        "auto" : false,
+        "unique" : false,
+        "attributes" : [],
+        "readOnly" : false,
+        "visible" : true,
+        "maxLength" : 255,
+        "lookupAttribute" : false,
+        "name" : "name",
+        "aggregateable" : false
+      },
+      {
+        "labelAttribute" : false,
+        "label" : "description",
+        "href" : "\/api\/v2\/packages\/meta\/description",
+        "nillable" : true,
+        "fieldType" : "TEXT",
+        "auto" : false,
+        "unique" : false,
+        "attributes" : [],
+        "readOnly" : false,
+        "visible" : true,
+        "maxLength" : 65535,
+        "lookupAttribute" : false,
+        "name" : "description",
+        "aggregateable" : false
+      },
+      {
+        "labelAttribute" : false,
+        "label" : "parent",
+        "href" : "\/api\/v2\/packages\/meta\/parent",
+        "nillable" : true,
+        "fieldType" : "XREF",
+        "refEntity" : {
+          "labelAttribute" : "fullName",
+          "label" : "packages",
+          "href" : "\/api\/v2\/packages",
+          "idAttribute" : "fullName",
+          "lookupAttributes" : [],
+          "languageCode" : "en",
+          "isAbstract" : false,
+          "writable" : false,
+          "hrefCollection" : "\/api\/v2\/packages",
+          "attributes" : [
+            {
+              "labelAttribute" : true,
+              "label" : "fullName",
+              "href" : "\/api\/v2\/packages\/meta\/fullName",
+              "nillable" : false,
+              "fieldType" : "STRING",
+              "auto" : false,
+              "unique" : true,
+              "attributes" : [],
+              "readOnly" : true,
+              "visible" : true,
+              "maxLength" : 255,
+              "lookupAttribute" : false,
+              "name" : "fullName",
+              "aggregateable" : false
+            }
+          ],
+          "name" : "packages"
+        },
+        "auto" : false,
+        "unique" : false,
+        "attributes" : [],
+        "readOnly" : false,
+        "visible" : true,
+        "lookupAttribute" : false,
+        "name" : "parent",
+        "aggregateable" : false
+      },
+      {
+        "labelAttribute" : false,
+        "label" : "tags",
+        "href" : "\/api\/v2\/packages\/meta\/tags",
+        "nillable" : true,
+        "fieldType" : "MREF",
+        "refEntity" : {
+          "labelAttribute" : "label",
+          "label" : "tags",
+          "href" : "\/api\/v2\/tags",
+          "idAttribute" : "identifier",
+          "lookupAttributes" : [],
+          "languageCode" : "en",
+          "isAbstract" : false,
+          "writable" : true,
+          "hrefCollection" : "\/api\/v2\/tags",
+          "attributes" : [
+            {
+              "labelAttribute" : false,
+              "label" : "identifier",
+              "href" : "\/api\/v2\/tags\/meta\/identifier",
+              "nillable" : false,
+              "fieldType" : "STRING",
+              "auto" : false,
+              "unique" : true,
+              "attributes" : [],
+              "readOnly" : true,
+              "visible" : true,
+              "maxLength" : 255,
+              "lookupAttribute" : false,
+              "name" : "identifier",
+              "aggregateable" : false
+            },
+            {
+              "labelAttribute" : true,
+              "label" : "label",
+              "href" : "\/api\/v2\/tags\/meta\/label",
+              "nillable" : false,
+              "fieldType" : "STRING",
+              "auto" : false,
+              "unique" : false,
+              "attributes" : [],
+              "readOnly" : false,
+              "visible" : true,
+              "maxLength" : 255,
+              "lookupAttribute" : false,
+              "name" : "label",
+              "aggregateable" : false
+            }
+          ],
+          "name" : "tags"
+        },
+        "auto" : false,
+        "unique" : false,
+        "attributes" : [],
+        "readOnly" : false,
+        "visible" : true,
+        "lookupAttribute" : false,
+        "name" : "tags",
+        "aggregateable" : false
+      }
+    ],
+    "name" : "packages"
+  },
+  "num" : 100,
+  "items" : [
+    {
+      "_href" : "\/api\/v2\/packages\/base",
+      "tags" : [],
+      "fullName" : "base",
+      "name" : "base",
+      "description" : "The default package"
+    },
+    {
+      "_href" : "\/api\/v2\/packages\/settings",
+      "tags" : [],
+      "fullName" : "settings",
+      "name" : "settings",
+      "description" : "Application and plugin settings"
+    }
+  ],
+  "href" : "\/api\/v2\/packages",
+  "total" : 7,
+  "start" : 0
+}
