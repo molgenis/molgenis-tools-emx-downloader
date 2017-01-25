@@ -192,7 +192,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		return data;
 	}
 
-	private Map<String, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)
+	Map<String, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)
 	{
 		final Map<String, String> data = new HashMap<>();
 
