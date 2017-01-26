@@ -155,13 +155,20 @@ public class MolgenisRestApiClient implements MolgenisClient
 	@Override
 	public void streamMetadata(MetadataConsumer consumer)
 	{
-		if(converter == null) initConverter();
-		streamEntityData(converter.getLanguagesRepository(), converter::toLanguage);
-		streamEntityData(converter.getTagsRepository(), converter::toTag);
-		streamEntityData(converter.getPackagesRepository(), converter::toPackage);
-		streamEntityData(converter.getAttributesRepository(), converter::toAttribute);
-		streamEntityData(converter.getEnitiesRepository(), converter::toEntity);
-		consumer.accept(repository);
+		try
+		{
+			if (converter == null) initConverter();
+			streamEntityData(converter.getLanguagesRepository(), converter::toLanguage);
+			streamEntityData(converter.getTagsRepository(), converter::toTag);
+			streamEntityData(converter.getPackagesRepository(), converter::toPackage);
+			streamEntityData(converter.getAttributesRepository(), converter::toAttribute);
+			streamEntityData(converter.getEnitiesRepository(), converter::toEntity);
+			consumer.accept(repository);
+		}
+		catch (Exception ex)
+		{
+			writeToConsole("An error occurred: %s.\n", ex);
+		}
 	}
 
 	@Override
@@ -306,27 +313,14 @@ public class MolgenisRestApiClient implements MolgenisClient
 		return att;
 	}
 
-	private void initConverter()
+	private void initConverter() throws IOException, URISyntaxException
 	{
 		if (converter == null)
 		{
 			final MolgenisVersion version;
-			try
-			{
-				version = getVersion();
-				converter = version.smallerThan(VERSION_2) ? new MolgenisV1MetadataConverter(
-						repository) : new MolgenisV2MetadataConverter(repository);
-			}
-			catch (IOException e)
-			{
-				//FIXME
-				e.printStackTrace();
-			}
-			catch (URISyntaxException e)
-			{
-				//FIXME
-				e.printStackTrace();
-			}
+			version = getVersion();
+			converter = version.smallerThan(VERSION_2) ? new MolgenisV1MetadataConverter(
+					repository) : new MolgenisV2MetadataConverter(repository);
 		}
 	}
 }
