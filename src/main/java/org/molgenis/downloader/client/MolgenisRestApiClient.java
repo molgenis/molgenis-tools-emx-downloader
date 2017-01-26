@@ -71,7 +71,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (final JSONException | IOException | URISyntaxException ex)
 		{
-			writeToConsole("An error occurred while logging in: %s.\n", ex);
+			writeToConsole("An error occurred while logging in:\n", ex);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (IOException ex)
 		{
-			writeToConsole("An error occurred while logging out: %s.\n", ex);
+			writeToConsole("An error occurred while logging out:\n", ex);
 			return false;
 		}
 	}
@@ -150,7 +150,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	{
 		JSONObject json;
 		String nextData = download(new URI(url));
-		ConsoleWriter.writeToConsole("downloading from: " + url);
+		ConsoleWriter.debug("downloading from: " + url);
 		json = new JSONObject(nextData);
 		return json;
 	}
@@ -170,7 +170,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (Exception ex)
 		{
-			writeToConsole("An error occurred: %s.\n", ex);
+			writeToConsole("An error occurred:\n", ex);
 		}
 	}
 

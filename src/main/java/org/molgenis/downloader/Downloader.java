@@ -18,10 +18,7 @@ import static java.util.Arrays.asList;
 import static org.molgenis.downloader.util.ConsoleWriter.writeHelp;
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
-/**
- * @author david
- */
-class Downloader
+public class Downloader
 {
 	private static final String URL = "url";
 	private static final String META = "meta";
@@ -32,6 +29,9 @@ class Downloader
 	private static final String FILE = "outputFile";
 	private static final String OVERWRITE = "overwrite";
 	private static final String PAGESIZE = "pageSize";
+	private static final String DEBUG = "debug";
+
+	public static boolean debug;
 
 	public static void main(final String[] args)
 	{
@@ -73,6 +73,7 @@ class Downloader
 		parser.acceptsAll(asList("i", INSECURE_SSL), "Ignore SSL certicate chain errors and hostname mismatches.");
 		parser.acceptsAll(asList("s", PAGESIZE), "The pagesize for the REST responses, increase in case of large datasets, maximum value=10000").withRequiredArg()
 				.ofType(Integer.class);
+		parser.acceptsAll(asList("d", DEBUG), "print debug logging to console");
 
 		return parser;
 	}
@@ -89,6 +90,8 @@ class Downloader
 		String username = (String) options.valueOf(ACCOUNT);
 		String password = (String) options.valueOf(PASSWORD);
 		boolean overwrite = options.has(OVERWRITE);
+
+		debug = options.has(DEBUG);
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
 
