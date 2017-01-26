@@ -41,10 +41,9 @@ public final class Attribute implements Metadata
 	private final List<Attribute> parts;
 	private Attribute compound;
 
-	public Attribute(final String id, final String name)
+	public Attribute(final String id)
 	{
 		this.id = id;
-		this.name = name;
 		labels = new HashMap<>();
 		descriptions = new HashMap<>();
 		tags = new HashSet<>();
@@ -55,13 +54,7 @@ public final class Attribute implements Metadata
 
 	public static Attribute createAttribute(final String id, final String name)
 	{
-		return new Attribute(id, name);
-	}
-
-	//FIXME: can we do this cleaner?
-	public Attribute(final String id)
-	{
-		this(id, null);
+		return new Attribute(id).setName(name);
 	}
 
 	public static Attribute from(final String id)

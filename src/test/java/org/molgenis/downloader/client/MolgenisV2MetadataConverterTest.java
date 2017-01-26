@@ -133,8 +133,8 @@ public class MolgenisV2MetadataConverterTest
 	{
 		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
 		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
-		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute", "idAttribute"));
-		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute", "labelAttribute"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute").setName("idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute").setName("labelAttribute"));
 
 		Map<String, String> map = new HashMap<>();
 		map.put("fullName",  "fullName");

@@ -5,10 +5,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.params.HttpParams;
@@ -37,7 +35,7 @@ public class TestHttpClient implements HttpClient
 	}
 
 	@Override
-	public HttpResponse execute(HttpUriRequest httpUriRequest) throws IOException, ClientProtocolException
+	public HttpResponse execute(HttpUriRequest httpUriRequest) throws IOException
 	{
 
 
@@ -141,48 +139,48 @@ public class TestHttpClient implements HttpClient
 
 	@Override
 	public HttpResponse execute(HttpUriRequest httpUriRequest, HttpContext httpContext)
-			throws IOException, ClientProtocolException
+			throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest) throws IOException, ClientProtocolException
+	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest) throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
 	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest, HttpContext httpContext)
-			throws IOException, ClientProtocolException
+			throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> T execute(HttpUriRequest httpUriRequest, ResponseHandler<? extends T> responseHandler)
-			throws IOException, ClientProtocolException
+			throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> T execute(HttpUriRequest httpUriRequest, ResponseHandler<? extends T> responseHandler,
-			HttpContext httpContext) throws IOException, ClientProtocolException
+			HttpContext httpContext) throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> T execute(HttpHost httpHost, HttpRequest httpRequest, ResponseHandler<? extends T> responseHandler)
-			throws IOException, ClientProtocolException
+			throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> T execute(HttpHost httpHost, HttpRequest httpRequest, ResponseHandler<? extends T> responseHandler,
-			HttpContext httpContext) throws IOException, ClientProtocolException
+			HttpContext httpContext) throws IOException
 	{
 		throw new NotImplementedException();
 	}

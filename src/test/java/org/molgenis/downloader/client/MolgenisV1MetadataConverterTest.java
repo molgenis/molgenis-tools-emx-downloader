@@ -129,8 +129,8 @@ public class MolgenisV1MetadataConverterTest
 	{
 		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
 		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
-		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute", "idAttribute"));
-		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute", "labelAttribute"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute").setName("idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute").setName("labelAttribute"));
 
 		Map<String, String> map = new HashMap<>();
 		map.put("fullName",  "fullName");
@@ -145,11 +145,11 @@ public class MolgenisV1MetadataConverterTest
 
 		Entity actual = converter.toEntity(map);
 		Entity expected = new Entity("fullName");
-		expected.setIdAttribute(new Attribute("idAttribute", "idAttribute"));
+		expected.setIdAttribute(new Attribute("idAttribute").setName("idAttribute"));
 		expected.setFullName("fullName");
 		expected.setBackend(Backend.POSTGRESQL);
 		expected.setPackage(new Package("package"));
-		expected.setLabelAttribute(new Attribute("labelAttribute", "labelAttribute"));
+		expected.setLabelAttribute(new Attribute("labelAttribute").setName("labelAttribute"));
 		expected.setAbstractClass(false);
 		expected.setLabel("label");
 		expected.setDescription("description");

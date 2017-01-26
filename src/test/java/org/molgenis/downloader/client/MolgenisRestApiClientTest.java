@@ -65,9 +65,9 @@ public class MolgenisRestApiClientTest
 		MolgenisRestApiClient client = new MolgenisRestApiClient(httpClient, new URI(""));
 		Entity actual = client.getEntity("test");
 
-		Attribute idAttr = new Attribute("id", "id");
+		Attribute idAttr = new Attribute("id").setName("id");
 		idAttr.setEntityFullname("biobank");
-		Attribute nameAttr = new Attribute("name", "name");
+		Attribute nameAttr = new Attribute("name").setName("name");
 		nameAttr.setEntityFullname("biobank");
 		Entity expected = new Entity("biobank");
 		expected.setIdAttribute(idAttr);
