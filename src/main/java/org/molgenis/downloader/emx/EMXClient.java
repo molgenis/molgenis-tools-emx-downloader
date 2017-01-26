@@ -25,13 +25,13 @@ public class EMXClient implements AutoCloseable
 
 	private static final String XLSX = ".xlsx";
 	private static final String XLS = ".xls";
-	private final MolgenisClient molgenis;
-	private final List<Exception> errors;
+	private final MolgenisClient molgenisClient;
+	private final List<Exception> exceptions;
 
 	public EMXClient(final MolgenisClient client)
 	{
-		molgenis = client;
-		errors = new ArrayList<>();
+		molgenisClient = client;
+		exceptions = new ArrayList<>();
 	}
 
 	public boolean downloadEMX(final List<String> entities, final Path path, final boolean includeMetadata,
@@ -39,32 +39,32 @@ public class EMXClient implements AutoCloseable
 	{
 		try (final EMXBackend backend = createBackend(path, overwrite))
 		{
-			final EMXFileWriter writer = new EMXFileWriter(backend, molgenis.getVersion());
+			final EMXFileWriter writer = new EMXFileWriter(backend, molgenisClient.getVersion());
 			final List<String> target = new ArrayList<>(entities);
 			if (includeMetadata)
 			{
 				try (final MetadataConsumer consumer = writer.createMetadataConsumer())
 				{
 					final MetadataFilter filter = new MetadataFilter(entities, consumer);
-					molgenis.getMetaData(filter);
+					molgenisClient.streamMetadata(filter);
 					target.addAll(filter.getIncludedEntities());
 				}
 			}
 			for (final String name : target)
 			{
-				try (final EntityConsumer consumer = writer.createConsumerForEntity(molgenis.getEntity(name)))
+				try (final EntityConsumer consumer = writer.createConsumerForEntity(molgenisClient.getEntity(name)))
 				{
-					molgenis.streamEntityData(name, consumer);
+					molgenisClient.streamEntityData(name, consumer);
 				}
 			}
-			errors.addAll(writer.getExceptions());
+			exceptions.addAll(writer.getExceptions());
 			return writer.hasExceptions();
 		}
 	}
 
-	public List<Exception> getErrors()
+	public List<Exception> getExceptions()
 	{
-		return errors;
+		return exceptions;
 	}
 
 	private EMXBackend createBackend(final Path path, boolean overwrite) throws IOException, URISyntaxException

@@ -153,7 +153,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	}
 
 	@Override
-	public void getMetaData(MetadataConsumer consumer)
+	public void streamMetadata(MetadataConsumer consumer)
 	{
 		if(converter == null) initConverter();
 		streamEntityData(converter.getLanguagesRepository(), converter::toLanguage);

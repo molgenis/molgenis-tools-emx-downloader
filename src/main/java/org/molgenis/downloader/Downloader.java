@@ -116,7 +116,7 @@ class Downloader
 				if (hasErrors)
 				{
 					writeToConsole("Errors occurred while writing EMX\n");
-					emxClient.getErrors().forEach(ex -> writeToConsole("Exception: %s\n", ex));
+					emxClient.getExceptions().forEach(ex -> writeToConsole("Exception: %s\n", ex));
 				}
 			}
 		}
