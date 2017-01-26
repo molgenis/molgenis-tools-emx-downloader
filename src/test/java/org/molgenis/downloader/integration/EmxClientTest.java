@@ -21,7 +21,7 @@ public class EmxClientTest
 		EMXClient emxClient = new EMXClient(client);
 
 		File actual = File.createTempFile("download", ".zip");
-		emxClient.downloadEMX(Collections.singletonList("org_molgenis_test_TypeTest"), actual.toPath(), true, true);
+		emxClient.downloadEMX(Collections.singletonList("org_molgenis_test_TypeTest"), actual.toPath(), true, true, null);
 		File expected = new File(Resources.getResource("integration/download.zip").getPath());
 		ZipFileAssert.assertEquals(expected, actual);
 	}

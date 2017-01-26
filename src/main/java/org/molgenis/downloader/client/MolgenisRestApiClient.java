@@ -19,6 +19,7 @@ import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
+import org.molgenis.downloader.util.ConsoleWriter;
 
 import java.io.IOException;
 import java.net.URI;
@@ -106,17 +107,19 @@ public class MolgenisRestApiClient implements MolgenisClient
 	@Override
 	public Entity getEntity(final String name) throws IOException, URISyntaxException
 	{
-		final JSONObject json = getJsonDataFromUrl(uri + "/api/v2/" + name);
+		final JSONObject json = getJsonDataFromUrl(uri + "/api/v2/" + name + "?num=1");
 		final JSONObject meta = json.getJSONObject("meta");
 		return entityFromJSON(meta);
 	}
 
 	@Override
-	public final void streamEntityData(final String entityName, final EntityConsumer consumer)
+	public final void streamEntityData(final String entityName, final EntityConsumer consumer, Integer pageSize)
 	{
 		try
 		{
-			JSONObject json = getJsonDataFromUrl(uri + "/api/v2/" + entityName);
+			String downloadUrl = uri + "/api/v2/" + entityName;
+			if( pageSize != null) downloadUrl += "?num="+pageSize;
+			JSONObject json = getJsonDataFromUrl(downloadUrl);
 			final JSONObject meta = json.getJSONObject("meta");
 			final Entity entity = entityFromJSON(meta);
 
@@ -147,6 +150,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	{
 		JSONObject json;
 		String nextData = download(new URI(url));
+		ConsoleWriter.writeToConsole("downloading from: " + url);
 		json = new JSONObject(nextData);
 		return json;
 	}

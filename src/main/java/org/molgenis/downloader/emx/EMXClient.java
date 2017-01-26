@@ -33,7 +33,7 @@ public class EMXClient implements AutoCloseable
 	}
 
 	public boolean downloadEMX(final List<String> entities, final Path path, final boolean includeMetadata,
-			boolean overwrite) throws Exception
+			boolean overwrite, Integer pageSize) throws Exception
 	{
 		try (final EMXBackend backend = createBackend(path, overwrite))
 		{
@@ -52,7 +52,7 @@ public class EMXClient implements AutoCloseable
 			{
 				try (final EntityConsumer consumer = writer.createConsumerForEntity(molgenisClient.getEntity(name)))
 				{
-					molgenisClient.streamEntityData(name, consumer);
+					molgenisClient.streamEntityData(name, consumer, pageSize);
 				}
 			}
 			exceptions.addAll(writer.getExceptions());
