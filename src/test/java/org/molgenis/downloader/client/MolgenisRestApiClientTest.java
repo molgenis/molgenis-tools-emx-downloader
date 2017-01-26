@@ -3,7 +3,6 @@ package org.molgenis.downloader.client;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
-import com.sun.tools.doclint.HtmlTag;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -139,7 +137,7 @@ public class MolgenisRestApiClientTest
 		Attribute xtextnillable = Attribute.createAttribute("xtextnillable", "xtextnillable")
 				.setEntityFullname("biobank");
 		Attribute xxref_value = Attribute.createAttribute("xxref_value", "xxref_value").setEntityFullname("biobank")
-				.setDataType(DataType.XREF).setRefEntity(ref);;
+				.setDataType(DataType.XREF).setRefEntity(ref);
 		Attribute xxrefnillable_value = Attribute.createAttribute("xxrefnillable_value", "xxrefnillable_value")
 				.setEntityFullname("biobank").setDataType(DataType.XREF).setRefEntity(ref);
 		Attribute xstring_hidden = Attribute.createAttribute("xstring_hidden", "xstring_hidden")

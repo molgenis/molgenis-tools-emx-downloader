@@ -60,7 +60,7 @@ class FilteredMetadataRepository implements MetadataRepository {
 
     @Override
     public final Collection<Attribute> getAttributes() {
-        return attributes.stream().sorted(Comparator.comparing(x -> x.getEntityFullname())).collect(Collectors.toList());
+        return attributes.stream().sorted(Comparator.comparing(Attribute::getEntityFullname)).collect(Collectors.toList());
     }
 
     @Override

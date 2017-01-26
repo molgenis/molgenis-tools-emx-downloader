@@ -39,7 +39,7 @@ class Downloader
 		{
 			final Downloader app = new Downloader();
 			OptionParser parser = createOptionParser();
-			OptionSet options = null;
+			OptionSet options;
 			try
 			{
 				options = parser.parse(args);
@@ -78,6 +78,7 @@ class Downloader
 	private void run(OptionSet options) throws Exception
 	{
 		File outFile = (File) options.valueOf(FILE);
+		@SuppressWarnings("unchecked")
 		List<String> entities = (List<String>) options.valuesOf(ARGUMENTS);
 		URI url = options.hasArgument(URL) ? new URI((String) options.valueOf(URL)) : null;
 		boolean includeMetaData = options.has(META);

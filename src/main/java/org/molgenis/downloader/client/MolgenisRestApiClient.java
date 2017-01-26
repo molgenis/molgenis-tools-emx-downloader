@@ -37,12 +37,11 @@ public class MolgenisRestApiClient implements MolgenisClient
 	private static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
 	private final HttpClient client;
 	private final WriteableMetadataRepository repository = new MetadataRepositoryImpl();
-	;
 	private MetadataConverter converter;
 	private final URI uri;
 	private String token;
 
-	public MolgenisRestApiClient(final HttpClient client, final URI uri) throws IOException, URISyntaxException
+	public MolgenisRestApiClient(final HttpClient client, final URI uri)
 	{
 		this.client = client;
 		this.uri = uri;
@@ -195,8 +194,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 			request.setHeader("x-molgenis-token", token);
 		}
 		HttpResponse result = client.execute(request);
-		String data = EntityUtils.toString(result.getEntity(), StandardCharsets.UTF_8);
-		return data;
+		return EntityUtils.toString(result.getEntity(), StandardCharsets.UTF_8);
 	}
 
 	Map<String, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)

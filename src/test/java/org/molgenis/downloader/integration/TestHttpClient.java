@@ -20,7 +20,7 @@ import java.io.IOException;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TestHttpClient implements HttpClient
+class TestHttpClient implements HttpClient
 {
 	@Override
 	public HttpParams getParams()

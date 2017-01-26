@@ -18,8 +18,6 @@ import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.MolgenisClient;
 import org.molgenis.downloader.emx.tsv.ZipFileBackend;
 
-import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
-
 public class EMXClient implements AutoCloseable
 {
 

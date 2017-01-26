@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class EmxClientTest
 {
@@ -20,7 +21,7 @@ public class EmxClientTest
 		EMXClient emxClient = new EMXClient(client);
 
 		File actual = File.createTempFile("download", ".zip");
-		emxClient.downloadEMX(Arrays.asList("org_molgenis_test_TypeTest"), actual.toPath(), true, true);
+		emxClient.downloadEMX(Collections.singletonList("org_molgenis_test_TypeTest"), actual.toPath(), true, true);
 		File expected = new File(Resources.getResource("integration/download.zip").getPath());
 		ZipFileAssert.assertEquals(expected, actual);
 	}

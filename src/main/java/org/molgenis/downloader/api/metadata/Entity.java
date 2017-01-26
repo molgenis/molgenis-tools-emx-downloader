@@ -2,7 +2,6 @@ package org.molgenis.downloader.api.metadata;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Entity implements Metadata
 {
@@ -28,7 +27,7 @@ public class Entity implements Metadata
 		return rowLevelSecured;
 	}
 
-	public Entity()
+	private Entity()
 	{
 		attributes = new LinkedHashSet<>();
 		descriptions = new HashMap<>();
@@ -89,10 +88,10 @@ public class Entity implements Metadata
 		if (tags != null ? !tags.equals(entity.tags) : entity.tags != null) return false;
 		if (backend != entity.backend) return false;
 		if (idAttribute != null ? !idAttribute.equals(entity.idAttribute) : entity.idAttribute != null) return false;
-		if (labelAttribute != null ? !labelAttribute.equals(entity.labelAttribute) : entity.labelAttribute != null)
-			return false;
-		return lookupAttributes != null ? lookupAttributes.equals(entity.lookupAttributes) :
-				entity.lookupAttributes == null;
+		return (labelAttribute != null ? labelAttribute.equals(entity.labelAttribute) : entity.labelAttribute == null)
+				&& (
+				lookupAttributes != null ? lookupAttributes.equals(entity.lookupAttributes) :
+						entity.lookupAttributes == null);
 	}
 
 	public boolean isParentOf(final Entity entity)
@@ -101,11 +100,7 @@ public class Entity implements Metadata
 		{
 			return false;
 		}
-		if (this.equals(entity.getBase()))
-		{
-			return true;
-		}
-		return this.isParentOf(entity.getBase());
+		return this.equals(entity.getBase()) || this.isParentOf(entity.getBase());
 	}
 
 	public Attribute getLabelAttribute()

@@ -4,7 +4,6 @@ package org.molgenis.downloader.client;
 import java.net.URI;
 import java.util.Map;
 
-import org.molgenis.downloader.api.MetadataRepository;
 import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Backend;

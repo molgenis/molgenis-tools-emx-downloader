@@ -44,8 +44,8 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
         return this.compareTo(that) < 0;
     }
     
-    public boolean equalsOrLargerThan(final MolgenisVersion that) {
-        return this.equals(that) || this.largerThan(that);
+    public boolean equalsOrLargerThan(final MolgenisVersion otherVersion) {
+        return this.equals(otherVersion) || this.largerThan(otherVersion);
     }
     
     public boolean equalsOrSmallerThan(final MolgenisVersion that) {
@@ -79,8 +79,7 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
         MolgenisVersion that = (MolgenisVersion) o;
 
         if (major != that.major) return false;
-        if (minor != that.minor) return false;
-        return revison == that.revison;
+        return minor == that.minor && revison == that.revison;
     }
 
     @Override

@@ -6,10 +6,8 @@ import org.molgenis.downloader.api.metadata.Package;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.naming.directory.AttributeInUseException;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import static org.mockito.Mockito.mock;

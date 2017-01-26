@@ -115,12 +115,12 @@ public final class Attribute implements Metadata
 		if (mappedBy != null ? !mappedBy.equals(attribute.mappedBy) : attribute.mappedBy != null) return false;
 		if (rangeMin != null ? !rangeMin.equals(attribute.rangeMin) : attribute.rangeMin != null) return false;
 		if (rangeMax != null ? !rangeMax.equals(attribute.rangeMax) : attribute.rangeMax != null) return false;
-		if (tags != null ? !tags.equals(attribute.tags) : attribute.tags != null) return false;
-		if (labels != null ? !labels.equals(attribute.labels) : attribute.labels != null) return false;
-		if (descriptions != null ? !descriptions.equals(attribute.descriptions) : attribute.descriptions != null)
+		if (!tags.equals(attribute.tags)) return false;
+		if (!labels.equals(attribute.labels)) return false;
+		if (!descriptions.equals(attribute.descriptions))
 			return false;
-		if (parts != null ? !parts.equals(attribute.parts) : attribute.parts != null) return false;
-		return compound != null ? compound.equals(attribute.compound) : attribute.compound == null;
+		return (parts != null ? parts.equals(attribute.parts) : attribute.parts == null) && (
+				compound != null ? compound.equals(attribute.compound) : attribute.compound == null);
 	}
 
 	public Attribute getMappedBy()

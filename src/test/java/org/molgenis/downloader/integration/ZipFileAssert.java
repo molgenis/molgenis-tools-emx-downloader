@@ -38,15 +38,15 @@ import junit.framework.AssertionFailedError;
 /**
  * Compare the contents of 2 zip files.
  */
-public class ZipFileAssert
+class ZipFileAssert
 {
 	private ZipFileAssert()
 	{
 	}
 
-	static final int BUFFER_SIZE = 2048;
+	private static final int BUFFER_SIZE = 2048;
 
-	protected static void equals(TreeMap<String, ByteArrayOutputStream> file1,
+	private static void equals(TreeMap<String, ByteArrayOutputStream> file1,
 			TreeMap<String, ByteArrayOutputStream> file2)
 	{
 		Set<String> listFile1 = file1.keySet();
@@ -69,11 +69,11 @@ public class ZipFileAssert
 		}
 	}
 
-	protected static TreeMap<String, ByteArrayOutputStream> decompress(File filename) throws IOException
+	private static TreeMap<String, ByteArrayOutputStream> decompress(File filename) throws IOException
 	{
 		// store the zip content in memory
 		// let s assume it is not Go ;-)
-		TreeMap<String, ByteArrayOutputStream> zipContent = new TreeMap<String, ByteArrayOutputStream>();
+		TreeMap<String, ByteArrayOutputStream> zipContent = new TreeMap<>();
 
 		byte data[] = new byte[BUFFER_SIZE];
 		/* Open file to decompress */
