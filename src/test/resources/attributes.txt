@@ -1,48 +1,3481 @@
-{
-  "start" : 0,
-  "href" : "\/api\/v2\/attributes",
-  "meta" : {
-    "labelAttribute" : "name",
-    "label" : "attributes",
-    "href" : "\/api\/v2\/attributes",
-    "idAttribute" : "identifier",
-    "lookupAttributes" : [],
-    "languageCode" : "en",
-    "isAbstract" : false,
-    "writable" : false,
-    "hrefCollection" : "\/api\/v2\/attributes",
-    "attributes" : [
-      {
-        "labelAttribute" : false,
-        "label" : "identifier",
-        "href" : "\/api\/v2\/attributes\/meta\/identifier",
-        "nillable" : false,
-        "fieldType" : "STRING",
-        "auto" : false,
-        "unique" : true,
-        "attributes" : [],
-        "readOnly" : true,
-        "visible" : false,
-        "maxLength" : 255,
-        "lookupAttribute" : false,
-        "name" : "identifier",
-        "aggregateable" : false
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 1,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xxref_unique" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
       },
-      {
-        "labelAttribute" : true,
-        "label" : "name",
-        "href" : "\/api\/v2\/attributes\/meta\/name",
-        "nillable" : false,
-        "fieldType" : "STRING",
-        "auto" : false,
-        "unique" : false,
-        "attributes" : [],
-        "readOnly" : false,
-        "visible" : true,
-        "maxLength" : 255,
-        "lookupAttribute" : false,
-        "name" : "name",
-        "aggregateable" : false
-      }
-  ]
-}
+      "xlongnillable" : 1,
+      "xstring_unique" : "str1",
+      "xcomputedint" : 5,
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/1",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 1,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum1",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 5,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 1,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/5",
+        "Position" : 5
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 1,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 2,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xxref_unique" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xlongnillable" : 2,
+      "xstring_unique" : "str2",
+      "xcomputedint" : 2,
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/2",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 2,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 2,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/3",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 3,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 3,
+      "xenum" : "enum3",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str3",
+      "xxref_unique" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 4,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xxref_unique" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref4",
+        "value" : "ref4",
+        "label" : "label4"
+      },
+      "xlongnillable" : 1,
+      "xstring_unique" : "str4",
+      "xcomputedint" : 1,
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/4",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 4,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum1",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 5,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xxref_unique" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref5",
+        "value" : "ref5",
+        "label" : "label5"
+      },
+      "xlongnillable" : 2,
+      "xstring_unique" : "str5",
+      "xcomputedint" : 2,
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/5",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 5,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 5,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 6,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/6",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 6,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 6,
+      "xenum" : "enum3",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str6",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 7,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str7",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/7",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 7,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum1",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 7,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 8,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str8",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/8",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 8,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 8,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 9,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/9",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 9,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 9,
+      "xenum" : "enum3",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str9",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 10,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str10",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/10",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 10,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum1",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 10,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 11,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str11",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/11",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 11,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 11,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 12,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/12",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 12,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 12,
+      "xenum" : "enum3",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str12",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 13,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str13",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/13",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 13,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum1",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 13,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 14,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str14",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/14",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 14,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 14,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 15,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/15",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 15,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 15,
+      "xenum" : "enum3",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str15",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 16,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/16",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 16,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 16,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str16",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 17,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str17",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/17",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 17,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 17,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 18,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str18",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/18",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 18,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 18,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 19,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/19",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 19,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 19,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str19",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 20,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str20",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/20",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 20,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xstringnillable_hidden" : "hidden",
+      "xint_unique" : 20,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 21,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str21",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/21",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 21,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xint_unique" : 21,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 22,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/22",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 22,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 22,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str22",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 23,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str23",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/23",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 23,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xint_unique" : 23,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 24,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str24",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/24",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 24,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xint_unique" : 24,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 25,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/25",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 25,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 25,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str25",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 26,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str26",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/26",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 26,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xint_unique" : 26,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 27,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str27",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/27",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 27,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xint_unique" : 27,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 28,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/28",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 28,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 28,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str28",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 29,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str29",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/29",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 29,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xint_unique" : 29,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 30,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str30",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/30",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 30,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xint_unique" : 30,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 31,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/31",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 31,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 31,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str31",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 32,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str32",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/32",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 32,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum2",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xint_unique" : 32,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 33,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str33",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/33",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 33,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xint_unique" : 33,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 34,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/34",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 34,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 34,
+      "xenum" : "enum1",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str34",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 35,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/35",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/3",
+        "Position" : 3
+      },
+      "xint" : 3,
+      "xcompound_int" : 35,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 35,
+      "xenum" : "enum2",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str35",
+      "xcomputedint" : 3,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    },
+    {
+      "xstring" : "str1",
+      "xtextnillable" : "text",
+      "xdate" : "1985-08-01",
+      "id" : 36,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum1",
+      "xtext" : "text",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 1,
+      "xlongnillable" : 1,
+      "xstring_unique" : "str36",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str1",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/36",
+      "xlong" : 1,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xdecimalnillable" : 1.23,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xintrangenillable" : 2,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xbool" : true,
+      "xcompound_int" : 36,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xdecimal" : 1.23,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum3",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+        "value" : "ref1",
+        "label" : "label1"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 2,
+      "xint" : 1,
+      "xint_unique" : 36,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : true,
+      "xlongrangenillable" : 2,
+      "xintrange" : 2,
+      "xintnillable" : 1
+    },
+    {
+      "xstring" : "str2",
+      "xtextnillable" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xdate" : "1985-08-01",
+      "id" : 37,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xhyperlinknillable" : "http:\/\/www.molgenis.org\/",
+      "xenumnillable" : "enum2",
+      "xtext" : "very long strong so that we can test if abbreviations are handled correctly by molgenis which is a very cool open source software program",
+      "xhtml" : "<h1>html<\/h1>",
+      "xcomputedint" : 2,
+      "xlongnillable" : 2,
+      "xstring_unique" : "str37",
+      "xdatenillable" : "1985-08-01",
+      "xstringnillable" : "str2",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xxrefnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/37",
+      "xlong" : 2,
+      "xcompound_string" : "compound strings are here",
+      "xcatmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xdecimalnillable" : 4.56,
+      "xcategoricalnillable_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xintrangenillable" : 3,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : false,
+      "xcompound_int" : 37,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xdecimal" : 4.56,
+      "xemail" : "molgenis@gmail.com",
+      "xemailnillable" : "molgenis@gmail.com",
+      "xenum" : "enum1",
+      "xhtmlnillable" : "<h1>html<\/h1>",
+      "xmrefnillable_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+        "value" : "ref2",
+        "label" : "label2"
+      },
+      "xstring_hidden" : "hidden",
+      "xlongrange" : 3,
+      "xint" : 2,
+      "xint_unique" : 37,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/2",
+        "Position" : 2
+      },
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xdatetimenillable" : "1985-08-12T08:12:13+0200",
+      "xboolnillable" : false,
+      "xlongrangenillable" : 3,
+      "xintrange" : 3,
+      "xintnillable" : 2
+    },
+    {
+      "xdatetime" : "1985-08-12T08:12:13+0200",
+      "xstring" : "str3",
+      "xdecimal" : 7.89,
+      "xemail" : "molgenis@gmail.com",
+      "xint_unique" : 38,
+      "xmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xbool" : true,
+      "xhtml" : "<h1>html<\/h1>",
+      "xlong" : 3,
+      "_href" : "\/api\/v2\/org_molgenis_test_TypeTest\/38",
+      "xlongrange" : 4,
+      "xcomputedxref" : {
+        "_href" : "\/api\/v2\/base_Location\/1",
+        "Position" : 1
+      },
+      "xint" : 1,
+      "xcompound_int" : 38,
+      "xcategorical_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xintrange" : 4,
+      "id" : 38,
+      "xenum" : "enum2",
+      "xstring_hidden" : "hidden",
+      "xhyperlink" : "http:\/\/www.molgenis.org\/",
+      "xcatmrefnillable_value" : [],
+      "xtext" : "text",
+      "xstring_unique" : "str38",
+      "xcomputedint" : 1,
+      "xcategoricalmref_value" : [
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref1",
+          "value" : "ref1",
+          "label" : "label1"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref2",
+          "value" : "ref2",
+          "label" : "label2"
+        },
+        {
+          "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+          "value" : "ref3",
+          "label" : "label3"
+        }
+      ],
+      "xxref_value" : {
+        "_href" : "\/api\/v2\/base_TypeTestRef\/ref3",
+        "value" : "ref3",
+        "label" : "label3"
+      },
+      "xcompound_string" : "compound strings are here",
+      "xdate" : "1985-08-01",
+      "xmrefnillable_value" : []
+    }
