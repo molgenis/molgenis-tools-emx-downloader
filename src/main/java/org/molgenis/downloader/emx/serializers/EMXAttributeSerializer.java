@@ -36,13 +36,13 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
     @Override
     public List<String> serialize(final Attribute att) {
         List<String> result = new ArrayList<>();
-        final Entity entity = att.getEntity();
-        result.add(entity.getFullName());
+        final String entity = att.getEntityFullname();
+        result.add(entity);
         result.add(att.getName());
         result.add(att.getLabel());
         result.add(att.getDataType().name().toLowerCase());
         result.add(Optional.ofNullable(att.getRefEntity()).map(Entity::getFullName).orElse(""));
-        result.add(Boolean.toString(att.isOptional()));
+        result.add(Boolean.toString(att.isNillable()));
         final boolean isAutoIdAttriubte = att.isAuto();
         final boolean isIdAttribute = att.isIdAttribute();
         if (isIdAttribute && isAutoIdAttriubte) {
@@ -73,11 +73,8 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         result.add(att.getTags().stream().map(Tag::getId).collect(joining(",")));
         result.add(att.getDescription());
         if (fields().contains(MAPPED_BY)) {
-            result.add(Optional.ofNullable(att.getMappedBy()).map(by -> by.getEntity().getFullName()).orElse(""));
+            result.add(Optional.ofNullable(att.getMappedBy()).map(Attribute::getEntityFullname).orElse(""));
         }
-//      Not yet supported attributes
-//        result.add(att.getVisibleExpression());
-//        result.add(att.getOrderBy());
         languages.forEach(language -> {
             result.add(att.getDescriptions().get(language));
             result.add(att.getLabels().get(language));

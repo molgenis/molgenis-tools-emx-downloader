@@ -4,7 +4,6 @@ package org.molgenis.downloader.client;
 import java.net.URI;
 import java.util.Map;
 
-import org.molgenis.downloader.api.MetadataRepository;
 import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Backend;
@@ -24,12 +23,11 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Attribute toAttribute(Map<Attribute, String> data) {
-        //FIXME: field might be refactored to identifier, to keep it the same as V1 (fix in test as well)
+    public Attribute toAttribute(Map<String, String> data) {
         final Attribute att = repository.createAttribute(getString(data, "id"));
         setString(data, "name", att::setName);
         setData(data, "type", DataType::from, att::setDataType);
-        setData(data, "entity", repository::createEntity, att::setEntity);
+        setString(data, "entity", att::setEntityFullname);
         setBoolean(data, "isIdAttribute", att::setIdAttribute);
         setBoolean(data, "isLabelAttribute", att::setLabelAttribute);
         setInteger(data, "lookupAttributeIndex", i -> att.setLookupAttribute(true));
@@ -42,7 +40,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
         setData(data, "mappedBy", repository::createAttribute, att::setMappedBy);
         setString(data, "orderBy", att::setOrderBy);
         setString(data, "expression", att::setExpression);
-        setBoolean(data, "isNullable", att::setOptional);
+        setBoolean(data, "isNullable", att::setNilleble);
         setBoolean(data, "isVisible", att::setVisible);
         setString(data, "label", att::setLabel);
         setString(data, "description", att::setDescription);
@@ -63,7 +61,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Entity toEntity(Map<Attribute, String> data) {
+    public Entity toEntity(Map<String, String> data) {
         final Entity ent = repository.createEntity(getString(data, "fullName"));
         setData(data, "backend", Backend::from, ent::setBackend);
         setData(data, "package", repository::createPackage, ent::setPackage);
@@ -82,7 +80,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Package toPackage(Map<Attribute, String> data) {
+    public Package toPackage(Map<String, String> data) {
         final Package pkg = repository.createPackage(getString(data, "fullName"));
         setString(data, "label", pkg::setLabel);
         setString(data, "description", pkg::setDescription);
@@ -92,8 +90,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Tag toTag(Map<Attribute, String> data) {
-        //FIXME: field might be refactored to identifier, to keep it the same as V1 (fix in test as well)
+    public Tag toTag(Map<String, String> data) {
         final Tag tag = repository.createTag(getString(data, "id"));
         setString(data, "label", tag::setLabel);
         setData(data, "objectIRI", URI::create, tag::setObjectIRI);
@@ -104,7 +101,7 @@ class MolgenisV2MetadataConverter extends AbstractMetadataConverter {
     }
 
     @Override
-    public Language toLanguage(Map<Attribute, String> data) {
+    public Language toLanguage(Map<String, String> data) {
         final Language lng = repository.createLanguage(getString(data, "code"));
         setString(data, "name", lng::setName);
         setBoolean(data, "active", lng::setActive);

@@ -1,0 +1,68 @@
+{
+  "start" : 0,
+  "href" : "\/api\/v2\/biobank",
+  "meta" : {
+    "labelAttribute" : "name",
+    "label" : "biobank",
+    "href" : "\/api\/v2\/biobank",
+    "idAttribute" : "id",
+    "lookupAttributes" : [
+      "id",
+      "name"
+    ],
+    "languageCode" : "en",
+    "isAbstract" : false,
+    "writable" : true,
+    "hrefCollection" : "\/api\/v2\/biobank",
+    "attributes" : [
+      {
+        "description" : "Identifier of Biobank",
+        "labelAttribute" : false,
+        "label" : "Identifier",
+        "href" : "\/api\/v2\/biobank\/meta\/id",
+        "nillable" : false,
+        "fieldType" : "STRING",
+        "auto" : true,
+        "unique" : true,
+        "attributes" : [],
+        "readOnly" : true,
+        "visible" : true,
+        "maxLength" : 255,
+        "lookupAttribute" : true,
+        "name" : "id",
+        "aggregateable" : false
+      },
+      {
+        "description" : "Name of Biobank",
+        "labelAttribute" : true,
+        "label" : "Name",
+        "href" : "\/api\/v2\/biobank\/meta\/name",
+        "nillable" : false,
+        "fieldType" : "STRING",
+        "auto" : false,
+        "unique" : false,
+        "attributes" : [],
+        "readOnly" : false,
+        "visible" : true,
+        "maxLength" : 65535,
+        "lookupAttribute" : true,
+        "name" : "name",
+        "aggregateable" : false
+      }
+    ],
+    "name" : "biobank"
+  },
+  "total" : 125,
+  "num" : 100,
+  "nextHref" : "https:\/\/molgenis52.target.rug.nl\/api\/v2\/biobank?start=100",
+  "items" : [
+    {
+      "id" : "195",
+      "name" : "Biobanken des Komptenznetzes HIV \/ AIDS"
+    },
+    {
+      "id" : "203",
+      "name" : "Stiftung PATH - Patients' Tumor Bank of Hope"
+    }
+  ]
+}

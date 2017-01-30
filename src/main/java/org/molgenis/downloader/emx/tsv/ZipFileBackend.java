@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +14,6 @@ import java.util.Map;
 
 import org.molgenis.downloader.api.EMXBackend;
 import org.molgenis.downloader.api.EMXDataStore;
-
-import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
 public class ZipFileBackend implements EMXBackend
 {

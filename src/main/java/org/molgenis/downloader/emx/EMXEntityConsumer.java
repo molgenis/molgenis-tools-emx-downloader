@@ -29,10 +29,10 @@ class EMXEntityConsumer implements EntityConsumer {
     }
 
     @Override
-    public void accept(Map<Attribute, String> data) {
+    public void accept(Map<String, String> data) {
         final List<String> values = new ArrayList<>();
-        for (int index = 0; index < getAttributes().size(); index++) {
-            final String value = data.get(getAttributes().get(index));
+        for (int index = 0; index < getAttributeNames().size(); index++) {
+            final String value = data.get(getAttributeNames().get(index));
             if (value != null && !value.trim().isEmpty()) {
                 values.add(value.trim());
             } else {
@@ -48,6 +48,10 @@ class EMXEntityConsumer implements EntityConsumer {
     
     private List<Attribute> getAttributes() {
         return attributes;
+    }
+
+    private List<String> getAttributeNames() {
+        return attributes.stream().map(Attribute::getName).collect(Collectors.toList());
     }
 
     private List<Attribute> getParts(final Attribute compound) {

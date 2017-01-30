@@ -1,28 +1,24 @@
 package org.molgenis.downloader;
 
+import joptsimple.OptionException;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import org.apache.http.client.HttpClient;
+import org.molgenis.downloader.api.MolgenisClient;
+import org.molgenis.downloader.client.HttpClientFactory;
+import org.molgenis.downloader.client.MolgenisRestApiClient;
+import org.molgenis.downloader.emx.EMXClient;
+
 import java.io.File;
 import java.net.URI;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
-import org.molgenis.downloader.client.HttpClientFactory;
-import org.molgenis.downloader.api.MolgenisClient;
-import org.molgenis.downloader.emx.EMXClient;
-import org.molgenis.downloader.client.MolgenisRestApiClient;
-
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import joptsimple.OptionException;
-
 import static java.util.Arrays.asList;
 import static org.molgenis.downloader.util.ConsoleWriter.writeHelp;
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
-/**
- * @author david
- */
-class Downloader
+public class Downloader
 {
 	private static final String URL = "url";
 	private static final String META = "meta";
@@ -32,6 +28,10 @@ class Downloader
 	private static final String ARGUMENTS = "[arguments]";
 	private static final String FILE = "outputFile";
 	private static final String OVERWRITE = "overwrite";
+	private static final String PAGESIZE = "pageSize";
+	private static final String DEBUG = "debug";
+
+	public static boolean debug;
 
 	public static void main(final String[] args)
 	{
@@ -39,7 +39,7 @@ class Downloader
 		{
 			final Downloader app = new Downloader();
 			OptionParser parser = createOptionParser();
-			OptionSet options = null;
+			OptionSet options;
 			try
 			{
 				options = parser.parse(args);
@@ -71,6 +71,9 @@ class Downloader
 		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login").withRequiredArg()
 				.ofType(String.class);
 		parser.acceptsAll(asList("i", INSECURE_SSL), "Ignore SSL certicate chain errors and hostname mismatches.");
+		parser.acceptsAll(asList("s", PAGESIZE), "The pagesize for the REST responses, increase in case of large datasets, maximum value=10000").withRequiredArg()
+				.ofType(Integer.class);
+		parser.acceptsAll(asList("d", DEBUG), "print debug logging to console");
 
 		return parser;
 	}
@@ -78,13 +81,17 @@ class Downloader
 	private void run(OptionSet options) throws Exception
 	{
 		File outFile = (File) options.valueOf(FILE);
+		@SuppressWarnings("unchecked")
 		List<String> entities = (List<String>) options.valuesOf(ARGUMENTS);
 		URI url = options.hasArgument(URL) ? new URI((String) options.valueOf(URL)) : null;
+		Integer pageSize = options.hasArgument(PAGESIZE) ? (Integer) options.valueOf(PAGESIZE) : null;
 		boolean includeMetaData = options.has(META);
 		boolean insecureSSL = options.has(INSECURE_SSL);
 		String username = (String) options.valueOf(ACCOUNT);
 		String password = (String) options.valueOf(PASSWORD);
 		boolean overwrite = options.has(OVERWRITE);
+
+		debug = options.has(DEBUG);
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
 
@@ -112,11 +119,11 @@ class Downloader
 			try (final EMXClient emxClient = new EMXClient(molgenis))
 			{
 				boolean hasErrors = emxClient
-						.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite);
+						.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite, pageSize);
 				if (hasErrors)
 				{
 					writeToConsole("Errors occurred while writing EMX\n");
-					emxClient.getErrors().forEach(ex -> writeToConsole("Exception: %s\n", ex));
+					emxClient.getExceptions().forEach(ex -> writeToConsole("Exception: %s\n", ex));
 				}
 			}
 		}

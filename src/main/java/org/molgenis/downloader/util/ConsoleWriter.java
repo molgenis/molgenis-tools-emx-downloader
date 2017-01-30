@@ -1,6 +1,7 @@
 package org.molgenis.downloader.util;
 
 import joptsimple.OptionParser;
+import org.molgenis.downloader.Downloader;
 
 import java.io.IOException;
 
@@ -23,6 +24,12 @@ public class ConsoleWriter
 	public static void writeToConsole(String message)
 	{
 		writeToConsole(message, null);
+	}
+
+	public static void debug(String message){
+		if(Downloader.debug){
+			writeToConsole(message);
+		}
 	}
 
 	public static void writeHelp(OptionParser optionParser) throws IOException

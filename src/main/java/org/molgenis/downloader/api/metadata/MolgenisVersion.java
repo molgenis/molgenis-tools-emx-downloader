@@ -26,39 +26,6 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.major;
-        hash = 37 * hash + this.minor;
-        hash = 37 * hash + this.revison;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final MolgenisVersion other = (MolgenisVersion) obj;
-        if (this.major != other.major) {
-            return false;
-        }
-        if (this.minor != other.minor) {
-            return false;
-        }
-        if (this.revison != other.revison) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public int compareTo(final MolgenisVersion that) {
         if (this.major != that.major) {
             return this.major - that.major;
@@ -77,8 +44,8 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
         return this.compareTo(that) < 0;
     }
     
-    public boolean equalsOrLargerThan(final MolgenisVersion that) {
-        return this.equals(that) || this.largerThan(that);
+    public boolean equalsOrLargerThan(final MolgenisVersion otherVersion) {
+        return this.equals(otherVersion) || this.largerThan(otherVersion);
     }
     
     public boolean equalsOrSmallerThan(final MolgenisVersion that) {
@@ -95,5 +62,32 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
 
     public int getRevison() {
         return revison;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "MolgenisVersion{" + "major=" + major + ", minor=" + minor + ", revison=" + revison + '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (!(o instanceof MolgenisVersion)) return false;
+
+        MolgenisVersion that = (MolgenisVersion) o;
+
+        if (major != that.major) return false;
+        return minor == that.minor && revison == that.revison;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = major;
+        result = 31 * result + minor;
+        result = 31 * result + revison;
+        return result;
     }
 }

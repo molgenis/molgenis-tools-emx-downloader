@@ -39,21 +39,22 @@ public class Package implements Metadata {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final Package other = (Package) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return Objects.equals(this.parent, other.parent);
+        return Objects.equals(this.name, other.name) && Objects.equals(this.parent, other.parent);
     }
 
     public String getLabel() {

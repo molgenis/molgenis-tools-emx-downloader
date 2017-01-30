@@ -1,0 +1,1 @@
+{"buildDate":"2016-12-05 12:19 UTC","molgenisVersion":"9.9.9-TESTAPPJE"}

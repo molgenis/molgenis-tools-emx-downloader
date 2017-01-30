@@ -6,10 +6,8 @@ import org.molgenis.downloader.api.metadata.Package;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.naming.directory.AttributeInUseException;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import static org.mockito.Mockito.mock;
@@ -35,22 +33,16 @@ public class MolgenisV2MetadataConverterTest
 		when(metadataRepository.createPackage("parent")).thenReturn(new Package("parent"));
 		when(metadataRepository.createTag("tag")).thenReturn(new Tag("tag"));
 
-
-		Attribute nameAttr = new Attribute("fullName", "fullName");
-		Attribute descriptionAttr = new Attribute("description", "description");
-		Attribute parentAttr = new Attribute("parent", "parent");
-		Attribute tagAttr = new Attribute("tags", "tags");
-
 		String name = "name";
 		String desc = "desc";
 		String parent = "parent";
 		String tag = "tag";
 
-		Map<Attribute, String> map = new HashMap<>();
-		map.put(nameAttr, name);
-		map.put(descriptionAttr, desc);
-		map.put(parentAttr, parent);
-		map.put(tagAttr, tag);
+		Map<String, String> map = new HashMap<>();
+		map.put("fullName", name);
+		map.put("description", desc);
+		map.put("parent", parent);
+		map.put("tags", tag);
 
 		Package actual = converter.toPackage(map);
 		Package expected = new Package("name");
@@ -70,13 +62,13 @@ public class MolgenisV2MetadataConverterTest
 	{
 		when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
 
-		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("id", "id"), "id");
-		map.put(new Attribute("label", "label"), "label");
-		map.put(new Attribute("objectIRI", "objectIRI"), "objectIRI");
-		map.put(new Attribute("relationIRI", "relationIRI"), "relationIRI");
-		map.put(new Attribute("relationLabel", "relationLabel"), "relationLabel");
-		map.put(new Attribute("codeSystem", "codeSystem"), "codeSystem");
+		Map<String, String> map = new HashMap<>();
+		map.put("id", "id");
+		map.put("label", "label");
+		map.put("objectIRI", "objectIRI");
+		map.put("relationIRI", "relationIRI");
+		map.put("relationLabel", "relationLabel");
+		map.put("codeSystem", "codeSystem");
 
 		Tag actual = converter.toTag(map);
 		Tag expected = new Tag("id");
@@ -96,26 +88,26 @@ public class MolgenisV2MetadataConverterTest
 	{
 		when(metadataRepository.createAttribute("id")).thenReturn(new Attribute("id"));
 
-		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("id", "id"), "id");
-		map.put(new Attribute("name", "name"), "name");
-		map.put(new Attribute("dataType", "dataType"), "STRING");
-		map.put(new Attribute("parts", "parts"), "");
-		map.put(new Attribute("refEntity", "refEntity"), null);
-		map.put(new Attribute("nillable", "nillable"), null);
-		map.put(new Attribute("auto", "auto"), "FALSE");
-		map.put(new Attribute("visible", "visible"), "TRUE");
-		map.put(new Attribute("label", "label"), "label");
-		map.put(new Attribute("description", "description"), "description");
-		map.put(new Attribute("isAggregatable", "isAggregatable"), "TRUE");
-		map.put(new Attribute("enumOptions", "enumOptions"), null);
-		map.put(new Attribute("rangeMin", "rangeMin"), "");
-		map.put(new Attribute("rangeMax", "rangeMax"), "");
-		map.put(new Attribute("readOnly", "readOnly"), "FALSE");
-		map.put(new Attribute("unique", "unique"), "FALSE");
-		map.put(new Attribute("visibleExpression", "visibleExpression"), null);
-		map.put(new Attribute("validateExpression", "validateExpression"), null);
-		map.put(new Attribute("defaultValue", "defaultValue"), null);
+		Map<String, String> map = new HashMap<>();
+		map.put("id",  "id");
+		map.put("name", "name");
+		map.put("dataType",  "STRING");
+		map.put("parts",  "");
+		map.put("refEntity",  null);
+		map.put("nillable",  null);
+		map.put("auto",  "FALSE");
+		map.put("visible",  "TRUE");
+		map.put("label",  "label");
+		map.put("description",  "description");
+		map.put("isAggregatable",  "TRUE");
+		map.put("enumOptions",  null);
+		map.put("rangeMin",  "");
+		map.put("rangeMax",  "");
+		map.put("readOnly",  "FALSE");
+		map.put("unique",  "FALSE");
+		map.put("visibleExpression",  null);
+		map.put("validateExpression",  null);
+		map.put("defaultValue",  null);
 
 		Attribute actual = converter.toAttribute(map);
 		Attribute expected = new Attribute("id");
@@ -139,17 +131,17 @@ public class MolgenisV2MetadataConverterTest
 	{
 		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
 		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
-		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute", "idAttribute"));
-		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute", "labelAttribute"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute").setName("idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute").setName("labelAttribute"));
 
-		Map<Attribute, String> map = new HashMap<>();
-		map.put(new Attribute("fullName", "fullName"), "fullName");
-		map.put(new Attribute("backend",  "backend"), "PostgreSQL");
-		map.put(new Attribute("package", "package"), "package");
-		map.put(new Attribute("lookupAttributes", "lookupAttributes"), "");
-		map.put(new Attribute("abstract", "abstract"), "false");
-		map.put(new Attribute("label", "label"), "label");
-		map.put(new Attribute("description", "description"), "description");
+		Map<String, String> map = new HashMap<>();
+		map.put("fullName",  "fullName");
+		map.put("backend",   "PostgreSQL");
+		map.put("package",  "package");
+		map.put("lookupAttributes",  "");
+		map.put("abstract",  "false");
+		map.put("label",  "label");
+		map.put("description", "description");
 
 		Entity actual = converter.toEntity(map);
 		Entity expected = new Entity("fullName");
