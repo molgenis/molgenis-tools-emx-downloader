@@ -3,8 +3,8 @@
 Stand alone tool to download data in EMX format from molgenis servers
 
 ##Example usages
-java -jar downloader-1.0-SNAPSHOT.jar -f filename.xlsx -u https://molgenis##.gcc.rug.nl/ -a account -p password my_test_entity
-java -jar downloader-1.0-SNAPSHOT.jar -f filename.zip -u https://molgenis##.gcc.rug.nl/ -a account -p password -o -s 1000 my_test_entity
+```java -jar downloader-1.0-SNAPSHOT.jar -f filename.xlsx -u https://molgenis##.gcc.rug.nl/ -a account -p password my_test_entity```
+```java -jar downloader-1.0-SNAPSHOT.jar -f filename.zip -u https://molgenis##.gcc.rug.nl/ -a account -p password -o -s 1000 my_test_entity```
 
 ##Available options:
 
