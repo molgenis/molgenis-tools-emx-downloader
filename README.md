@@ -23,3 +23,4 @@ java -jar downloader-1.0.jar -f filename.zip -u https://molgenis##.gcc.rug.nl/ -
 |-p, --password|             Password for the MOLGENIS user to login|
 |-s, --pageSize <Integer>|   The pagesize for the REST responses, increase in case of large datasets |  
 |* -u, --url|                URL of the MOLGENIS instance  |
+||Entities to be downloaded should be added at the end of the command (see "my_test_entity" in examples above) multiple entities can be specified separated by a whitespace. Entities linked to the specified entities (for example by XREF or MREF) are downloaded automatically|
