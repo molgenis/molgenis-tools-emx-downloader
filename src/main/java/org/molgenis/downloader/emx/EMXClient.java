@@ -53,6 +53,8 @@ public class EMXClient implements AutoCloseable
 				try (final EntityConsumer consumer = writer.createConsumerForEntity(molgenisClient.getEntity(name)))
 				{
 					molgenisClient.streamEntityData(name, consumer, pageSize);
+				}catch (final org.json.JSONException ex) {
+					writer.addException(new IllegalArgumentException("entity: "+name+" does not exist", ex));
 				}
 			}
 			exceptions.addAll(writer.getExceptions());
