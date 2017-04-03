@@ -1,4 +1,3 @@
-
 package org.molgenis.downloader.api.metadata;
 
 import java.util.Collections;
@@ -6,97 +5,131 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+public class Package extends Metadata
+{
+	private String name;
+	private String description;
+	private Package parent;
+	private final Set<Tag> tags;
+	private String label;
 
-public class Package implements Metadata {
-    private String name;
-    private String description;
-    private Package parent;
-    private final Set<Tag> tags;
-    private String label;
+	public Package(final String name)
+	{
+		tags = new HashSet<>();
+		this.name = name;
+	}
 
-    public Package(final String name) {
-        tags = new HashSet<>();        
-        this.name = name;
-    }
+	public Package()
+	{
+		tags = new HashSet<>();
+	}
 
-    public static Package from(final String fullName) {
-        if (fullName == null || fullName.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-        return new Package(fullName);
-    }
-    
-    public String getName() {
-        return name;
-    }
+	public static Package from(final String fullName)
+	{
+		if (fullName == null || fullName.isEmpty())
+		{
+			throw new IllegalArgumentException();
+		}
+		return new Package(fullName);
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.parent);
-        return hash;
-    }
+	public static Package fromId(final String id)
+	{
+		if (id == null || id.isEmpty())
+		{
+			throw new IllegalArgumentException();
+		}
+		Package pack = new Package();
+		pack.setId(id);
+		return pack;
+	}
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        final Package other = (Package) obj;
-        return Objects.equals(this.name, other.name) && Objects.equals(this.parent, other.parent);
-    }
+	public String getName()
+	{
+		return name;
+	}
 
-    public String getLabel() {
-        return label;
-    }
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof Package)) return false;
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+		Package aPackage = (Package) o;
 
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
+		if (name != null ? !name.equals(aPackage.name) : aPackage.name != null) return false;
+		if (description != null ? !description.equals(aPackage.description) : aPackage.description != null)
+			return false;
+		if (parent != null ? !parent.equals(aPackage.parent) : aPackage.parent != null) return false;
+		if (tags != null ? !tags.equals(aPackage.tags) : aPackage.tags != null) return false;
+		return label != null ? label.equals(aPackage.label) : aPackage.label == null;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public int hashCode()
+	{
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (parent != null ? parent.hashCode() : 0);
+		result = 31 * result + (tags != null ? tags.hashCode() : 0);
+		result = 31 * result + (label != null ? label.hashCode() : 0);
+		return result;
+	}
 
-    public Package getParent() {
-        return parent;
-    }
+	public String getLabel()
+	{
+		return label;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setLabel(String label)
+	{
+		this.label = label;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public Set<Tag> getTags()
+	{
+		return Collections.unmodifiableSet(tags);
+	}
 
-    public void setParent(Package parent) {
-        this.parent = parent;
-    }
-    
-    public void addTag(final Tag tag) {
-        tags.add(tag);
-    }
+	public String getDescription()
+	{
+		return description;
+	}
 
-    @Override
-    public String toString()
-    {
-        return "Package{" + "name='" + name + '\'' + ", description='" + description + '\'' + ", parent=" + parent
-                + ", tags=" + tags + ", label='" + label + '\'' + '}';
-    }
+	public Package getParent()
+	{
+		return parent;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
+	public void setParent(Package parent)
+	{
+		this.parent = parent;
+	}
+
+	public String getFullName()
+	{
+		return getParent() == null ? getName() : getParent().getFullName() + "_" + getName();
+	}
+
+	public void addTag(final Tag tag)
+	{
+		tags.add(tag);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Package{" + "name='" + name + '\'' + ", description='" + description + '\'' + ", parent=" + parent
+				+ ", tags=" + tags + ", label='" + label + '\'' + '}';
+	}
 }

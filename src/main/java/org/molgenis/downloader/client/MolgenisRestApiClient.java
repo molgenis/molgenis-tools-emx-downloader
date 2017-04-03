@@ -35,7 +35,8 @@ import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 public class MolgenisRestApiClient implements MolgenisClient
 {
 
-	private static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
+	public static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
+	public static final MolgenisVersion VERSION_3 = new MolgenisVersion(3, 0, 0);
 	private final HttpClient client;
 	private final WriteableMetadataRepository repository = new MetadataRepositoryImpl();
 	private MetadataConverter converter;
@@ -97,11 +98,19 @@ public class MolgenisRestApiClient implements MolgenisClient
 	@Override
 	public final MolgenisVersion getVersion() throws IOException, URISyntaxException
 	{
-		final String data = download(new URI(uri + "/api/v2/version"));
-		final JSONObject json = new JSONObject(data);
-		final String version = json.getString("molgenisVersion");
-
-		return MolgenisVersion.from(version);
+		MolgenisVersion version = null;
+		try
+		{
+			final String data = download(new URI(uri + "/api/v2/version"));
+			final JSONObject json = new JSONObject(data);
+			final String versionString = json.getString("molgenisVersion");
+			version = MolgenisVersion.from(versionString);
+		}
+		catch (Exception e)
+		{
+			//Leave empty
+		}
+		return version;
 	}
 
 	@Override
@@ -118,7 +127,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		try
 		{
 			String downloadUrl = uri + "/api/v2/" + entityName;
-			if( pageSize != null) downloadUrl += "?num="+pageSize;
+			if (pageSize != null) downloadUrl += "?num=" + pageSize;
 			JSONObject json = getJsonDataFromUrl(downloadUrl);
 			final JSONObject meta = json.getJSONObject("meta");
 			final Entity entity = entityFromJSON(meta);
@@ -161,11 +170,13 @@ public class MolgenisRestApiClient implements MolgenisClient
 		try
 		{
 			if (converter == null) initConverter();
-			streamEntityData(converter.getLanguagesRepository(), converter::toLanguage);
-			streamEntityData(converter.getTagsRepository(), converter::toTag);
-			streamEntityData(converter.getPackagesRepository(), converter::toPackage);
-			streamEntityData(converter.getAttributesRepository(), converter::toAttribute);
-			streamEntityData(converter.getEnitiesRepository(), converter::toEntity);
+			streamEntityData(converter.getLanguagesRepositoryName(), converter::toLanguage);
+			streamEntityData(converter.getTagsRepositoryName(), converter::toTag);
+			streamEntityData(converter.getPackagesRepositoryName(), converter::toPackage);
+			streamEntityData(converter.getAttributesRepositoryName(), converter::toAttribute);
+			streamEntityData(converter.getEntitiesRepositoryName(), converter::toEntity);
+			if (getVersion() != null && getVersion().equalsOrLargerThan(VERSION_3))
+				((MolgenisV3MetadataConverter) converter).postProcess(repository);
 			consumer.accept(repository);
 		}
 		catch (Exception ex)
@@ -203,9 +214,12 @@ public class MolgenisRestApiClient implements MolgenisClient
 
 	Map<String, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)
 	{
+		List<Attribute> attributesList = new ArrayList<Attribute>(attributes);
+
+		Collections.sort(attributesList);
 		final Map<String, String> data = new HashMap<>();
 
-		attributes.forEach((Attribute attribute) ->
+		attributesList.forEach((Attribute attribute) ->
 		{
 
 			final DataType type = attribute.getDataType();
@@ -321,8 +335,19 @@ public class MolgenisRestApiClient implements MolgenisClient
 		{
 			final MolgenisVersion version;
 			version = getVersion();
-			converter = version.smallerThan(VERSION_2) ? new MolgenisV1MetadataConverter(
-					repository) : new MolgenisV2MetadataConverter(repository);
+
+			if (version == null || version.smallerThan(VERSION_2))
+			{
+				converter = new MolgenisV1MetadataConverter(repository);
+			}
+			else if (version.smallerThan(VERSION_3))
+			{
+				converter = new MolgenisV2MetadataConverter(repository);
+			}
+			else
+			{
+				converter = new MolgenisV3MetadataConverter(repository);
+			}
 		}
 	}
 }

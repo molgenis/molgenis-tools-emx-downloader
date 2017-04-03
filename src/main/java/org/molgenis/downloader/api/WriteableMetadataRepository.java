@@ -14,11 +14,15 @@ public interface WriteableMetadataRepository extends MetadataRepository {
 
     Entity createEntity(final String fullName);
 
+    Entity createEntityById(final String id);
+
     Entity createEntity(final String name, final String pkgName);
 
     Language createLanguage(final String code);
 
     Package createPackage(final String fullName);
+
+    Package createPackageById(String id);
 
     Tag createTag(final String identifier);
     

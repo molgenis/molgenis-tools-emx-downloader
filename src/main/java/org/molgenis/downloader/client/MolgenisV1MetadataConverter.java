@@ -113,27 +113,27 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter {
     }
     
     @Override
-    public String getTagsRepository() {
+    public String getTagsRepositoryName() {
         return "tags";
     }
 
     @Override
-    public String getPackagesRepository() {
+    public String getPackagesRepositoryName() {
         return "packages";
     }
 
     @Override
-    public String getEnitiesRepository() {
+    public String getEntitiesRepositoryName() {
         return "entities";
     }
 
     @Override
-    public String getAttributesRepository() {
+    public String getAttributesRepositoryName() {
         return "attributes";
     }
 
     @Override
-    public String getLanguagesRepository() {
+    public String getLanguagesRepositoryName() {
         return "languages";
     }
 }

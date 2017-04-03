@@ -66,10 +66,22 @@ public class MetadataRepositoryImpl implements WriteableMetadataRepository {
     public Package createPackage(final String fullName) {
         return packages.computeIfAbsent(fullName, Package::from);
     }
-    
+
+    @Override
+    public Package createPackageById(final String id) {
+        return Package.fromId(id);
+    }
+
     @Override
     public Entity createEntity(final String fullName) {
         return entities.computeIfAbsent(fullName, Entity::createEntityByName);
+    }
+
+    @Override
+    public Entity createEntityById(final String id) {
+        Entity entity = new Entity();
+        entity.setId(id);
+        return entity;
     }
     
     @Override

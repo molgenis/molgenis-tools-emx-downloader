@@ -27,7 +27,7 @@ public class EMXEntitySerializer implements EntitySerializer<Entity> {
     public List<String> serialize(final Entity entity) {
         List<String> result = new ArrayList<>();
         result.add(entity.getShortName());
-        result.add(Optional.ofNullable(entity.getPkg()).map(Package::getName).orElse(""));
+        result.add(Optional.ofNullable(entity.getPackage()).map(Package::getName).orElse(""));
         result.add(Optional.ofNullable(entity.getBase()).map(Entity::getFullName).orElse(""));
         result.add(Boolean.toString(entity.isAbstractClass()));
         // MYSQL and POSTGRESQL backends are the defaults for MOLGENIS 1 and 2 respectively
