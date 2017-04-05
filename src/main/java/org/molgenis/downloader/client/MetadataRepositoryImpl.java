@@ -77,14 +77,22 @@ public class MetadataRepositoryImpl implements WriteableMetadataRepository {
         return entities.computeIfAbsent(fullName, Entity::createEntityByName);
     }
 
-    @Override
-    public Entity createEntityById(final String id) {
-        Entity entity = new Entity();
-        entity.setId(id);
-        return entity;
-    }
-    
-    @Override
+	@Override
+	public Entity createEntityById(String id, String name)
+	{
+		if(entities.containsKey(id)){
+			return entities.get(id);
+		}
+		else
+		{
+			Entity entity = Entity.createEntityByName(name);
+			entity.setId(id);
+			entities.put(id, entity);
+			return entity;
+		}
+	}
+
+	@Override
     public Entity createEntity(final String name, final String pkgName) {
         final String fullName = pkgName + "_" + name;
         return entities.computeIfAbsent(fullName, Entity::createEntityByName);

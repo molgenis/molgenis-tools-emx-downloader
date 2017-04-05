@@ -14,7 +14,7 @@ public interface WriteableMetadataRepository extends MetadataRepository {
 
     Entity createEntity(final String fullName);
 
-    Entity createEntityById(final String id);
+    Entity createEntityById(final String id, final String name);
 
     Entity createEntity(final String name, final String pkgName);
 

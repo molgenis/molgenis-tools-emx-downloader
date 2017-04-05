@@ -129,12 +129,13 @@ public class MolgenisV3MetadataConverterTest
 	@Test
 	public void toEntityTest()
 	{
-		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
+		when(metadataRepository.createEntityById("id", "fullName")).thenReturn(new Entity("fullName"));
 		when(metadataRepository.createPackageById("package")).thenReturn(new Package("package"));
 		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute").setName("idAttribute"));
 		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute").setName("labelAttribute"));
 
 		Map<String, String> map = new HashMap<>();
+		map.put("id",  "id");
 		map.put("name",  "fullName");
 		map.put("backend",   "PostgreSQL");
 		map.put("package",  "package");

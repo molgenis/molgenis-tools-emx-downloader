@@ -33,8 +33,7 @@ class FilteredMetadataRepository implements MetadataRepository
 		else
 		{
 			source.getEntities().stream().filter(entity -> entities.contains(
-					entity.getPackage() != null ? (entity.getPackage().getFullName() + "_" + entity
-							.getFullName()) : entity.getFullName())).forEach(this::traverse);
+					entity.getFullName())).forEach(this::traverse);
 		}
 	}
 

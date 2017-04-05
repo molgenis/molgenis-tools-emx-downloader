@@ -12,6 +12,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 
 	private final WriteableMetadataRepository repository;
 	private final MolgenisV2MetadataConverter molgenisV2MetadataConverter;
+	private HashMap<String, Entity> entityIdMap;
 
 	public MolgenisV3MetadataConverter(WriteableMetadataRepository metadataRepository)
 	{
@@ -23,14 +24,15 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 	@Override
 	public Entity toEntity(Map<String, String> data)
 	{
+		String entityId = getString(data, "id");
 		String entityName = getString(data, "name");
-		final Entity entity = repository.createEntity(entityName);
+		final Entity entity = repository.createEntityById(entityId, entityName);
 		setData(data, "backend", Backend::from, entity::setBackend);
 		setData(data, "package", repository::createPackageById, entity::setPackage);
 		setBoolean(data, "isAbstract", entity::setAbstractClass);
 		setString(data, "label", entity::setLabel);
 		setString(data, "id", entity::setId);
-		setData(data, "extends", repository::createEntity, entity::setBase);
+		setData(data, "extends", Entity::createEntityByName, entity::setBase);
 		setString(data, "description", entity::setDescription);
 		setList(data, "tags", repository::createTag, entity::addTag);
 		setList(data, "attributes", repository::createAttribute, att ->
@@ -75,7 +77,12 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 			part.setCompound(att);
 			att.addPart(part);
 		});
-		setData(data, "refEntityType", repository::createEntityById, att::setRefEntity);
+		String refEntityId = getString(data, "refEntityType");
+		if(refEntityId != null)
+		{
+			Entity refEntity = (Entity) new Entity().setId(refEntityId);
+			att.setRefEntity(refEntity);
+		}
 		setData(data, "mappedBy", repository::createAttribute, att::setMappedBy);
 		setString(data, "orderBy", att::setOrderBy);
 		setString(data, "expression", att::setExpression);
@@ -143,7 +150,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 
 	public void postProcess(WriteableMetadataRepository repository)
 	{
-		Map<String, Entity> entityIdMap = new HashMap<>();
+		entityIdMap = new HashMap<>();
 		Map<String, Package> packageIdMap = new HashMap<>();
 
 		repository.getEntities().stream().filter(entity -> entity.getId() != null)
@@ -157,9 +164,23 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 				.forEach(entity -> entity.setPackage(packageIdMap.get(entity.getPackage().getId())));
 		repository.getEntities().stream().filter(entity -> entity.getBase() != null)
 				.forEach(entity -> entity.setBase(entityIdMap.get(entity.getBase().getId())));
-		repository.getAttributes().stream().filter(attribute -> attribute.getEntityId() != null).forEach(
-				attribute -> attribute.setEntityFullname(entityIdMap.get(attribute.getEntityId()).getFullName()));
-		repository.getAttributes().stream().filter(attribute -> attribute.getRefEntity() != null).forEach(
-				attribute -> attribute.setRefEntity(entityIdMap.get(attribute.getRefEntity().getId())));
+		repository.getEntities().stream().filter(entity -> entity.getPackage() != null)
+				.forEach(entity -> entity.setFullName(entity.getPackage().getFullName() + "_" + entity.getFullName()));
+		repository.getAttributes().stream().filter(attribute -> attribute.getEntityId() != null)
+				.forEach(attribute -> test(attribute));
+		repository.getAttributes().stream().filter(attribute -> attribute.getRefEntity() != null)
+				.forEach(attribute -> attribute.setRefEntity(entityIdMap.get(attribute.getRefEntity().getId())));
+	}
+
+	private void test(Attribute attribute)
+	{
+		try
+		{
+			attribute.setEntityFullname(entityIdMap.get(attribute.getEntityId()).getFullName());
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException("");
+		}
 	}
 }

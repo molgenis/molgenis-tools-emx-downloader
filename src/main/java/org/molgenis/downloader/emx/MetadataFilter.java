@@ -42,10 +42,8 @@ class MetadataFilter implements MetadataConsumer
 		}
 		else
 		{
-			return target.getEntities().stream().filter(ent -> !entities.contains(ent.getFullName()))
-					.filter(ent -> !ent.isAbstractClass()).map(entity ->
-							entity.getPackage() == null ? entity.getFullName() :
-									entity.getPackage().getFullName() + "_" + entity.getFullName()).collect(toList());
+			return target.getEntities().stream().filter(ent -> !entities.contains(ent.getId()))
+					.filter(ent -> !ent.isAbstractClass()).map(entity -> entity.getFullName()).collect(toList());
 		}
 	}
 }
