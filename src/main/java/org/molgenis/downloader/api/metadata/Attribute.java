@@ -8,10 +8,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public final class Attribute implements Metadata
+public final class Attribute extends Metadata implements Comparable<Attribute>
 {
 	private String entityFullname;
-	private String id;
 	private String name;
 	private DataType dataType;
 	private Entity refEntity;
@@ -40,10 +39,11 @@ public final class Attribute implements Metadata
 	private final Map<Language, String> descriptions;
 	private final List<Attribute> parts;
 	private Attribute compound;
+	private String entityId;
 
 	public Attribute(final String id)
 	{
-		this.id = id;
+		super.setId(id);
 		labels = new HashMap<>();
 		descriptions = new HashMap<>();
 		tags = new HashSet<>();
@@ -69,18 +69,10 @@ public final class Attribute implements Metadata
 	}
 
 	@Override
-	public int hashCode()
-	{
-		int hash = 5;
-		hash = 17 * hash + Objects.hashCode(this.id);
-		return hash;
-	}
-
-	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (!(o instanceof Attribute)) return false;
 
 		Attribute attribute = (Attribute) o;
 
@@ -95,7 +87,6 @@ public final class Attribute implements Metadata
 		if (labelAttribute != attribute.labelAttribute) return false;
 		if (entityFullname != null ? !entityFullname.equals(attribute.entityFullname) :
 				attribute.entityFullname != null) return false;
-		if (id != null ? !id.equals(attribute.id) : attribute.id != null) return false;
 		if (name != null ? !name.equals(attribute.name) : attribute.name != null) return false;
 		if (dataType != attribute.dataType) return false;
 		if (refEntity != null ? !refEntity.equals(attribute.refEntity) : attribute.refEntity != null) return false;
@@ -115,12 +106,49 @@ public final class Attribute implements Metadata
 		if (mappedBy != null ? !mappedBy.equals(attribute.mappedBy) : attribute.mappedBy != null) return false;
 		if (rangeMin != null ? !rangeMin.equals(attribute.rangeMin) : attribute.rangeMin != null) return false;
 		if (rangeMax != null ? !rangeMax.equals(attribute.rangeMax) : attribute.rangeMax != null) return false;
-		if (!tags.equals(attribute.tags)) return false;
-		if (!labels.equals(attribute.labels)) return false;
-		if (!descriptions.equals(attribute.descriptions))
+		if (tags != null ? !tags.equals(attribute.tags) : attribute.tags != null) return false;
+		if (labels != null ? !labels.equals(attribute.labels) : attribute.labels != null) return false;
+		if (descriptions != null ? !descriptions.equals(attribute.descriptions) : attribute.descriptions != null)
 			return false;
-		return (parts != null ? parts.equals(attribute.parts) : attribute.parts == null) && (
-				compound != null ? compound.equals(attribute.compound) : attribute.compound == null);
+		if (parts != null ? !parts.equals(attribute.parts) : attribute.parts != null) return false;
+		if (compound != null ? !compound.equals(attribute.compound) : attribute.compound != null) return false;
+		return entityId != null ? entityId.equals(attribute.entityId) : attribute.entityId == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = entityFullname != null ? entityFullname.hashCode() : 0;
+		result = 31 * result + (id != null ? id.hashCode() : 0);
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (dataType != null ? dataType.hashCode() : 0);
+		result = 31 * result + (refEntity != null ? refEntity.hashCode() : 0);
+		result = 31 * result + (idAttribute ? 1 : 0);
+		result = 31 * result + (lookupAttribute ? 1 : 0);
+		result = 31 * result + (nillable ? 1 : 0);
+		result = 31 * result + (auto ? 1 : 0);
+		result = 31 * result + (visible ? 1 : 0);
+		result = 31 * result + (readOnly ? 1 : 0);
+		result = 31 * result + (unique ? 1 : 0);
+		result = 31 * result + (aggregateable ? 1 : 0);
+		result = 31 * result + (labelAttribute ? 1 : 0);
+		result = 31 * result + (enumOptions != null ? enumOptions.hashCode() : 0);
+		result = 31 * result + (expression != null ? expression.hashCode() : 0);
+		result = 31 * result + (label != null ? label.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (visibleExpression != null ? visibleExpression.hashCode() : 0);
+		result = 31 * result + (validationExpression != null ? validationExpression.hashCode() : 0);
+		result = 31 * result + (defaultValue != null ? defaultValue.hashCode() : 0);
+		result = 31 * result + (orderBy != null ? orderBy.hashCode() : 0);
+		result = 31 * result + (mappedBy != null ? mappedBy.hashCode() : 0);
+		result = 31 * result + (rangeMin != null ? rangeMin.hashCode() : 0);
+		result = 31 * result + (rangeMax != null ? rangeMax.hashCode() : 0);
+		result = 31 * result + (tags != null ? tags.hashCode() : 0);
+		result = 31 * result + (labels != null ? labels.hashCode() : 0);
+		result = 31 * result + (descriptions != null ? descriptions.hashCode() : 0);
+		result = 31 * result + (compound != null ? compound.hashCode() : 0);
+		result = 31 * result + (entityId != null ? entityId.hashCode() : 0);
+		return result;
 	}
 
 	public Attribute getMappedBy()
@@ -176,11 +204,6 @@ public final class Attribute implements Metadata
 	public boolean isLookupAttribute()
 	{
 		return lookupAttribute;
-	}
-
-	public String getId()
-	{
-		return id;
 	}
 
 	public String getExpression()
@@ -289,10 +312,14 @@ public final class Attribute implements Metadata
 		return this;
 	}
 
-	public Attribute setId(String id)
+	public Attribute setEntityId(String id)
 	{
-		this.id = id;
+		this.entityId = id;
 		return this;
+	}
+
+	public String getEntityId(){
+		return this.entityId;
 	}
 
 	public Attribute setName(String name)
@@ -453,15 +480,22 @@ public final class Attribute implements Metadata
 	@Override
 	public String toString()
 	{
-		return "Attribute{" + "entityFullname='" + entityFullname + '\'' + ", id='" + id + '\'' + ", name='" + name
-				+ '\'' + ", dataType=" + dataType + ", refEntity=" + refEntity + ", idAttribute=" + idAttribute
-				+ ", lookupAttribute=" + lookupAttribute + ", nillable=" + nillable + ", auto=" + auto + ", visible="
-				+ visible + ", readOnly=" + readOnly + ", unique=" + unique + ", aggregateable=" + aggregateable
-				+ ", labelAttribute=" + labelAttribute + ", enumOptions='" + enumOptions + '\'' + ", expression='"
-				+ expression + '\'' + ", label='" + label + '\'' + ", description='" + description + '\''
-				+ ", visibleExpression='" + visibleExpression + '\'' + ", validationExpression='" + validationExpression
-				+ '\'' + ", defaultValue='" + defaultValue + '\'' + ", orderBy='" + orderBy + '\'' + ", mappedBy="
-				+ mappedBy + ", rangeMin=" + rangeMin + ", rangeMax=" + rangeMax + ", tags=" + tags + ", labels="
-				+ labels + ", descriptions=" + descriptions + ", parts=" + parts + ", compound=" + compound + '}';
+		return "Attribute{" + "entityFullname='" + entityFullname + '\'' + ", name='" + name + '\'' + ", dataType="
+				+ dataType + ", refEntity=" + refEntity + ", idAttribute=" + idAttribute + ", lookupAttribute="
+				+ lookupAttribute + ", nillable=" + nillable + ", auto=" + auto + ", visible=" + visible + ", readOnly="
+				+ readOnly + ", unique=" + unique + ", aggregateable=" + aggregateable + ", labelAttribute="
+				+ labelAttribute + ", enumOptions='" + enumOptions + '\'' + ", expression='" + expression + '\''
+				+ ", label='" + label + '\'' + ", description='" + description + '\'' + ", visibleExpression='"
+				+ visibleExpression + '\'' + ", validationExpression='" + validationExpression + '\''
+				+ ", defaultValue='" + defaultValue + '\'' + ", orderBy='" + orderBy + '\'' + ", mappedBy=" + mappedBy
+				+ ", rangeMin=" + rangeMin + ", rangeMax=" + rangeMax + ", tags=" + tags + ", labels=" + labels
+				+ ", descriptions=" + descriptions + ", parts=" + parts + ", compound=" + compound + ", entityId='"
+				+ entityId + '\'' + '}';
+	}
+
+	@Override
+	public int compareTo(Attribute attr)
+	{
+		return id.compareTo(attr.getId());
 	}
 }

@@ -21,9 +21,9 @@ interface MetadataConverter {
     
     Language toLanguage(final Map<String, String> data);
     
-    String getTagsRepository();
-    String getPackagesRepository();
-    String getEnitiesRepository();
-    String getAttributesRepository();
-    String getLanguagesRepository();
+    String getTagsRepositoryName();
+    String getPackagesRepositoryName();
+    String getEntitiesRepositoryName();
+    String getAttributesRepositoryName();
+    String getLanguagesRepositoryName();
 }

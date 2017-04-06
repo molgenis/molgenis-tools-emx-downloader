@@ -76,7 +76,7 @@ public class MolgenisRestApiClientTest
 	@Test
 	public void getAttributesTest() throws IOException, URISyntaxException
 	{
-		Entity ref = new Entity("ref").setIdAttribute(Attribute.createAttribute("value","value"));
+		Entity ref = new Entity("ref").setIdAttribute(Attribute.createAttribute("value", "value"));
 		Attribute idAttr = Attribute.createAttribute("id", "id").setEntityFullname("biobank");
 		Attribute xbool = Attribute.createAttribute("xbool", "xbool").setEntityFullname("biobank");
 		Attribute xboolnillable = Attribute.createAttribute("xboolnillable", "xboolnillable")
@@ -172,7 +172,7 @@ public class MolgenisRestApiClientTest
 		Map<String, String> actual = client.getAttributes(json, attributes);
 
 		assertEquals(
-				"{xint_unique=1, xcategoricalnillable_value={\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}, xstringnillable_hidden=hidden, xxref_unique={\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}, xstring_hidden=hidden, xstring=str1, xhtmlnillable=<h1>html</h1>, xdatetime=1985-08-12T08:12:13+0200, xint=5, xboolnillable=true, xdatetimenillable=1985-08-12T08:12:13+0200, xtextnillable=text, xcomputedint=5, xstring_unique=str1, xcatmrefnillable_value=[{\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}], xlongrange=2, xenumnillable=enum1, xhyperlink=http://www.molgenis.org/, id=1, xxrefnillable_value=ref1, xdatenillable=1985-08-01, xdecimal=1.23, xemail=molgenis@gmail.com, xdecimalnillable=1.23, xintrange=1, xstringnillable=str1, xbool=true, xcomputedxref={\"_href\":\"/api/v2/base_Location/5\",\"Position\":5}, xdate=1985-08-01, xhtml=<h1>html</h1>, xxref_value=ref1, xlongnillable=1, xemailnillable=molgenis@gmail.com, xintnillable=1, xenum=enum1, xhyperlinknillable=http://www.molgenis.org/, xintrangenillable=2, xtext=text, xcategorical_value={\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}, xmrefnillable_value=ref1, xlong=1, xlongrangenillable=2, xmref_value=ref1, xfile=}",
+				"{xint_unique=1, xcategoricalnillable_value={\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}, xstringnillable_hidden=hidden, xxref_unique={\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}, xstring_hidden=hidden, xstring=str1, xhtmlnillable=<h1>html</h1>, xdatetime=1985-08-12T08:12:13+0200, xint=5, xboolnillable=true, xdatetimenillable=1985-08-12T08:12:13+0200, xtextnillable=text, xcomputedint=5, xcatmrefnillable_value=[{\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}], xstring_unique=str1, xenumnillable=enum1, xhyperlink=http://www.molgenis.org/, xlongrange=2, id=1, xxrefnillable_value=ref1, xdatenillable=1985-08-01, xdecimal=1.23, xemail=molgenis@gmail.com, xdecimalnillable=1.23, xintrange=1, xbool=true, xstringnillable=str1, xcomputedxref={\"_href\":\"/api/v2/base_Location/5\",\"Position\":5}, xdate=1985-08-01, xhtml=<h1>html</h1>, xxref_value=ref1, xlongnillable=1, xemailnillable=molgenis@gmail.com, xintnillable=1, xenum=enum1, xhyperlinknillable=http://www.molgenis.org/, xintrangenillable=2, xtext=text, xcategorical_value={\"_href\":\"/api/v2/base_TypeTestRef/ref1\",\"label\":\"label1\",\"value\":\"ref1\"}, xmrefnillable_value=ref1, xlong=1, xlongrangenillable=2, xmref_value=ref1, xfile=}",
 				actual.toString());
 
 	}

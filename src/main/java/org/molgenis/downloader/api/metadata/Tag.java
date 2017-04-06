@@ -1,13 +1,9 @@
-
 package org.molgenis.downloader.api.metadata;
 
 import java.net.URI;
-import java.util.Objects;
 
+public class Tag extends Metadata {
 
-public class Tag implements Metadata {
-    
-    private String id;
     private String label;
     private URI objectIRI;
     private URI relationIRI;
@@ -30,39 +26,39 @@ public class Tag implements Metadata {
         return codeSystem;
     }
 
-    public String getId() {
-        return id;
-    }
 
     public String getLabel() {
         return label;
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
 
     @Override
     public boolean equals(Object o)
-	{
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+    {
+        if (this == o) return true;
+        if (!(o instanceof Tag)) return false;
 
-		Tag tag = (Tag) o;
+        Tag tag = (Tag) o;
 
-		if (id != null ? !id.equals(tag.id) : tag.id != null) return false;
-		if (label != null ? !label.equals(tag.label) : tag.label != null) return false;
-		if (objectIRI != null ? !objectIRI.equals(tag.objectIRI) : tag.objectIRI != null) return false;
-		if (relationIRI != null ? !relationIRI.equals(tag.relationIRI) : tag.relationIRI != null) return false;
-		return (relationLabel != null ? relationLabel.equals(tag.relationLabel) : tag.relationLabel == null) && (
-				codeSystem != null ? codeSystem.equals(tag.codeSystem) : tag.codeSystem == null);
-	}
+        if (label != null ? !label.equals(tag.label) : tag.label != null) return false;
+        if (objectIRI != null ? !objectIRI.equals(tag.objectIRI) : tag.objectIRI != null) return false;
+        if (relationIRI != null ? !relationIRI.equals(tag.relationIRI) : tag.relationIRI != null) return false;
+        if (relationLabel != null ? !relationLabel.equals(tag.relationLabel) : tag.relationLabel != null) return false;
+        return codeSystem != null ? codeSystem.equals(tag.codeSystem) : tag.codeSystem == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = label != null ? label.hashCode() : 0;
+        result = 31 * result + (objectIRI != null ? objectIRI.hashCode() : 0);
+        result = 31 * result + (relationIRI != null ? relationIRI.hashCode() : 0);
+        result = 31 * result + (relationLabel != null ? relationLabel.hashCode() : 0);
+        result = 31 * result + (codeSystem != null ? codeSystem.hashCode() : 0);
+        return result;
+    }
 
     public Tag(final String id) {
-        this.id = id;
+        super.id = id;
     }
     
     public static Tag from(final String id) {
@@ -70,10 +66,6 @@ public class Tag implements Metadata {
             throw new IllegalArgumentException();
         }
         return new Tag(id);
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setLabel(String label) {

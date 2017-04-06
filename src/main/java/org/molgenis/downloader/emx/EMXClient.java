@@ -5,6 +5,7 @@ import org.molgenis.downloader.api.EMXBackend;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.emx.excel.ExcelBackend;
 
 import java.nio.file.FileAlreadyExistsException;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.molgenis.downloader.api.EntityConsumer;
 import org.molgenis.downloader.api.MetadataConsumer;
@@ -28,8 +30,8 @@ public class EMXClient implements AutoCloseable
 
 	public EMXClient(final MolgenisClient client)
 	{
-		molgenisClient = client;
-		exceptions = new ArrayList<>();
+		this.molgenisClient = client;
+		this.exceptions = new ArrayList<>();
 	}
 
 	public boolean downloadEMX(final List<String> entities, final Path path, final boolean includeMetadata,
@@ -38,14 +40,15 @@ public class EMXClient implements AutoCloseable
 		try (final EMXBackend backend = createBackend(path, overwrite))
 		{
 			final EMXFileWriter writer = new EMXFileWriter(backend, molgenisClient.getVersion());
-			final List<String> target = new ArrayList<>(entities);
+			List<String> target = new ArrayList<>(entities);
 			if (includeMetadata)
 			{
 				try (final MetadataConsumer consumer = writer.createMetadataConsumer())
 				{
-					final MetadataFilter filter = new MetadataFilter(entities, consumer);
+					final MetadataFilter filter = new MetadataFilter(entities, consumer, molgenisClient.getVersion());
 					molgenisClient.streamMetadata(filter);
 					target.addAll(filter.getIncludedEntities());
+					target = target.stream().distinct().collect(Collectors.toList());
 				}
 			}
 			for (final String name : target)
@@ -53,8 +56,10 @@ public class EMXClient implements AutoCloseable
 				try (final EntityConsumer consumer = writer.createConsumerForEntity(molgenisClient.getEntity(name)))
 				{
 					molgenisClient.streamEntityData(name, consumer, pageSize);
-				}catch (final org.json.JSONException ex) {
-					writer.addException(new IllegalArgumentException("entity: "+name+" does not exist", ex));
+				}
+				catch (final org.json.JSONException ex)
+				{
+					writer.addException(new IllegalArgumentException("entity: " + name + " does not exist", ex));
 				}
 			}
 			exceptions.addAll(writer.getExceptions());
@@ -87,7 +92,8 @@ public class EMXClient implements AutoCloseable
 			}
 			else
 			{
-				throw new FileAlreadyExistsException(String.format("File %s already exists, please use the '-o' option to overwrite.", path));
+				throw new FileAlreadyExistsException(
+						String.format("File %s already exists, please use the '-o' option to overwrite.", path));
 			}
 		}
 		return backend;

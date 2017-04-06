@@ -3,7 +3,7 @@ package org.molgenis.downloader.api.metadata;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Entity implements Metadata
+public class Entity extends Metadata
 {
 
 	private String fullName;
@@ -27,7 +27,7 @@ public class Entity implements Metadata
 		return rowLevelSecured;
 	}
 
-	private Entity()
+	public Entity()
 	{
 		attributes = new LinkedHashSet<>();
 		descriptions = new HashMap<>();
@@ -123,7 +123,7 @@ public class Entity implements Metadata
 		return base;
 	}
 
-	public Package getPkg()
+	public Package getPackage()
 	{
 		return pkg;
 	}
@@ -270,11 +270,6 @@ public class Entity implements Metadata
 	public void setAttributes(Set<Attribute> attributes)
 	{
 		this.attributes = attributes;
-	}
-
-	public void setPkg(Package pkg)
-	{
-		this.pkg = pkg;
 	}
 
 	public void setDescriptions(Map<Language, String> descriptions)
