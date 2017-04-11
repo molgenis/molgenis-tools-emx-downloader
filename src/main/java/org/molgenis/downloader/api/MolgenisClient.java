@@ -6,10 +6,12 @@ import java.net.URISyntaxException;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 
+import javax.naming.AuthenticationException;
+
 
 public interface MolgenisClient extends AutoCloseable {
 
-    void login(final String username, final String password);
+    void login(final String username, final String password) throws AuthenticationException;
 
     boolean logout();
     
