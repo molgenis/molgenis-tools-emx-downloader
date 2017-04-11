@@ -53,12 +53,16 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         result.add(att.getEnumOptions());
         result.add(att.getDefaultValue());
         if (att.getDataType().isNumericType()
-                && att.getRangeMin() != null && att.getRangeMax() != null
-                && !att.getRangeMin().equals(att.getRangeMax())) {
+                && att.getRangeMin() != null) {
             result.add(Long.toString(att.getRangeMin()));
-            result.add(Long.toString(att.getRangeMax()));
+
         } else {
             result.add(null);
+        }
+        if (att.getDataType().isNumericType()
+                && att.getRangeMax() != null) {
+            result.add(Long.toString(att.getRangeMax()));
+        } else {
             result.add(null);
         }
         result.add(Boolean.toString(att.isLookupAttribute()));
