@@ -37,6 +37,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 
 	public static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
 	public static final MolgenisVersion VERSION_3 = new MolgenisVersion(3, 0, 0);
+	public static final MolgenisVersion VERSION_4 = new MolgenisVersion(4, 0, 0);
 	private final HttpClient client;
 	private final WriteableMetadataRepository repository = new MetadataRepositoryImpl();
 	private MetadataConverter converter;
@@ -283,6 +284,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	private Entity entityFromJSON(final JSONObject metadata)
 	{
 		Entity ent = new Entity(metadata.getString("name"));
+		ent.setId(metadata.getString("name"));//FIXME: will this do, or do we add an "id" to the response in v4.x.x
 		final String idAttribute = metadata.getString("idAttribute");
 		final JSONArray attributes = metadata.getJSONArray("attributes");
 		attributes.iterator().forEachRemaining((Object object) ->
