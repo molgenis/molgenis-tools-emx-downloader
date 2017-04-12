@@ -2,7 +2,8 @@
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.EMXWriter;
-import org.molgenis.downloader.api.metadata.Metadata;
+import org.molgenis.downloader.api.metadata.*;
+import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.emx.serializers.EMXAttributeSerializer;
 import org.molgenis.downloader.emx.serializers.EMXTagSerializer;
 import org.molgenis.downloader.emx.serializers.EMXPackageSerializer;
@@ -12,8 +13,12 @@ import java.util.Collection;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.MetadataRepository;
-import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.api.EMXDataStore;
+import org.molgenis.downloader.emx.serializers.v3.EMXAttributeSerializerV3;
+import org.molgenis.downloader.emx.serializers.v3.EMXEntitySerializerV3;
+import org.molgenis.downloader.emx.serializers.v3.EMXPackageSerializerV3;
+
+import static org.molgenis.downloader.client.MolgenisRestApiClient.VERSION_2;
 
 
 class EMXMetadataConsumer implements MetadataConsumer {
@@ -33,13 +38,20 @@ class EMXMetadataConsumer implements MetadataConsumer {
     @Override
     public void accept(final MetadataRepository repository) {
         try {
-            EMXAttributeSerializer attributesSerializer = new EMXAttributeSerializer(version, repository.getLanguages());
+            EntitySerializer<Attribute> attributesSerializer;
+            EntitySerializer<Package> packagesSerializer;
+            EntitySerializer<Entity> entitiesSerializer;
+            if(version.equalsOrSmallerThan(VERSION_2)) {
+                attributesSerializer = new EMXAttributeSerializer(version, repository.getLanguages());
+                packagesSerializer = new EMXPackageSerializer();
+                entitiesSerializer = new EMXEntitySerializer(repository.getLanguages());
+            }else{
+                attributesSerializer = new EMXAttributeSerializerV3(repository.getLanguages());
+                packagesSerializer = new EMXPackageSerializerV3();
+                entitiesSerializer = new EMXEntitySerializerV3(repository.getLanguages());
+            }
             writeMetadata(ATTRIBUTES, attributesSerializer, repository.getAttributes());
-
-            EMXEntitySerializer entitiesSerializer = new EMXEntitySerializer(repository.getLanguages());
             writeMetadata(ENTITIES, entitiesSerializer, repository.getEntities());
-
-            EMXPackageSerializer packagesSerializer = new EMXPackageSerializer();
             writeMetadata(PACKAGES, packagesSerializer, repository.getPackages());
 
             EMXTagSerializer tagSerializer = new EMXTagSerializer();

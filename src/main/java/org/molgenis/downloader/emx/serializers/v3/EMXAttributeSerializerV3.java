@@ -1,18 +1,15 @@
 
-package org.molgenis.downloader.emx.serializers;
+package org.molgenis.downloader.emx.serializers.v3;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.*;
+
+import java.util.*;
 
 import static java.util.stream.Collectors.joining;
 
 
-public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
+public class EMXAttributeSerializerV3 implements EntitySerializer<Attribute> {
 
     private static final String[] FIELDS = {
         "entity", "name", "label", "dataType", "refEntity", "nillable",
@@ -25,11 +22,9 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
     private static final String AUTO = "AUTO";
     private static final String MAPPED_BY = "mappedBy";
 
-    private final MolgenisVersion version;
     private final Collection<Language> languages;
 
-    public EMXAttributeSerializer(final MolgenisVersion molgenisVersion, final Collection<Language> languages) {
-        version = molgenisVersion;
+    public EMXAttributeSerializerV3(final Collection<Language> languages) {
         this.languages = languages;
     }
 
@@ -89,9 +84,7 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
     @Override
     public List<String> fields() {
         final List<String> fields = new ArrayList<>(Arrays.asList(FIELDS));
-        if (version.equalsOrLargerThan(MIN_VERSION_FOR_MAPPEDBY)) {
-            fields.add(MAPPED_BY);
-        }
+        fields.add(MAPPED_BY);
 
         languages.forEach(language -> {
             fields.add("description-" + language.getCode());
