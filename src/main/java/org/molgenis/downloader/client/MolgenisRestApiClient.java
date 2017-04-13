@@ -37,6 +37,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 
 	public static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
 	public static final MolgenisVersion VERSION_3 = new MolgenisVersion(3, 0, 0);
+	public static final MolgenisVersion VERSION_4 = new MolgenisVersion(4, 0, 0);
 	private final HttpClient client;
 	private final WriteableMetadataRepository repository = new MetadataRepositoryImpl();
 	private MetadataConverter converter;
@@ -175,8 +176,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 			streamEntityData(converter.getPackagesRepositoryName(), converter::toPackage);
 			streamEntityData(converter.getAttributesRepositoryName(), converter::toAttribute);
 			streamEntityData(converter.getEntitiesRepositoryName(), converter::toEntity);
-			if (getVersion() != null && getVersion().equalsOrLargerThan(VERSION_3))
-				((MolgenisV3MetadataConverter) converter).postProcess(repository);
+			converter.postProcess(repository);
 			consumer.accept(repository);
 		}
 		catch (Exception ex)
@@ -340,13 +340,13 @@ public class MolgenisRestApiClient implements MolgenisClient
 			{
 				converter = new MolgenisV1MetadataConverter(repository);
 			}
-			else if (version.smallerThan(VERSION_3))
+			else if (version.equals(VERSION_3))
 			{
 				converter = new MolgenisV2MetadataConverter(repository);
 			}
-			else
+			else if (version.equalsOrLargerThan(VERSION_4))
 			{
-				converter = new MolgenisV3MetadataConverter(repository);
+				converter = new MolgenisV4MetadataConverter(repository);
 			}
 		}
 	}
