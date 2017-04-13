@@ -346,6 +346,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 			}
 			else if (version.equalsOrLargerThan(VERSION_4))
 			{
+				writeToConsole("WARNING: For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for ID that do not follow the scheme 'package'+'_'+'name'");
 				converter = new MolgenisV4MetadataConverter(repository);
 			}
 		}
