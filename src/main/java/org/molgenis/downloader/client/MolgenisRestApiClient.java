@@ -21,6 +21,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.util.ConsoleWriter;
 
+import javax.naming.AuthenticationException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -51,8 +52,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	}
 
 	@Override
-	public final void login(final String username, final String password)
-	{
+	public final void login(final String username, final String password) throws AuthenticationException {
 		final JSONObject login = new JSONObject();
 		login.put("username", username);
 		login.put("password", password);
@@ -74,6 +74,9 @@ public class MolgenisRestApiClient implements MolgenisClient
 		catch (final JSONException | IOException | URISyntaxException ex)
 		{
 			writeToConsole("An error occurred while logging in:\n", ex);
+		}
+		if(token == null){
+			throw new AuthenticationException("Username or password is incorrect");
 		}
 	}
 

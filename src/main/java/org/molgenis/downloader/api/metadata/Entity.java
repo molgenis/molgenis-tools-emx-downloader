@@ -170,7 +170,7 @@ public class Entity extends Metadata
 
 	public String getShortName()
 	{
-		String prefix = pkg == null ? "" : pkg.getName() + "_";
+		String prefix = pkg == null ? "" : pkg.getFullName() + "_";
 		return fullName.replaceFirst(prefix, "");
 	}
 
