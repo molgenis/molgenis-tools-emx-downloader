@@ -37,12 +37,10 @@ class TestHttpClient implements HttpClient
 	@Override
 	public HttpResponse execute(HttpUriRequest httpUriRequest) throws IOException
 	{
-
-
 		HttpResponse versionHttpResponse = mock(HttpResponse.class);
 		HttpEntity versionHttpEntity = mock(HttpEntity.class);
-		when(versionHttpEntity.getContent()).thenReturn(new FileInputStream(new File(
-				Resources.getResource("integration/version.txt").getPath())));
+		when(versionHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/version.txt"));
+
 		when(versionHttpResponse.getEntity()).thenReturn(versionHttpEntity);
 
 		HttpResponse languageHttpResponse = mock(HttpResponse.class);
