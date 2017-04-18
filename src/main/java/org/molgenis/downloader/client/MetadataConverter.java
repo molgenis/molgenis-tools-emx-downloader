@@ -2,6 +2,8 @@
 package org.molgenis.downloader.client;
 
 import java.util.Map;
+
+import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.Language;
@@ -26,4 +28,6 @@ interface MetadataConverter {
     String getEntitiesRepositoryName();
     String getAttributesRepositoryName();
     String getLanguagesRepositoryName();
+
+    default void postProcess(WriteableMetadataRepository repository){};
 }

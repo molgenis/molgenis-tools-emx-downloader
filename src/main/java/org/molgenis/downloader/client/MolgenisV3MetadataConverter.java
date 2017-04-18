@@ -148,6 +148,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 		return molgenisV2MetadataConverter.getLanguagesRepositoryName();
 	}
 
+	@Override
 	public void postProcess(WriteableMetadataRepository repository)
 	{
 		entityIdMap = new HashMap<>();
