@@ -343,9 +343,13 @@ public class MolgenisRestApiClient implements MolgenisClient
 			{
 				converter = new MolgenisV1MetadataConverter(repository);
 			}
-			else if (version.equals(VERSION_3))
+			else if (version.equals(VERSION_2))
 			{
 				converter = new MolgenisV2MetadataConverter(repository);
+			}
+			else if (version.equals(VERSION_3))
+			{
+				converter = new MolgenisV3MetadataConverter(repository);
 			}
 			else if (version.equalsOrLargerThan(VERSION_4))
 			{
