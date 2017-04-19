@@ -37,72 +37,70 @@ class TestHttpClient implements HttpClient
 	@Override
 	public HttpResponse execute(HttpUriRequest httpUriRequest) throws IOException
 	{
-
-
 		HttpResponse versionHttpResponse = mock(HttpResponse.class);
 		HttpEntity versionHttpEntity = mock(HttpEntity.class);
-		when(versionHttpEntity.getContent()).thenReturn(new FileInputStream(new File(
-				Resources.getResource("integration/version.txt").getPath())));
+		when(versionHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/version.txt"));
+
 		when(versionHttpResponse.getEntity()).thenReturn(versionHttpEntity);
 
 		HttpResponse languageHttpResponse = mock(HttpResponse.class);
 		HttpEntity languageHttpEntity = mock(HttpEntity.class);
-		when(languageHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/language.txt").getPath())));
+		when(languageHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/language.txt"));
 		when(languageHttpResponse.getEntity()).thenReturn(languageHttpEntity);
 
 		HttpResponse tagHttpResponse = mock(HttpResponse.class);
 		HttpEntity tagHttpEntity = mock(HttpEntity.class);
-		when(tagHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/tags.txt").getPath())));
+		when(tagHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/tags.txt"));
 		when(tagHttpResponse.getEntity()).thenReturn(tagHttpEntity);
 
 		HttpResponse packageHttpResponse = mock(HttpResponse.class);
 		HttpEntity packageHttpEntity = mock(HttpEntity.class);
-		when(packageHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/package.txt").getPath())));
+		when(packageHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/package.txt"));
 		when(packageHttpResponse.getEntity()).thenReturn(packageHttpEntity);
 
 		HttpResponse attributeHttpResponse = mock(HttpResponse.class);
 		HttpEntity attributeHttpEntity = mock(HttpEntity.class);
-		when(attributeHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/attributes.txt").getPath())));
+		when(attributeHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes.txt"));
 		when(attributeHttpResponse.getEntity()).thenReturn(attributeHttpEntity);
 
 		HttpResponse attribute100HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute100HttpEntity = mock(HttpEntity.class);
-		when(attribute100HttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/attributes100.txt").getPath())));
+		when(attribute100HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes100.txt"));
 		when(attribute100HttpResponse.getEntity()).thenReturn(attribute100HttpEntity);
 
 		HttpResponse attribute200HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute200HttpEntity = mock(HttpEntity.class);
-		when(attribute200HttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/attributes200.txt").getPath())));
+		when(attribute200HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes200.txt"));
 		when(attribute200HttpResponse.getEntity()).thenReturn(attribute200HttpEntity);
 
 		HttpResponse attribute300HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute300HttpEntity = mock(HttpEntity.class);
-		when(attribute300HttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/attributes300.txt").getPath())));
+		when(attribute300HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes300.txt"));
 		when(attribute300HttpResponse.getEntity()).thenReturn(attribute300HttpEntity);
 
 		HttpResponse attribute400HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute400HttpEntity = mock(HttpEntity.class);
-		when(attribute400HttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/attributes400.txt").getPath())));
+		when(attribute400HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes400.txt"));
 		when(attribute400HttpResponse.getEntity()).thenReturn(attribute400HttpEntity);
 
 		HttpResponse entityHttpResponse = mock(HttpResponse.class);
 		HttpEntity entityHttpEntity = mock(HttpEntity.class);
-		when(entityHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/type.txt").getPath())));
+		when(entityHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/type.txt"));
 		when(entityHttpResponse.getEntity()).thenReturn(entityHttpEntity);
 
 		HttpResponse dataHttpResponse = mock(HttpResponse.class);
 		HttpEntity dataHttpEntity = mock(HttpEntity.class);
-		when(dataHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/data.txt").getPath())));
+		when(dataHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/data.txt"));
 		when(dataHttpResponse.getEntity()).thenReturn(dataHttpEntity);
 
 		HttpResponse locationHttpResponse = mock(HttpResponse.class);
 		HttpEntity locationHttpEntity = mock(HttpEntity.class);
-		when(locationHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/location.txt").getPath())));
+		when(locationHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/location.txt"));
 		when(locationHttpResponse.getEntity()).thenReturn(locationHttpEntity);
 
 		HttpResponse refHttpResponse = mock(HttpResponse.class);
 		HttpEntity refHttpEntity = mock(HttpEntity.class);
-		when(refHttpEntity.getContent()).thenReturn(new FileInputStream(new File(Resources.getResource("integration/ref.txt").getPath())));
+		when(refHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/ref.txt"));
 		when(refHttpResponse.getEntity()).thenReturn(refHttpEntity);
 
 		HttpResponse response = null;

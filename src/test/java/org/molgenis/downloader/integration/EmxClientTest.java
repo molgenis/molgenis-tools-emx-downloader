@@ -1,14 +1,14 @@
 package org.molgenis.downloader.integration;
 
-import com.google.common.io.Resources;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.client.HttpClient;
 import org.molgenis.downloader.client.MolgenisRestApiClient;
 import org.molgenis.downloader.emx.EMXClient;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class EmxClientTest
@@ -22,7 +22,12 @@ public class EmxClientTest
 
 		File actual = File.createTempFile("download", ".zip");
 		emxClient.downloadEMX(Collections.singletonList("org_molgenis_test_TypeTest"), actual.toPath(), true, true, null);
-		File expected = new File(Resources.getResource("integration/download.zip").getPath());
+
+		File expected = File.createTempFile("download-expected", ".zip");
+		FileOutputStream outputStream = new FileOutputStream(expected);
+		IOUtils.copy(getClass().getResourceAsStream("/integration/download.zip"), outputStream);
+		outputStream.close();
+
 		ZipFileAssert.assertEquals(expected, actual);
 	}
 }
