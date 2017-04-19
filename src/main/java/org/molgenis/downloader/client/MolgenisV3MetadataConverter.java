@@ -3,6 +3,7 @@ package org.molgenis.downloader.client;
 import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.*;
 import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.util.NameUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -166,7 +167,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 		repository.getEntities().stream().filter(entity -> entity.getBase() != null)
 				.forEach(entity -> entity.setBase(entityIdMap.get(entity.getBase().getId())));
 		repository.getEntities().stream().filter(entity -> entity.getPackage() != null)
-				.forEach(entity -> entity.setFullName(entity.getPackage().getFullName() + "_" + entity.getFullName()));
+				.forEach(entity -> entity.setFullName(NameUtils.getPackageFullName(entity.getPackage(),MolgenisRestApiClient.VERSION_3) + "_" + entity.getFullName()));
 		repository.getAttributes().stream().filter(attribute -> attribute.getEntityId() != null)
 				.forEach(attribute -> test(attribute));
 		repository.getAttributes().stream().filter(attribute -> attribute.getRefEntity() != null)

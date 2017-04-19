@@ -116,11 +116,6 @@ public class Package extends Metadata
 		this.parent = parent;
 	}
 
-	public String getFullName()
-	{
-		return getParent() == null ? getName() : getParent().getFullName() + "_" + getName();
-	}
-
 	public void addTag(final Tag tag)
 	{
 		tags.add(tag);
