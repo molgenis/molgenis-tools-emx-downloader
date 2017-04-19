@@ -28,7 +28,7 @@ public class EMXFileWriter implements EMXWriter {
 
     @Override
     public EntityConsumer createConsumerForEntity(final Entity entity) throws IOException {
-        return new EMXEntityConsumer(this, entity);
+        return new EMXEntityConsumer(this, entity, version);
     }
 
     @Override

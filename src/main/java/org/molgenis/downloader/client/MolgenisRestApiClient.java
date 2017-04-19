@@ -286,6 +286,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	private Entity entityFromJSON(final JSONObject metadata)
 	{
 		Entity ent = new Entity(metadata.getString("name"));
+		ent.setId(metadata.getString("name"));//FIXME: will this do, or do we add an "id" to the response in v4.x.x
 		final String idAttribute = metadata.getString("idAttribute");
 		final JSONArray attributes = metadata.getJSONArray("attributes");
 		attributes.iterator().forEachRemaining((Object object) ->

@@ -17,8 +17,13 @@ import org.molgenis.downloader.api.EMXDataStore;
 import org.molgenis.downloader.emx.serializers.v3.EMXAttributeSerializerV3;
 import org.molgenis.downloader.emx.serializers.v3.EMXEntitySerializerV3;
 import org.molgenis.downloader.emx.serializers.v3.EMXPackageSerializerV3;
+import org.molgenis.downloader.emx.serializers.v4.EMXAttributeSerializerV4;
+import org.molgenis.downloader.emx.serializers.v4.EMXEntitySerializerV4;
+import org.molgenis.downloader.emx.serializers.v4.EMXPackageSerializerV4;
 
 import static org.molgenis.downloader.client.MolgenisRestApiClient.VERSION_2;
+import static org.molgenis.downloader.client.MolgenisRestApiClient.VERSION_3;
+import static org.molgenis.downloader.client.MolgenisRestApiClient.VERSION_4;
 
 
 class EMXMetadataConsumer implements MetadataConsumer {
@@ -45,11 +50,16 @@ class EMXMetadataConsumer implements MetadataConsumer {
                 attributesSerializer = new EMXAttributeSerializer(version, repository.getLanguages());
                 packagesSerializer = new EMXPackageSerializer();
                 entitiesSerializer = new EMXEntitySerializer(repository.getLanguages());
-            }else{
+            }else if(version.equals(VERSION_3)) {
                 attributesSerializer = new EMXAttributeSerializerV3(repository.getLanguages());
                 packagesSerializer = new EMXPackageSerializerV3();
                 entitiesSerializer = new EMXEntitySerializerV3(repository.getLanguages());
+            }else{
+                attributesSerializer = new EMXAttributeSerializerV4(repository.getLanguages());
+                packagesSerializer = new EMXPackageSerializerV4();
+                entitiesSerializer = new EMXEntitySerializerV4(repository.getLanguages());
             }
+
             writeMetadata(ATTRIBUTES, attributesSerializer, repository.getAttributes());
             writeMetadata(ENTITIES, entitiesSerializer, repository.getEntities());
             writeMetadata(PACKAGES, packagesSerializer, repository.getPackages());

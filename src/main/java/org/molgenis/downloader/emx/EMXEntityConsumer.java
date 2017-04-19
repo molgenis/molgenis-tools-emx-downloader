@@ -12,6 +12,8 @@ import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.EMXDataStore;
+import org.molgenis.downloader.api.metadata.MolgenisVersion;
+import org.molgenis.downloader.client.MolgenisRestApiClient;
 
 class EMXEntityConsumer implements EntityConsumer {
 
@@ -19,12 +21,18 @@ class EMXEntityConsumer implements EntityConsumer {
     private final EMXDataStore sheet;
     private final EMXWriter writer;
 
-    public EMXEntityConsumer(final EMXWriter writer, final Entity entity) throws IOException {
+    public EMXEntityConsumer(final EMXWriter writer, final Entity entity, final MolgenisVersion version) throws IOException {
         this.writer = writer;
         attributes = setAttributes(entity);
         final List<String> values = getAttributes().stream().map(Attribute::getName).collect(Collectors.toList());
 
-        sheet = writer.createDataStore(entity.getFullName());
+        if (version.equalsOrSmallerThan(MolgenisRestApiClient.VERSION_3))
+        {
+            sheet = writer.createDataStore(entity.getFullName());
+        }
+        else{
+            sheet = writer.createDataStore(entity.getId());
+        }
         sheet.writeRow(values);
     }
 
