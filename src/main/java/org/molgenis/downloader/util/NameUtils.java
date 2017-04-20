@@ -11,7 +11,7 @@ public class NameUtils {
         if(pack == null) return "";
 
         String name =  pack.getName();
-        if(version.equalsOrLargerThan(MolgenisRestApiClient.VERSION_4)) return name;
+        if(version != null && version.equalsOrLargerThan(MolgenisRestApiClient.VERSION_4)) return name;
 
         return pack.getParent() == null ? name : NameUtils.getPackageFullName(pack.getParent(), version) + "_" + name;
     }
