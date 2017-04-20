@@ -1,8 +1,7 @@
 package org.molgenis.downloader.client;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.Sets;
-import com.google.common.io.Files;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -13,9 +12,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -37,8 +34,7 @@ public class MolgenisRestApiClientTest
 		HttpResponse httpResponse = mock(HttpResponse.class);
 		HttpEntity httpEntity = mock(HttpEntity.class);
 
-		File resource = new File(Resources.getResource("versionResponse.txt").getPath());
-		when(httpEntity.getContent()).thenReturn(new FileInputStream(resource));
+		when(httpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/versionResponse.txt"));
 		when(httpResponse.getEntity()).thenReturn(httpEntity);
 		when(httpClient.execute(any())).thenReturn(httpResponse);
 
@@ -55,8 +51,7 @@ public class MolgenisRestApiClientTest
 		HttpResponse httpResponse = mock(HttpResponse.class);
 		HttpEntity httpEntity = mock(HttpEntity.class);
 
-		File resource = new File(Resources.getResource("entities.txt").getPath());
-		when(httpEntity.getContent()).thenReturn(new FileInputStream(resource));
+		when(httpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/entities.txt"));
 		when(httpResponse.getEntity()).thenReturn(httpEntity);
 		when(httpClient.execute(any())).thenReturn(httpResponse);
 
@@ -155,9 +150,9 @@ public class MolgenisRestApiClientTest
 
 		HttpClient httpClient = mock(HttpClient.class);
 		MolgenisRestApiClient client = new MolgenisRestApiClient(httpClient, new URI(""));
-		JSONObject json = new JSONObject(
-				Files.toString(new File(Resources.getResource("attributes.txt").getPath()).getAbsoluteFile(),
-						Charsets.UTF_8));
+
+		String jsonString = IOUtils.toString(getClass().getResourceAsStream("/attributes.txt"), "UTF-8");
+		JSONObject json = new JSONObject(jsonString);
 
 		Set<Attribute> attributes = Sets
 				.newHashSet(idAttr, xbool, xboolnillable, xcompound, xcompound_int, xcompound_string,
