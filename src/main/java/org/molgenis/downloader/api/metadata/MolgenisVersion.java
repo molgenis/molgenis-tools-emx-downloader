@@ -82,6 +82,16 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
         return minor == that.minor && revison == that.revison;
     }
 
+    public boolean equalsMajor(Object o)
+    {
+        if (this == o) return true;
+        if (!(o instanceof MolgenisVersion)) return false;
+
+        MolgenisVersion that = (MolgenisVersion) o;
+
+        return major == that.major;
+    }
+
     @Override
     public int hashCode()
     {
