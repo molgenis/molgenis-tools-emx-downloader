@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.*;
-import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.util.NameUtils;
 
 import static java.util.stream.Collectors.joining;
 
@@ -18,16 +18,18 @@ public class EMXEntitySerializerV3 implements EntitySerializer<Entity> {
          "abstract", "backend", "tags", "label", "description" };
     
     private final Collection<Language> languages;
+    private final MolgenisVersion version;
 
-    public EMXEntitySerializerV3(final Collection<Language> languages) {
+    public EMXEntitySerializerV3(MolgenisVersion version, final Collection<Language> languages) {
         this.languages = languages;
+        this.version=version;
     }
     
     @Override
     public List<String> serialize(final Entity entity) {
         List<String> result = new ArrayList<>();
-        result.add(entity.getShortName());
-        result.add(Optional.ofNullable(entity.getPackage()).map(Package::getFullName).orElse(""));
+        result.add(NameUtils.getEntityShortName(entity,version));
+        result.add(NameUtils.getPackageFullName(entity.getPackage(), version));
         result.add(Optional.ofNullable(entity.getBase()).map(Entity::getFullName).orElse(""));
         result.add(Boolean.toString(entity.isAbstractClass()));
         // MYSQL and POSTGRESQL backends are the defaults for MOLGENIS 1 and 2 respectively

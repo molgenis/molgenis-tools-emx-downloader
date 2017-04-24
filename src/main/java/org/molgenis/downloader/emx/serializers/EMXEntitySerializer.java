@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.*;
 import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.util.NameUtils;
 
 import static java.util.stream.Collectors.joining;
 
@@ -26,7 +27,7 @@ public class EMXEntitySerializer implements EntitySerializer<Entity> {
     @Override
     public List<String> serialize(final Entity entity) {
         List<String> result = new ArrayList<>();
-        result.add(entity.getShortName());
+        result.add(NameUtils.getEntityShortName(entity, null));
         result.add(Optional.ofNullable(entity.getPackage()).map(Package::getName).orElse(""));
         result.add(Optional.ofNullable(entity.getBase()).map(Entity::getFullName).orElse(""));
         result.add(Boolean.toString(entity.isAbstractClass()));

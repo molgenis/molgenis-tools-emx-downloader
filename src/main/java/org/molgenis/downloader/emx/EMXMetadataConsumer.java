@@ -47,8 +47,8 @@ class EMXMetadataConsumer implements MetadataConsumer {
                 entitiesSerializer = new EMXEntitySerializer(repository.getLanguages());
             }else{
                 attributesSerializer = new EMXAttributeSerializerV3(repository.getLanguages());
-                packagesSerializer = new EMXPackageSerializerV3();
-                entitiesSerializer = new EMXEntitySerializerV3(repository.getLanguages());
+                packagesSerializer = new EMXPackageSerializerV3(version);
+                entitiesSerializer = new EMXEntitySerializerV3(version, repository.getLanguages());
             }
             writeMetadata(ATTRIBUTES, attributesSerializer, repository.getAttributes());
             writeMetadata(ENTITIES, entitiesSerializer, repository.getEntities());

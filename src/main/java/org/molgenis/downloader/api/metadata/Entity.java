@@ -168,12 +168,6 @@ public class Entity extends Metadata
 		return fullName;
 	}
 
-	public String getShortName()
-	{
-		String prefix = pkg == null ? "" : pkg.getFullName() + "_";
-		return fullName.replaceFirst(prefix, "");
-	}
-
 	public Set<Attribute> getAttributes()
 	{
 		return attributes;
