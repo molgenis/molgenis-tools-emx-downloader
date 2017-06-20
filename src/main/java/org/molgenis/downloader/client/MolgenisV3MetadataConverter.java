@@ -8,6 +8,8 @@ import org.molgenis.downloader.util.NameUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
+
 class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 {
 
@@ -167,7 +169,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 		repository.getEntities().stream().filter(entity -> entity.getBase() != null)
 				.forEach(entity -> entity.setBase(entityIdMap.get(entity.getBase().getId())));
 		repository.getEntities().stream().filter(entity -> entity.getPackage() != null)
-				.forEach(entity -> entity.setFullName(NameUtils.getPackageFullName(entity.getPackage(),MolgenisRestApiClient.VERSION_3) + "_" + entity.getFullName()));
+				.forEach(entity -> entity.setFullName(NameUtils.getPackageFullName(entity.getPackage(),VERSION_3) + "_" + entity.getFullName()));
 		repository.getAttributes().stream().filter(attribute -> attribute.getEntityId() != null)
 				.forEach(attribute -> test(attribute));
 		repository.getAttributes().stream().filter(attribute -> attribute.getRefEntity() != null)

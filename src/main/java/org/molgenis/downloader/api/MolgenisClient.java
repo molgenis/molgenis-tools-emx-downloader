@@ -16,14 +16,14 @@ public interface MolgenisClient extends AutoCloseable {
     boolean logout();
     
     default void streamEntityData(final String name, final EntityConsumer consumer){
-        streamEntityData(name, consumer, null);
+        streamEntityData(name, consumer,null);
     }
 
     void streamEntityData(final String name, final EntityConsumer consumer, Integer pageSize);
     
     Entity getEntity(final String name) throws IOException, URISyntaxException;
     
-    void streamMetadata(final MetadataConsumer consumer);
+    void streamMetadata(final MetadataConsumer consumer, MolgenisVersion version);
 
     MolgenisVersion getVersion() throws IOException, URISyntaxException;
 }

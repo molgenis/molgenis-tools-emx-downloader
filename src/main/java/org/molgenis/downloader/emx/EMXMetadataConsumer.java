@@ -18,8 +18,7 @@ import org.molgenis.downloader.emx.serializers.v3.EMXAttributeSerializerV3;
 import org.molgenis.downloader.emx.serializers.v3.EMXEntitySerializerV3;
 import org.molgenis.downloader.emx.serializers.v3.EMXPackageSerializerV3;
 
-import static org.molgenis.downloader.client.MolgenisRestApiClient.VERSION_2;
-
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_2;
 
 class EMXMetadataConsumer implements MetadataConsumer {
 

@@ -31,14 +31,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_2;
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_4;
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
 public class MolgenisRestApiClient implements MolgenisClient
 {
-
-	public static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
-	public static final MolgenisVersion VERSION_3 = new MolgenisVersion(3, 0, 0);
-	public static final MolgenisVersion VERSION_4 = new MolgenisVersion(4, 0, 0);
 	private final HttpClient client;
 	private final WriteableMetadataRepository repository = new MetadataRepositoryImpl();
 	private MetadataConverter converter;
@@ -169,11 +168,11 @@ public class MolgenisRestApiClient implements MolgenisClient
 	}
 
 	@Override
-	public void streamMetadata(MetadataConsumer consumer)
+	public void streamMetadata(MetadataConsumer consumer, MolgenisVersion version)
 	{
 		try
 		{
-			if (converter == null) initConverter();
+			if (converter == null) initConverter(version);
 			streamEntityData(converter.getLanguagesRepositoryName(), converter::toLanguage);
 			streamEntityData(converter.getTagsRepositoryName(), converter::toTag);
 			streamEntityData(converter.getPackagesRepositoryName(), converter::toPackage);
@@ -332,13 +331,11 @@ public class MolgenisRestApiClient implements MolgenisClient
 		return att;
 	}
 
-	private void initConverter() throws IOException, URISyntaxException
+	private void initConverter(MolgenisVersion version) throws IOException, URISyntaxException
 	{
+		if(version == null) getVersion();
 		if (converter == null)
 		{
-			final MolgenisVersion version;
-			version = getVersion();
-
 			if (version == null || version.smallerThan(VERSION_2))
 			{
 				converter = new MolgenisV1MetadataConverter(repository);

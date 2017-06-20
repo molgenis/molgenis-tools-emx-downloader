@@ -5,6 +5,7 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.apache.http.client.HttpClient;
 import org.molgenis.downloader.api.MolgenisClient;
+import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.client.HttpClientFactory;
 import org.molgenis.downloader.client.MolgenisRestApiClient;
 import org.molgenis.downloader.emx.EMXClient;
@@ -30,6 +31,7 @@ public class Downloader
 	private static final String OVERWRITE = "overwrite";
 	private static final String PAGESIZE = "pageSize";
 	private static final String DEBUG = "debug";
+	private static final String VERSION = "version";
 
 	public static boolean debug;
 
@@ -74,6 +76,8 @@ public class Downloader
 		parser.acceptsAll(asList("s", PAGESIZE), "The pagesize for the REST responses, increase in case of large datasets, maximum value=10000").withRequiredArg()
 				.ofType(Integer.class);
 		parser.acceptsAll(asList("d", DEBUG), "print debug logging to console");
+		parser.acceptsAll(asList("v", VERSION), "Optional parameter to override the result form '/api/v2/version/'").withRequiredArg()
+				.ofType(String.class);
 
 		return parser;
 	}
@@ -90,10 +94,13 @@ public class Downloader
 		String username = (String) options.valueOf(ACCOUNT);
 		String password = (String) options.valueOf(PASSWORD);
 		boolean overwrite = options.has(OVERWRITE);
+		String versionString = (String) options.valueOf(VERSION);
 
 		debug = options.has(DEBUG);
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
+
+
 
 		try (final MolgenisClient molgenis = new MolgenisRestApiClient(client, url))
 		{
@@ -118,8 +125,15 @@ public class Downloader
 			}
 			try (final EMXClient emxClient = new EMXClient(molgenis))
 			{
+				MolgenisVersion version;
+				if(versionString != null){
+					version = MolgenisVersion.from(versionString);
+				}else{
+					version = molgenis.getVersion();
+				}
+
 				boolean hasErrors = emxClient
-						.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite, pageSize);
+						.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite, version, pageSize);
 				if (hasErrors)
 				{
 					writeToConsole("Errors occurred while writing EMX\n");
