@@ -16,7 +16,7 @@ public interface MolgenisClient extends AutoCloseable {
     boolean logout();
     
     default void streamEntityData(final String name, final EntityConsumer consumer){
-        streamEntityData(name, consumer,null);
+        streamEntityData(name, consumer, null);
     }
 
     void streamEntityData(final String name, final EntityConsumer consumer, Integer pageSize);
