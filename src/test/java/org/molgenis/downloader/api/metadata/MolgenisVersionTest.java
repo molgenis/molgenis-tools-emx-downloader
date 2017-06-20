@@ -2,11 +2,8 @@
 package org.molgenis.downloader.api.metadata;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.molgenis.downloader.Downloader;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
