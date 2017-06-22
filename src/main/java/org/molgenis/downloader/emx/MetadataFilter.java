@@ -5,6 +5,7 @@ import org.molgenis.downloader.api.MetadataRepository;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
 
 import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.metadata.Entity;
@@ -35,7 +36,7 @@ class MetadataFilter implements MetadataConsumer
 
 	public List<String> getIncludedEntities()
 	{
-		if (version.smallerThan(MolgenisRestApiClient.VERSION_3))
+		if (version.smallerThan(VERSION_3))
 		{
 			return target.getEntities().stream().filter(ent -> !entities.contains(ent.getFullName()))
 					.filter(ent -> !ent.isAbstractClass()).map(Entity::getFullName).collect(toList());

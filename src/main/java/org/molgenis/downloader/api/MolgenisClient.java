@@ -23,7 +23,7 @@ public interface MolgenisClient extends AutoCloseable {
     
     Entity getEntity(final String name) throws IOException, URISyntaxException;
     
-    void streamMetadata(final MetadataConsumer consumer);
+    void streamMetadata(final MetadataConsumer consumer, MolgenisVersion version);
 
     MolgenisVersion getVersion() throws IOException, URISyntaxException;
 }

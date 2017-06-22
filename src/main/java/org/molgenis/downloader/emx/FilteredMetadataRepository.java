@@ -9,6 +9,8 @@ import org.molgenis.downloader.api.metadata.*;
 import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.client.MolgenisRestApiClient;
 
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
+
 class FilteredMetadataRepository implements MetadataRepository
 {
 
@@ -26,7 +28,7 @@ class FilteredMetadataRepository implements MetadataRepository
 		packages = new LinkedHashSet<>();
 		tags = new LinkedHashSet<>();
 		languages = source.getLanguages();
-		if (version.smallerThan(MolgenisRestApiClient.VERSION_3))
+		if (version.smallerThan(VERSION_3))
 		{
 			source.getEntities().stream().filter((ent) -> entities.contains(ent.getFullName())).forEach(this::traverse);
 		}

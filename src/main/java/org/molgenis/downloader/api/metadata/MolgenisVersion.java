@@ -8,6 +8,10 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
     private final int minor;
     private final int revison;
 
+    public static final MolgenisVersion VERSION_2 = new MolgenisVersion(2, 0, 0);
+    public static final MolgenisVersion VERSION_3 = new MolgenisVersion(3, 0, 0);
+    public static final MolgenisVersion VERSION_4 = new MolgenisVersion(4, 0, 0);
+
     public MolgenisVersion(int major, int minor, int revison) {
         this.major = major;
         this.minor = minor;

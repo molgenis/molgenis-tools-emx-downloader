@@ -35,18 +35,18 @@ public class EMXClient implements AutoCloseable
 	}
 
 	public boolean downloadEMX(final List<String> entities, final Path path, final boolean includeMetadata,
-			boolean overwrite, Integer pageSize) throws Exception
+			boolean overwrite, MolgenisVersion version, Integer pageSize) throws Exception
 	{
 		try (final EMXBackend backend = createBackend(path, overwrite))
 		{
-			final EMXFileWriter writer = new EMXFileWriter(backend, molgenisClient.getVersion());
+			final EMXFileWriter writer = new EMXFileWriter(backend, version);
 			List<String> target = new ArrayList<>(entities);
 			if (includeMetadata)
 			{
 				try (final MetadataConsumer consumer = writer.createMetadataConsumer())
 				{
-					final MetadataFilter filter = new MetadataFilter(entities, consumer, molgenisClient.getVersion());
-					molgenisClient.streamMetadata(filter);
+					final MetadataFilter filter = new MetadataFilter(entities, consumer, version);
+					molgenisClient.streamMetadata(filter, version);
 					target.addAll(filter.getIncludedEntities());
 					target = target.stream().distinct().collect(Collectors.toList());
 				}
