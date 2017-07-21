@@ -11,7 +11,8 @@ public class ConsoleWriter
 	{
 		if (System.console() != null)
 		{
-			System.console().format(message + " %s\n", e.getLocalizedMessage()).flush();
+			if(e!= null) message += String.format(message + " %s\n", e.getLocalizedMessage());
+			System.console().format(message).flush();
 		}
 		else
 		{
