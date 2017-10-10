@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -51,7 +52,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	}
 
 	@Override
-	public final void login(final String username, final String password) throws AuthenticationException {
+	public final void login(final String username, final String password, final Integer socketTimeout) throws AuthenticationException {
 		final JSONObject login = new JSONObject();
 		login.put("username", username);
 		login.put("password", password);
@@ -59,9 +60,13 @@ public class MolgenisRestApiClient implements MolgenisClient
 		token = null;
 		try
 		{
+			RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+			requestConfigBuilder.setSocketTimeout(1000 * socketTimeout);
+
 			final HttpPost request = new HttpPost(new URI(uri + "/api/v1/login"));
 			request.setHeader("Content-Type", "application/json");
 			request.setEntity(new StringEntity(login.toString()));
+			request.setConfig(requestConfigBuilder.build());
 
 			final HttpResponse result = client.execute(request);
 			if (result.getStatusLine().getStatusCode() == 200)
