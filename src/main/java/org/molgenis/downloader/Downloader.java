@@ -72,7 +72,7 @@ public class Downloader
 		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the exisiting file if it exists.");
 		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class)
 				.required();
-		parser.acceptsAll(asList("d", DATA_ONLY), "Write only the data for the entities to the output file.");
+		parser.acceptsAll(asList("D", DATA_ONLY), "Write only the data for the entities to the output file.");
 		parser.acceptsAll(asList("a", ACCOUNT), "MOLGENIS username to login with to download the data.")
 				.withRequiredArg().ofType(String.class);
 		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login").withRequiredArg()
