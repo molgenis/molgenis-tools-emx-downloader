@@ -11,7 +11,7 @@ import javax.naming.AuthenticationException;
 
 public interface MolgenisClient extends AutoCloseable {
 
-    void login(final String username, final String password) throws AuthenticationException;
+    void login(final String username, final String password, final Integer timeout) throws AuthenticationException;
 
     boolean logout();
     

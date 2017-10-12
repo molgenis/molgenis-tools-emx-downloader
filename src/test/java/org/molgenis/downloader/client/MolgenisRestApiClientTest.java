@@ -23,8 +23,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.AssertJUnit.assertEquals;
 
-import com.google.common.io.Resources;
-
 public class MolgenisRestApiClientTest
 {
 	@Test

@@ -4,6 +4,9 @@ import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.molgenis.downloader.api.MolgenisClient;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.client.HttpClientFactory;
@@ -22,7 +25,7 @@ import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 public class Downloader
 {
 	private static final String URL = "url";
-	private static final String META = "meta";
+	private static final String DATA_ONLY = "dataOnly";
 	private static final String ACCOUNT = "account";
 	private static final String PASSWORD = "password";
 	private static final String INSECURE_SSL = "insecureSSL";
@@ -32,6 +35,8 @@ public class Downloader
 	private static final String PAGESIZE = "pageSize";
 	private static final String DEBUG = "debug";
 	private static final String VERSION = "version";
+	private static final String SOCKET_TIMEOUT = "timeout";
+	private static final Integer DEFAULT_SOCKET_TIMEOUT = 60;
 
 	public static boolean debug;
 
@@ -67,9 +72,9 @@ public class Downloader
 		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the exisiting file if it exists.");
 		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class)
 				.required();
-		parser.acceptsAll(asList("m", META), "Write the metadata for the entities to the output file.");
+		parser.acceptsAll(asList("D", DATA_ONLY), "Write only the data for the entities to the output file.");
 		parser.acceptsAll(asList("a", ACCOUNT), "MOLGENIS username to login with to download the data.")
-				.withRequiredArg().ofType(String.class).required();
+				.withRequiredArg().ofType(String.class);
 		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login").withRequiredArg()
 				.ofType(String.class);
 		parser.acceptsAll(asList("i", INSECURE_SSL), "Ignore SSL certicate chain errors and hostname mismatches.");
@@ -78,6 +83,8 @@ public class Downloader
 		parser.acceptsAll(asList("d", DEBUG), "print debug logging to console");
 		parser.acceptsAll(asList("v", VERSION), "Optional parameter to override the result form '/api/v2/version/'").withRequiredArg()
 				.ofType(String.class);
+		parser.acceptsAll(asList("t", SOCKET_TIMEOUT), "Optional parameter to configure the socket timeout in seconds, default value is 60").withRequiredArg()
+			  .ofType(Integer.class);
 
 		return parser;
 	}
@@ -89,22 +96,20 @@ public class Downloader
 		List<String> entities = (List<String>) options.valuesOf(ARGUMENTS);
 		URI url = options.hasArgument(URL) ? new URI((String) options.valueOf(URL)) : null;
 		Integer pageSize = options.hasArgument(PAGESIZE) ? (Integer) options.valueOf(PAGESIZE) : null;
-		boolean includeMetaData = options.has(META);
+		boolean includeMetaData = !options.has(DATA_ONLY);
 		boolean insecureSSL = options.has(INSECURE_SSL);
 		String username = (String) options.valueOf(ACCOUNT);
 		String password = (String) options.valueOf(PASSWORD);
 		boolean overwrite = options.has(OVERWRITE);
 		String versionString = (String) options.valueOf(VERSION);
+		Integer socketTimeout = options.hasArgument(SOCKET_TIMEOUT) ? (Integer) options.valueOf(SOCKET_TIMEOUT) : DEFAULT_SOCKET_TIMEOUT;
 
 		debug = options.has(DEBUG);
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
 
-
-
 		try (final MolgenisClient molgenis = new MolgenisRestApiClient(client, url))
 		{
-
 			if (username != null)
 			{
 				if (password == null)
@@ -121,7 +126,7 @@ public class Downloader
 						return;
 					}
 				}
-				molgenis.login(username, password);
+				molgenis.login(username, password, socketTimeout);
 			}
 			try (final EMXClient emxClient = new EMXClient(molgenis))
 			{

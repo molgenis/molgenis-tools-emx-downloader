@@ -77,7 +77,7 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute> {
         result.add(att.getTags().stream().map(Tag::getId).collect(joining(",")));
         result.add(att.getDescription());
         if (fields().contains(MAPPED_BY)) {
-            result.add(Optional.ofNullable(att.getMappedBy()).map(Attribute::getEntityFullname).orElse(""));
+            result.add(att.getMappedBy()!=null?att.getMappedBy().getName():"");
         }
         languages.forEach(language -> {
             result.add(att.getDescriptions().get(language));
