@@ -1,12 +1,6 @@
 package org.molgenis.downloader.api.metadata;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public final class Attribute extends Metadata implements Comparable<Attribute>
 {
@@ -318,7 +312,8 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 		return this;
 	}
 
-	public String getEntityId(){
+	public String getEntityId()
+	{
 		return this.entityId;
 	}
 

@@ -1,16 +1,14 @@
 package org.molgenis.downloader.emx;
 
+import org.molgenis.downloader.api.MetadataConsumer;
 import org.molgenis.downloader.api.MetadataRepository;
+import org.molgenis.downloader.api.metadata.Entity;
+import org.molgenis.downloader.api.metadata.MolgenisVersion;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
-
-import org.molgenis.downloader.api.MetadataConsumer;
-import org.molgenis.downloader.api.metadata.Entity;
-import org.molgenis.downloader.api.metadata.MolgenisVersion;
-import org.molgenis.downloader.client.MolgenisRestApiClient;
 
 class MetadataFilter implements MetadataConsumer
 {
@@ -38,13 +36,21 @@ class MetadataFilter implements MetadataConsumer
 	{
 		if (version.smallerThan(VERSION_3))
 		{
-			return target.getEntities().stream().filter(ent -> !entities.contains(ent.getFullName()))
-					.filter(ent -> !ent.isAbstractClass()).map(Entity::getFullName).collect(toList());
+			return target.getEntities()
+						 .stream()
+						 .filter(ent -> !entities.contains(ent.getFullName()))
+						 .filter(ent -> !ent.isAbstractClass())
+						 .map(Entity::getFullName)
+						 .collect(toList());
 		}
 		else
 		{
-			return target.getEntities().stream().filter(ent -> !entities.contains(ent.getId()))
-					.filter(ent -> !ent.isAbstractClass()).map(entity -> entity.getFullName()).collect(toList());
+			return target.getEntities()
+						 .stream()
+						 .filter(ent -> !entities.contains(ent.getId()))
+						 .filter(ent -> !ent.isAbstractClass())
+						 .map(entity -> entity.getFullName())
+						 .collect(toList());
 		}
 	}
 }

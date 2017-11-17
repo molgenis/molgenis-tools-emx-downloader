@@ -59,14 +59,15 @@ public class MolgenisV1MetadataConverterTest
 
 	@Test
 	public void toTagTest()
-	{	when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
+	{
+		when(metadataRepository.createTag("id")).thenReturn(new Tag("id"));
 
 		Map<String, String> map = new HashMap<>();
 		map.put("identifier", "id");
-		map.put("label",  "label");
+		map.put("label", "label");
 		map.put("objectIRI", "objectIRI");
 		map.put("relationIRI", "relationIRI");
-		map.put("relationLabel",  "relationLabel");
+		map.put("relationLabel", "relationLabel");
 		map.put("codeSystem", "codeSystem");
 
 		Tag actual = converter.toTag(map);
@@ -84,28 +85,29 @@ public class MolgenisV1MetadataConverterTest
 
 	@Test
 	public void toAttributeTest()
-	{	when(metadataRepository.createAttribute("identifier")).thenReturn(new Attribute("identifier"));
+	{
+		when(metadataRepository.createAttribute("identifier")).thenReturn(new Attribute("identifier"));
 
 		Map<String, String> map = new HashMap<>();
-		map.put("identifier",  "identifier");
-		map.put("name",  "name");
-		map.put("dataType",  "STRING");
-		map.put("parts",  "");
-		map.put("refEntity",  null);
-		map.put("nillable",  null);
+		map.put("identifier", "identifier");
+		map.put("name", "name");
+		map.put("dataType", "STRING");
+		map.put("parts", "");
+		map.put("refEntity", null);
+		map.put("nillable", null);
 		map.put("auto", "FALSE");
 		map.put("visible", "TRUE");
-		map.put("label",  "label");
-		map.put("description",  "description");
-		map.put("aggregateable",  "TRUE");
-		map.put("enumOptions",  null);
-		map.put("rangeMin",  "");
-		map.put("rangeMax",  "");
-		map.put("readOnly",  "FALSE");
-		map.put("unique",  "FALSE");
-		map.put("visibleExpression",  null);
-		map.put("validateExpression",  null);
-		map.put("defaultValue",  null);
+		map.put("label", "label");
+		map.put("description", "description");
+		map.put("aggregateable", "TRUE");
+		map.put("enumOptions", null);
+		map.put("rangeMin", "");
+		map.put("rangeMax", "");
+		map.put("readOnly", "FALSE");
+		map.put("unique", "FALSE");
+		map.put("visibleExpression", null);
+		map.put("validateExpression", null);
+		map.put("defaultValue", null);
 
 		Attribute actual = converter.toAttribute(map);
 		Attribute expected = new Attribute("identifier");
@@ -129,18 +131,20 @@ public class MolgenisV1MetadataConverterTest
 	{
 		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
 		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
-		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute").setName("idAttribute"));
-		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute").setName("labelAttribute"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(
+				new Attribute("idAttribute").setName("idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(
+				new Attribute("labelAttribute").setName("labelAttribute"));
 
 		Map<String, String> map = new HashMap<>();
-		map.put("fullName",  "fullName");
-		map.put("backend",   "PostgreSQL");
-		map.put("package",  "package");
-		map.put("idAttribute",  "idAttribute");
-		map.put("labelAttribute",  "labelAttribute");
-		map.put("lookupAttributes",  "");
-		map.put("abstract",  "false");
-		map.put("label",  "label");
+		map.put("fullName", "fullName");
+		map.put("backend", "PostgreSQL");
+		map.put("package", "package");
+		map.put("idAttribute", "idAttribute");
+		map.put("labelAttribute", "labelAttribute");
+		map.put("lookupAttributes", "");
+		map.put("abstract", "false");
+		map.put("label", "label");
 		map.put("description", "description");
 
 		Entity actual = converter.toEntity(map);

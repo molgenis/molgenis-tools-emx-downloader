@@ -11,7 +11,7 @@ public class ConsoleWriter
 	{
 		if (System.console() != null)
 		{
-			if(e!= null) message += String.format(message + " %s\n", e.getLocalizedMessage());
+			if (e != null) message += String.format(message + " %s\n", e.getLocalizedMessage());
 			System.console().format(message).flush();
 		}
 		else
@@ -27,8 +27,10 @@ public class ConsoleWriter
 		writeToConsole(message, null);
 	}
 
-	public static void debug(String message){
-		if(Downloader.debug){
+	public static void debug(String message)
+	{
+		if (Downloader.debug)
+		{
 			writeToConsole(message);
 		}
 	}

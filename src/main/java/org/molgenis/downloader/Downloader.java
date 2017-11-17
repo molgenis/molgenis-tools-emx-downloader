@@ -4,9 +4,6 @@ import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.molgenis.downloader.api.MolgenisClient;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.client.HttpClientFactory;
@@ -67,23 +64,34 @@ public class Downloader
 	private static OptionParser createOptionParser()
 	{
 		OptionParser parser = new OptionParser();
-		parser.acceptsAll(asList("f", FILE), "Name of the file to write the data to.").withRequiredArg()
-				.ofType(File.class).required();
+		parser.acceptsAll(asList("f", FILE), "Name of the file to write the data to.")
+			  .withRequiredArg()
+			  .ofType(File.class)
+			  .required();
 		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the exisiting file if it exists.");
-		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance").withRequiredArg().ofType(String.class)
-				.required();
+		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance")
+			  .withRequiredArg()
+			  .ofType(String.class)
+			  .required();
 		parser.acceptsAll(asList("D", DATA_ONLY), "Write only the data for the entities to the output file.");
 		parser.acceptsAll(asList("a", ACCOUNT), "MOLGENIS username to login with to download the data.")
-				.withRequiredArg().ofType(String.class);
-		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login").withRequiredArg()
-				.ofType(String.class);
+			  .withRequiredArg()
+			  .ofType(String.class);
+		parser.acceptsAll(asList("p", PASSWORD), "Password for the MOLGENIS user to login")
+			  .withRequiredArg()
+			  .ofType(String.class);
 		parser.acceptsAll(asList("i", INSECURE_SSL), "Ignore SSL certicate chain errors and hostname mismatches.");
-		parser.acceptsAll(asList("s", PAGESIZE), "The pagesize for the REST responses, increase in case of large datasets, maximum value=10000").withRequiredArg()
-				.ofType(Integer.class);
+		parser.acceptsAll(asList("s", PAGESIZE),
+				"The pagesize for the REST responses, increase in case of large datasets, maximum value=10000")
+			  .withRequiredArg()
+			  .ofType(Integer.class);
 		parser.acceptsAll(asList("d", DEBUG), "print debug logging to console");
-		parser.acceptsAll(asList("v", VERSION), "Optional parameter to override the result form '/api/v2/version/'").withRequiredArg()
-				.ofType(String.class);
-		parser.acceptsAll(asList("t", SOCKET_TIMEOUT), "Optional parameter to configure the socket timeout in seconds, default value is 60").withRequiredArg()
+		parser.acceptsAll(asList("v", VERSION), "Optional parameter to override the result form '/api/v2/version/'")
+			  .withRequiredArg()
+			  .ofType(String.class);
+		parser.acceptsAll(asList("t", SOCKET_TIMEOUT),
+				"Optional parameter to configure the socket timeout in seconds, default value is 60")
+			  .withRequiredArg()
 			  .ofType(Integer.class);
 
 		return parser;
@@ -102,7 +110,8 @@ public class Downloader
 		String password = (String) options.valueOf(PASSWORD);
 		boolean overwrite = options.has(OVERWRITE);
 		String versionString = (String) options.valueOf(VERSION);
-		Integer socketTimeout = options.hasArgument(SOCKET_TIMEOUT) ? (Integer) options.valueOf(SOCKET_TIMEOUT) : DEFAULT_SOCKET_TIMEOUT;
+		Integer socketTimeout = options.hasArgument(SOCKET_TIMEOUT) ? (Integer) options.valueOf(
+				SOCKET_TIMEOUT) : DEFAULT_SOCKET_TIMEOUT;
 
 		debug = options.has(DEBUG);
 
@@ -131,14 +140,17 @@ public class Downloader
 			try (final EMXClient emxClient = new EMXClient(molgenis))
 			{
 				MolgenisVersion version;
-				if(versionString != null){
+				if (versionString != null)
+				{
 					version = MolgenisVersion.from(versionString);
-				}else{
+				}
+				else
+				{
 					version = molgenis.getVersion();
 				}
 
-				boolean hasErrors = emxClient
-						.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData, overwrite, version, pageSize);
+				boolean hasErrors = emxClient.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData,
+						overwrite, version, pageSize);
 				if (hasErrors)
 				{
 					writeToConsole("Errors occurred while writing EMX\n");

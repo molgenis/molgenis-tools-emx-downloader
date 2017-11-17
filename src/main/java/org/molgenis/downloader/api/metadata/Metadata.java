@@ -1,8 +1,7 @@
-
 package org.molgenis.downloader.api.metadata;
 
-
-public abstract class Metadata {
+public abstract class Metadata
+{
 	String id;
 
 	public String getId()

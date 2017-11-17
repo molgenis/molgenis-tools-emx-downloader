@@ -2,7 +2,6 @@ package org.molgenis.downloader.integration;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.HttpClient;
-import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.client.MolgenisRestApiClient;
 import org.molgenis.downloader.emx.EMXClient;
 import org.testng.annotations.Test;

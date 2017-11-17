@@ -1,13 +1,11 @@
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.MetadataRepository;
+import org.molgenis.downloader.api.metadata.*;
+import org.molgenis.downloader.api.metadata.Package;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import org.molgenis.downloader.api.metadata.*;
-import org.molgenis.downloader.api.metadata.Package;
-import org.molgenis.downloader.client.MolgenisRestApiClient;
 
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
 
@@ -34,8 +32,10 @@ class FilteredMetadataRepository implements MetadataRepository
 		}
 		else
 		{
-			source.getEntities().stream().filter(entity -> entities.contains(
-					entity.getFullName())).forEach(this::traverse);
+			source.getEntities()
+				  .stream()
+				  .filter(entity -> entities.contains(entity.getFullName()))
+				  .forEach(this::traverse);
 		}
 	}
 
@@ -75,8 +75,9 @@ class FilteredMetadataRepository implements MetadataRepository
 	@Override
 	public final Collection<Attribute> getAttributes()
 	{
-		return attributes.stream().sorted(Comparator.comparing(Attribute::getEntityFullname))
-				.collect(Collectors.toList());
+		return attributes.stream()
+						 .sorted(Comparator.comparing(Attribute::getEntityFullname))
+						 .collect(Collectors.toList());
 	}
 
 	@Override
