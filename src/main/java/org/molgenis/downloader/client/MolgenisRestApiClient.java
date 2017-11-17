@@ -32,9 +32,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_2;
-import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
-import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_4;
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.*;
 import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
 public class MolgenisRestApiClient implements MolgenisClient
@@ -52,7 +50,9 @@ public class MolgenisRestApiClient implements MolgenisClient
 	}
 
 	@Override
-	public final void login(final String username, final String password, final Integer socketTimeout) throws AuthenticationException {
+	public final void login(final String username, final String password, final Integer socketTimeout)
+			throws AuthenticationException
+	{
 		final JSONObject login = new JSONObject();
 		login.put("username", username);
 		login.put("password", password);
@@ -79,7 +79,8 @@ public class MolgenisRestApiClient implements MolgenisClient
 		{
 			writeToConsole("An error occurred while logging in:\n", ex);
 		}
-		if(token == null){
+		if (token == null)
+		{
 			throw new AuthenticationException("Username or password is incorrect");
 		}
 	}
@@ -144,8 +145,9 @@ public class MolgenisRestApiClient implements MolgenisClient
 			do
 			{
 				final JSONArray items = json.getJSONArray("items");
-				items.iterator().forEachRemaining(
-						(Object item) -> consumer.accept(getAttributes((JSONObject) item, entity.getAttributes())));
+				items.iterator()
+					 .forEachRemaining((Object item) -> consumer.accept(
+							 getAttributes((JSONObject) item, entity.getAttributes())));
 
 				nextHref = json.optString("nextHref");
 				if (StringUtils.isNotEmpty(nextHref))
@@ -338,7 +340,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 
 	private void initConverter(MolgenisVersion version) throws IOException, URISyntaxException
 	{
-		if(version == null) getVersion();
+		if (version == null) getVersion();
 		if (converter == null)
 		{
 			if (version == null || version.smallerThan(VERSION_2))
@@ -355,7 +357,8 @@ public class MolgenisRestApiClient implements MolgenisClient
 			}
 			else if (version.equalsOrLargerThan(VERSION_4))
 			{
-				writeToConsole("WARNING: For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
+				writeToConsole(
+						"WARNING: For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
 				converter = new MolgenisV4MetadataConverter(repository);
 			}
 		}

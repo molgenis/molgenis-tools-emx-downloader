@@ -17,23 +17,16 @@
 
 package org.molgenis.downloader.integration;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import junit.framework.AssertionFailedError;
+import org.junit.Assert;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.junit.Assert;
-
-import junit.framework.AssertionFailedError;
+import static org.junit.Assert.*;
 
 /**
  * Compare the contents of 2 zip files.

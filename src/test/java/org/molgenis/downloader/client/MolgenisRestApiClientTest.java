@@ -12,7 +12,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.testng.annotations.Test;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -73,77 +73,87 @@ public class MolgenisRestApiClientTest
 		Attribute idAttr = Attribute.createAttribute("id", "id").setEntityFullname("biobank");
 		Attribute xbool = Attribute.createAttribute("xbool", "xbool").setEntityFullname("biobank");
 		Attribute xboolnillable = Attribute.createAttribute("xboolnillable", "xboolnillable")
-				.setEntityFullname("biobank");
-		Attribute xcompound = Attribute.createAttribute("xcompound", "xcompound").setEntityFullname("biobank")
-				.setDataType(DataType.COMPOUND);
+										   .setEntityFullname("biobank");
+		Attribute xcompound = Attribute.createAttribute("xcompound", "xcompound")
+									   .setEntityFullname("biobank")
+									   .setDataType(DataType.COMPOUND);
 		Attribute xcompound_int = Attribute.createAttribute("xcompound_int", "xcompound_int")
-				.setEntityFullname("biobank").setDataType(DataType.COMPOUND);
+										   .setEntityFullname("biobank")
+										   .setDataType(DataType.COMPOUND);
 		Attribute xcompound_string = Attribute.createAttribute("xcompound_string", "xcompound_string")
-				.setEntityFullname("biobank").setDataType(DataType.COMPOUND);
+											  .setEntityFullname("biobank")
+											  .setDataType(DataType.COMPOUND);
 		Attribute xcategorical_value = Attribute.createAttribute("xcategorical_value", "xcategorical_value")
-				.setEntityFullname("biobank");
-		Attribute xcategoricalnillable_value = Attribute
-				.createAttribute("xcategoricalnillable_value", "xcategoricalnillable_value")
-				.setEntityFullname("biobank");
+												.setEntityFullname("biobank");
+		Attribute xcategoricalnillable_value = Attribute.createAttribute("xcategoricalnillable_value",
+				"xcategoricalnillable_value").setEntityFullname("biobank");
 		Attribute xcatmrefnillable_value = Attribute.createAttribute("xcatmrefnillable_value", "xcatmrefnillable_value")
-				.setEntityFullname("biobank");
+													.setEntityFullname("biobank");
 		Attribute xdate = Attribute.createAttribute("xdate", "xdate").setEntityFullname("biobank");
 		Attribute xdatenillable = Attribute.createAttribute("xdatenillable", "xdatenillable")
-				.setEntityFullname("biobank");
+										   .setEntityFullname("biobank");
 		Attribute xdatetime = Attribute.createAttribute("xdatetime", "xdatetime").setEntityFullname("biobank");
 		Attribute xdatetimenillable = Attribute.createAttribute("xdatetimenillable", "xdatetimenillable")
-				.setEntityFullname("biobank");
+											   .setEntityFullname("biobank");
 		Attribute xdecimal = Attribute.createAttribute("xdecimal", "xdecimal").setEntityFullname("biobank");
 		Attribute xdecimalnillable = Attribute.createAttribute("xdecimalnillable", "xdecimalnillable")
-				.setEntityFullname("biobank");
+											  .setEntityFullname("biobank");
 		Attribute xemail = Attribute.createAttribute("xemail", "xemail").setEntityFullname("biobank");
 		Attribute xemailnillable = Attribute.createAttribute("xemailnillable", "xemailnillable")
-				.setEntityFullname("biobank");
+											.setEntityFullname("biobank");
 		Attribute xenum = Attribute.createAttribute("xenum", "xenum").setEntityFullname("biobank");
 		Attribute xenumnillable = Attribute.createAttribute("xenumnillable", "xenumnillable")
-				.setEntityFullname("biobank");
+										   .setEntityFullname("biobank");
 		Attribute xhtml = Attribute.createAttribute("xhtml", "xhtml").setEntityFullname("biobank");
 		Attribute xhtmlnillable = Attribute.createAttribute("xhtmlnillable", "xhtmlnillable")
-				.setEntityFullname("biobank");
+										   .setEntityFullname("biobank");
 		Attribute xhyperlink = Attribute.createAttribute("xhyperlink", "xhyperlink").setEntityFullname("biobank");
 		Attribute xhyperlinknillable = Attribute.createAttribute("xhyperlinknillable", "xhyperlinknillable")
-				.setEntityFullname("biobank");
+												.setEntityFullname("biobank");
 		Attribute xint = Attribute.createAttribute("xint", "xint").setEntityFullname("biobank");
 		Attribute xintnillable = Attribute.createAttribute("xintnillable", "xintnillable").setEntityFullname("biobank");
 		Attribute xintrange = Attribute.createAttribute("xintrange", "xintrange").setEntityFullname("biobank");
 		Attribute xintrangenillable = Attribute.createAttribute("xintrangenillable", "xintrangenillable")
-				.setEntityFullname("biobank");
+											   .setEntityFullname("biobank");
 		Attribute xlong = Attribute.createAttribute("xlong", "xlong").setEntityFullname("biobank");
 		Attribute xlongnillable = Attribute.createAttribute("xlongnillable", "xlongnillable")
-				.setEntityFullname("biobank");
+										   .setEntityFullname("biobank");
 		Attribute xlongrange = Attribute.createAttribute("xlongrange", "xlongrange").setEntityFullname("biobank");
 		Attribute xlongrangenillable = Attribute.createAttribute("xlongrangenillable", "xlongrangenillable")
-				.setEntityFullname("biobank");
-		Attribute xmref_value = Attribute.createAttribute("xmref_value", "xmref_value").setEntityFullname("biobank")
-				.setDataType(DataType.MREF).setRefEntity(ref);
+												.setEntityFullname("biobank");
+		Attribute xmref_value = Attribute.createAttribute("xmref_value", "xmref_value")
+										 .setEntityFullname("biobank")
+										 .setDataType(DataType.MREF)
+										 .setRefEntity(ref);
 		Attribute xmrefnillable_value = Attribute.createAttribute("xmrefnillable_value", "xmrefnillable_value")
-				.setEntityFullname("biobank").setDataType(DataType.MREF).setRefEntity(ref);
+												 .setEntityFullname("biobank")
+												 .setDataType(DataType.MREF)
+												 .setRefEntity(ref);
 		Attribute xstring = Attribute.createAttribute("xstring", "xstring").setEntityFullname("biobank");
 		Attribute xstringnillable = Attribute.createAttribute("xstringnillable", "xstringnillable")
-				.setEntityFullname("biobank");
+											 .setEntityFullname("biobank");
 		Attribute xtext = Attribute.createAttribute("xtext", "xtext").setEntityFullname("biobank");
 		Attribute xtextnillable = Attribute.createAttribute("xtextnillable", "xtextnillable")
-				.setEntityFullname("biobank");
-		Attribute xxref_value = Attribute.createAttribute("xxref_value", "xxref_value").setEntityFullname("biobank")
-				.setDataType(DataType.XREF).setRefEntity(ref);
+										   .setEntityFullname("biobank");
+		Attribute xxref_value = Attribute.createAttribute("xxref_value", "xxref_value")
+										 .setEntityFullname("biobank")
+										 .setDataType(DataType.XREF)
+										 .setRefEntity(ref);
 		Attribute xxrefnillable_value = Attribute.createAttribute("xxrefnillable_value", "xxrefnillable_value")
-				.setEntityFullname("biobank").setDataType(DataType.XREF).setRefEntity(ref);
+												 .setEntityFullname("biobank")
+												 .setDataType(DataType.XREF)
+												 .setRefEntity(ref);
 		Attribute xstring_hidden = Attribute.createAttribute("xstring_hidden", "xstring_hidden")
-				.setEntityFullname("biobank");
+											.setEntityFullname("biobank");
 		Attribute xstringnillable_hidden = Attribute.createAttribute("xstringnillable_hidden", "xstringnillable_hidden")
-				.setEntityFullname("biobank");
+													.setEntityFullname("biobank");
 		Attribute xstring_unique = Attribute.createAttribute("xstring_unique", "xstring_unique")
-				.setEntityFullname("biobank");
+											.setEntityFullname("biobank");
 		Attribute xint_unique = Attribute.createAttribute("xint_unique", "xint_unique").setEntityFullname("biobank");
 		Attribute xxref_unique = Attribute.createAttribute("xxref_unique", "xxref_unique").setEntityFullname("biobank");
 		Attribute xfile = Attribute.createAttribute("xfile", "xfile").setEntityFullname("biobank");
 		Attribute xcomputedxref = Attribute.createAttribute("xcomputedxref", "xcomputedxref")
-				.setEntityFullname("biobank");
+										   .setEntityFullname("biobank");
 		Attribute xcomputedint = Attribute.createAttribute("xcomputedint", "xcomputedint").setEntityFullname("biobank");
 
 		HttpClient httpClient = mock(HttpClient.class);
@@ -152,15 +162,14 @@ public class MolgenisRestApiClientTest
 		String jsonString = IOUtils.toString(getClass().getResourceAsStream("/attributes.txt"), "UTF-8");
 		JSONObject json = new JSONObject(jsonString);
 
-		Set<Attribute> attributes = Sets
-				.newHashSet(idAttr, xbool, xboolnillable, xcompound, xcompound_int, xcompound_string,
-						xcategorical_value, xcategoricalnillable_value, xcatmrefnillable_value, xdate, xdatenillable,
-						xdatetime, xdatetimenillable, xdecimal, xdecimalnillable, xemail, xemailnillable, xenum,
-						xenumnillable, xhtml, xhtmlnillable, xhyperlink, xhyperlinknillable, xint, xintnillable,
-						xintrange, xintrangenillable, xlong, xlongnillable, xlongrange, xlongrangenillable, xmref_value,
-						xmrefnillable_value, xstring, xstringnillable, xtext, xtextnillable, xxref_value,
-						xxrefnillable_value, xstring_hidden, xstringnillable_hidden, xstring_unique, xint_unique,
-						xxref_unique, xfile, xcomputedxref, xcomputedint);
+		Set<Attribute> attributes = Sets.newHashSet(idAttr, xbool, xboolnillable, xcompound, xcompound_int,
+				xcompound_string, xcategorical_value, xcategoricalnillable_value, xcatmrefnillable_value, xdate,
+				xdatenillable, xdatetime, xdatetimenillable, xdecimal, xdecimalnillable, xemail, xemailnillable, xenum,
+				xenumnillable, xhtml, xhtmlnillable, xhyperlink, xhyperlinknillable, xint, xintnillable, xintrange,
+				xintrangenillable, xlong, xlongnillable, xlongrange, xlongrangenillable, xmref_value,
+				xmrefnillable_value, xstring, xstringnillable, xtext, xtextnillable, xxref_value, xxrefnillable_value,
+				xstring_hidden, xstringnillable_hidden, xstring_unique, xint_unique, xxref_unique, xfile, xcomputedxref,
+				xcomputedint);
 
 		Map<String, String> actual = client.getAttributes(json, attributes);
 

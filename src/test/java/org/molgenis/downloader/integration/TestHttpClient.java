@@ -1,6 +1,5 @@
 package org.molgenis.downloader.integration;
 
-import com.google.common.io.Resources;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
@@ -13,8 +12,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import static org.mockito.Mockito.mock;
@@ -60,27 +57,32 @@ class TestHttpClient implements HttpClient
 
 		HttpResponse attributeHttpResponse = mock(HttpResponse.class);
 		HttpEntity attributeHttpEntity = mock(HttpEntity.class);
-		when(attributeHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes.txt"));
+		when(attributeHttpEntity.getContent()).thenReturn(
+				getClass().getResourceAsStream("/integration/attributes.txt"));
 		when(attributeHttpResponse.getEntity()).thenReturn(attributeHttpEntity);
 
 		HttpResponse attribute100HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute100HttpEntity = mock(HttpEntity.class);
-		when(attribute100HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes100.txt"));
+		when(attribute100HttpEntity.getContent()).thenReturn(
+				getClass().getResourceAsStream("/integration/attributes100.txt"));
 		when(attribute100HttpResponse.getEntity()).thenReturn(attribute100HttpEntity);
 
 		HttpResponse attribute200HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute200HttpEntity = mock(HttpEntity.class);
-		when(attribute200HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes200.txt"));
+		when(attribute200HttpEntity.getContent()).thenReturn(
+				getClass().getResourceAsStream("/integration/attributes200.txt"));
 		when(attribute200HttpResponse.getEntity()).thenReturn(attribute200HttpEntity);
 
 		HttpResponse attribute300HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute300HttpEntity = mock(HttpEntity.class);
-		when(attribute300HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes300.txt"));
+		when(attribute300HttpEntity.getContent()).thenReturn(
+				getClass().getResourceAsStream("/integration/attributes300.txt"));
 		when(attribute300HttpResponse.getEntity()).thenReturn(attribute300HttpEntity);
 
 		HttpResponse attribute400HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute400HttpEntity = mock(HttpEntity.class);
-		when(attribute400HttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/attributes400.txt"));
+		when(attribute400HttpEntity.getContent()).thenReturn(
+				getClass().getResourceAsStream("/integration/attributes400.txt"));
 		when(attribute400HttpResponse.getEntity()).thenReturn(attribute400HttpEntity);
 
 		HttpResponse entityHttpResponse = mock(HttpResponse.class);
@@ -105,39 +107,31 @@ class TestHttpClient implements HttpClient
 
 		HttpResponse response = null;
 
-		if(httpUriRequest.getURI().getPath().equals("/api/v2/version"))
-			response = versionHttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/sys_Language"))
-			response = languageHttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_Tag"))
-			response = tagHttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_Package"))
-			response = packageHttpResponse;
-		else if(httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute"))
+		if (httpUriRequest.getURI().getPath().equals("/api/v2/version")) response = versionHttpResponse;
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_Language")) response = languageHttpResponse;
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_Tag")) response = tagHttpResponse;
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_Package")) response = packageHttpResponse;
+		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute"))
 			response = attributeHttpResponse;
-		else if(httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=100"))
+		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=100"))
 			response = attribute100HttpResponse;
-		else if(httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=200"))
+		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=200"))
 			response = attribute200HttpResponse;
-		else if(httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=300"))
+		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=300"))
 			response = attribute300HttpResponse;
-		else if(httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=400"))
+		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=400"))
 			response = attribute400HttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_EntityType"))
-			response = entityHttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/org_molgenis_test_TypeTest"))
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_EntityType")) response = entityHttpResponse;
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/org_molgenis_test_TypeTest"))
 			response = dataHttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/base_Location"))
-			response = locationHttpResponse;
-		else if(httpUriRequest.getURI().getPath().equals("/api/v2/base_TypeTestRef"))
-			response = refHttpResponse;
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/base_Location")) response = locationHttpResponse;
+		else if (httpUriRequest.getURI().getPath().equals("/api/v2/base_TypeTestRef")) response = refHttpResponse;
 
 		return response;
 	}
 
 	@Override
-	public HttpResponse execute(HttpUriRequest httpUriRequest, HttpContext httpContext)
-			throws IOException
+	public HttpResponse execute(HttpUriRequest httpUriRequest, HttpContext httpContext) throws IOException
 	{
 		throw new NotImplementedException();
 	}
@@ -149,15 +143,13 @@ class TestHttpClient implements HttpClient
 	}
 
 	@Override
-	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest, HttpContext httpContext)
-			throws IOException
+	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest, HttpContext httpContext) throws IOException
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public <T> T execute(HttpUriRequest httpUriRequest, ResponseHandler<? extends T> responseHandler)
-			throws IOException
+	public <T> T execute(HttpUriRequest httpUriRequest, ResponseHandler<? extends T> responseHandler) throws IOException
 	{
 		throw new NotImplementedException();
 	}

@@ -89,25 +89,25 @@ public class MolgenisV2MetadataConverterTest
 		when(metadataRepository.createAttribute("id")).thenReturn(new Attribute("id"));
 
 		Map<String, String> map = new HashMap<>();
-		map.put("id",  "id");
+		map.put("id", "id");
 		map.put("name", "name");
-		map.put("dataType",  "STRING");
-		map.put("parts",  "");
-		map.put("refEntity",  null);
-		map.put("nillable",  null);
-		map.put("auto",  "FALSE");
-		map.put("visible",  "TRUE");
-		map.put("label",  "label");
-		map.put("description",  "description");
-		map.put("isAggregatable",  "TRUE");
-		map.put("enumOptions",  null);
-		map.put("rangeMin",  "");
-		map.put("rangeMax",  "");
-		map.put("readOnly",  "FALSE");
-		map.put("unique",  "FALSE");
-		map.put("visibleExpression",  null);
-		map.put("validateExpression",  null);
-		map.put("defaultValue",  null);
+		map.put("dataType", "STRING");
+		map.put("parts", "");
+		map.put("refEntity", null);
+		map.put("nillable", null);
+		map.put("auto", "FALSE");
+		map.put("visible", "TRUE");
+		map.put("label", "label");
+		map.put("description", "description");
+		map.put("isAggregatable", "TRUE");
+		map.put("enumOptions", null);
+		map.put("rangeMin", "");
+		map.put("rangeMax", "");
+		map.put("readOnly", "FALSE");
+		map.put("unique", "FALSE");
+		map.put("visibleExpression", null);
+		map.put("validateExpression", null);
+		map.put("defaultValue", null);
 
 		Attribute actual = converter.toAttribute(map);
 		Attribute expected = new Attribute("id");
@@ -131,16 +131,18 @@ public class MolgenisV2MetadataConverterTest
 	{
 		when(metadataRepository.createEntity("fullName")).thenReturn(new Entity("fullName"));
 		when(metadataRepository.createPackage("package")).thenReturn(new Package("package"));
-		when(metadataRepository.createAttribute("idAttribute")).thenReturn(new Attribute("idAttribute").setName("idAttribute"));
-		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(new Attribute("labelAttribute").setName("labelAttribute"));
+		when(metadataRepository.createAttribute("idAttribute")).thenReturn(
+				new Attribute("idAttribute").setName("idAttribute"));
+		when(metadataRepository.createAttribute("labelAttribute")).thenReturn(
+				new Attribute("labelAttribute").setName("labelAttribute"));
 
 		Map<String, String> map = new HashMap<>();
-		map.put("fullName",  "fullName");
-		map.put("backend",   "PostgreSQL");
-		map.put("package",  "package");
-		map.put("lookupAttributes",  "");
-		map.put("abstract",  "false");
-		map.put("label",  "label");
+		map.put("fullName", "fullName");
+		map.put("backend", "PostgreSQL");
+		map.put("package", "package");
+		map.put("lookupAttributes", "");
+		map.put("abstract", "false");
+		map.put("label", "label");
 		map.put("description", "description");
 
 		Entity actual = converter.toEntity(map);

@@ -1,14 +1,12 @@
-
 package org.molgenis.downloader.emx.tsv;
+
+import au.com.bytecode.opencsv.CSVWriter;
+import org.molgenis.downloader.api.EMXDataStore;
 
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.util.List;
-
-import au.com.bytecode.opencsv.CSVWriter;
-
-import org.molgenis.downloader.api.EMXDataStore;
 
 /**
  * @author david

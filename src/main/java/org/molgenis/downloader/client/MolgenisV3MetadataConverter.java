@@ -43,10 +43,11 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 			entity.addAttribute(att);
 			updateReference(entity, att);
 		});
-		repository.getLanguages().forEach(lang -> setString(data, "description-" + lang.getCode(),
-				description -> entity.addDescription(description, lang)));
 		repository.getLanguages()
-				.forEach(lang -> setString(data, "label-" + lang.getCode(), label -> entity.addLabel(label, lang)));
+				  .forEach(lang -> setString(data, "description-" + lang.getCode(),
+						  description -> entity.addDescription(description, lang)));
+		repository.getLanguages()
+				  .forEach(lang -> setString(data, "label-" + lang.getCode(), label -> entity.addLabel(label, lang)));
 		return entity;
 	}
 
@@ -81,7 +82,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 			att.addPart(part);
 		});
 		String refEntityId = getString(data, "refEntityType");
-		if(refEntityId != null)
+		if (refEntityId != null)
 		{
 			Entity refEntity = (Entity) new Entity().setId(refEntityId);
 			att.setRefEntity(refEntity);
@@ -157,23 +158,40 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 		entityIdMap = new HashMap<>();
 		Map<String, Package> packageIdMap = new HashMap<>();
 
-		repository.getEntities().stream().filter(entity -> entity.getId() != null)
-				.forEach(entity -> entityIdMap.put(entity.getId(), entity));
-		repository.getPackages().stream().filter(pack -> pack.getId() != null && pack.getName() != null)
-				.forEach(pack -> packageIdMap.put(pack.getId(), pack));
+		repository.getEntities()
+				  .stream()
+				  .filter(entity -> entity.getId() != null)
+				  .forEach(entity -> entityIdMap.put(entity.getId(), entity));
+		repository.getPackages()
+				  .stream()
+				  .filter(pack -> pack.getId() != null && pack.getName() != null)
+				  .forEach(pack -> packageIdMap.put(pack.getId(), pack));
 
-		repository.getPackages().stream().filter(pack -> pack.getParent() != null)
-				.forEach(pack -> pack.setParent(packageIdMap.get(pack.getParent().getId())));
-		repository.getEntities().stream().filter(entity -> entity.getPackage() != null)
-				.forEach(entity -> entity.setPackage(packageIdMap.get(entity.getPackage().getId())));
-		repository.getEntities().stream().filter(entity -> entity.getBase() != null)
-				.forEach(entity -> entity.setBase(entityIdMap.get(entity.getBase().getId())));
-		repository.getEntities().stream().filter(entity -> entity.getPackage() != null)
-				.forEach(entity -> entity.setFullName(NameUtils.getPackageFullName(entity.getPackage(),VERSION_3) + "_" + entity.getFullName()));
-		repository.getAttributes().stream().filter(attribute -> attribute.getEntityId() != null)
-				.forEach(attribute -> test(attribute));
-		repository.getAttributes().stream().filter(attribute -> attribute.getRefEntity() != null)
-				.forEach(attribute -> attribute.setRefEntity(entityIdMap.get(attribute.getRefEntity().getId())));
+		repository.getPackages()
+				  .stream()
+				  .filter(pack -> pack.getParent() != null)
+				  .forEach(pack -> pack.setParent(packageIdMap.get(pack.getParent().getId())));
+		repository.getEntities()
+				  .stream()
+				  .filter(entity -> entity.getPackage() != null)
+				  .forEach(entity -> entity.setPackage(packageIdMap.get(entity.getPackage().getId())));
+		repository.getEntities()
+				  .stream()
+				  .filter(entity -> entity.getBase() != null)
+				  .forEach(entity -> entity.setBase(entityIdMap.get(entity.getBase().getId())));
+		repository.getEntities()
+				  .stream()
+				  .filter(entity -> entity.getPackage() != null)
+				  .forEach(entity -> entity.setFullName(
+						  NameUtils.getPackageFullName(entity.getPackage(), VERSION_3) + "_" + entity.getFullName()));
+		repository.getAttributes()
+				  .stream()
+				  .filter(attribute -> attribute.getEntityId() != null)
+				  .forEach(attribute -> test(attribute));
+		repository.getAttributes()
+				  .stream()
+				  .filter(attribute -> attribute.getRefEntity() != null)
+				  .forEach(attribute -> attribute.setRefEntity(entityIdMap.get(attribute.getRefEntity().getId())));
 	}
 
 	private void test(Attribute attribute)

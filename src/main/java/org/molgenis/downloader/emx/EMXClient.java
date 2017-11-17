@@ -1,24 +1,21 @@
 package org.molgenis.downloader.emx;
 
 import org.molgenis.downloader.api.EMXBackend;
+import org.molgenis.downloader.api.EntityConsumer;
+import org.molgenis.downloader.api.MetadataConsumer;
+import org.molgenis.downloader.api.MolgenisClient;
+import org.molgenis.downloader.api.metadata.MolgenisVersion;
+import org.molgenis.downloader.emx.excel.ExcelBackend;
+import org.molgenis.downloader.emx.tsv.ZipFileBackend;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import org.molgenis.downloader.api.metadata.MolgenisVersion;
-import org.molgenis.downloader.emx.excel.ExcelBackend;
-
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.molgenis.downloader.api.EntityConsumer;
-import org.molgenis.downloader.api.MetadataConsumer;
-import org.molgenis.downloader.api.MolgenisClient;
-import org.molgenis.downloader.emx.tsv.ZipFileBackend;
 
 public class EMXClient implements AutoCloseable
 {
