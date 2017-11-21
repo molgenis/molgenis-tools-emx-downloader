@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EMXClient implements AutoCloseable
+public class EMXClient
 {
 
 	private static final String XLSX = ".xlsx";
@@ -94,10 +94,5 @@ public class EMXClient implements AutoCloseable
 			}
 		}
 		return backend;
-	}
-
-	@Override
-	public void close() throws Exception
-	{
 	}
 }

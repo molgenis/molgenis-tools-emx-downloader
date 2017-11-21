@@ -137,8 +137,7 @@ public class Downloader
 				}
 				molgenis.login(username, password, socketTimeout);
 			}
-			try (final EMXClient emxClient = new EMXClient(molgenis))
-			{
+			final EMXClient emxClient = new EMXClient(molgenis);
 				MolgenisVersion version;
 				if (versionString != null)
 				{
@@ -156,7 +155,7 @@ public class Downloader
 					writeToConsole("Errors occurred while writing EMX\n");
 					emxClient.getExceptions().forEach(ex -> writeToConsole("Exception: %s\n", ex));
 				}
-			}
+
 		}
 	}
 }
