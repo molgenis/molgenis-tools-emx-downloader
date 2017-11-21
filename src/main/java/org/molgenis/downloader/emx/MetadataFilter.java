@@ -28,7 +28,7 @@ class MetadataFilter implements MetadataConsumer
 	@Override
 	public void accept(final MetadataRepository source)
 	{
-		target = new FilteredMetadataRepository(source, entities, version);
+		target = new FilteredMetadataRepository(source, entities);
 		consumer.accept(target);
 	}
 
