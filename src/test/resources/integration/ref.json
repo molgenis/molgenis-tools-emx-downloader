@@ -1,0 +1,82 @@
+{
+  "href": "/api/v2/base_TypeTestRef",
+  "meta": {
+    "href": "/api/v2/base_TypeTestRef",
+    "hrefCollection": "/api/v2/base_TypeTestRef",
+    "name": "base_TypeTestRef",
+    "label": "TypeTestRef",
+    "attributes": [
+      {
+        "href": "/api/v2/base_TypeTestRef/meta/value",
+        "fieldType": "STRING",
+        "name": "value",
+        "label": "value",
+        "attributes": [],
+        "maxLength": 255,
+        "auto": false,
+        "nillable": false,
+        "readOnly": true,
+        "labelAttribute": false,
+        "unique": true,
+        "visible": true,
+        "lookupAttribute": true,
+        "isAggregatable": false
+      },
+      {
+        "href": "/api/v2/base_TypeTestRef/meta/label",
+        "fieldType": "STRING",
+        "name": "label",
+        "label": "label",
+        "attributes": [],
+        "maxLength": 255,
+        "auto": false,
+        "nillable": false,
+        "readOnly": false,
+        "labelAttribute": true,
+        "unique": false,
+        "visible": true,
+        "lookupAttribute": true,
+        "isAggregatable": false
+      }
+    ],
+    "labelAttribute": "label",
+    "idAttribute": "value",
+    "lookupAttributes": [
+      "value",
+      "label"
+    ],
+    "isAbstract": false,
+    "writable": true,
+    "languageCode": "en"
+  },
+  "start": 0,
+  "num": 100,
+  "total": 5,
+  "items": [
+    {
+      "_href": "/api/v2/base_TypeTestRef/ref1",
+      "value": "ref1",
+      "label": "label1"
+    },
+    {
+      "_href": "/api/v2/base_TypeTestRef/ref2",
+      "value": "ref2",
+      "label": "label2"
+    },
+    {
+      "_href": "/api/v2/base_TypeTestRef/ref3",
+      "value": "ref3",
+      "label": "label3"
+    },
+    {
+      "_href": "/api/v2/base_TypeTestRef/ref4",
+      "value": "ref4",
+      "label": "label4"
+    },
+    {
+      "_href": "/api/v2/base_TypeTestRef/ref5",
+      "value": "ref5",
+      "label": "label5"
+    }
+  ]
+}

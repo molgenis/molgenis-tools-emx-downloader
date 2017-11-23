@@ -1,1 +1,0 @@
-{"buildDate":"2016-12-02 08:34 UTC","molgenisVersion":"2.0.0-SNAPSHOT"}
