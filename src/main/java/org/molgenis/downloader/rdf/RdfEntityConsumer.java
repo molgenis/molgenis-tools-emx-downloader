@@ -121,8 +121,7 @@ class RdfEntityConsumer implements EntityConsumer
 	{
 		try
 		{
-			return Optional.of(
-					valueFactory.createStatement(subject, RDFS.CLASS, valueFactory.createIRI(tag.getObjectIRI())));
+			return Optional.of(valueFactory.createStatement(subject, TYPE, valueFactory.createIRI(tag.getObjectIRI())));
 		}
 		catch (RuntimeException ex)
 		{

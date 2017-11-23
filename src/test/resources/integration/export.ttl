@@ -13,154 +13,154 @@
 @prefix ldp: <http://www.w3.org/ns/ldp#> .
 @prefix mlg: <http://molgenis.org#> .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/1> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/1> a mlg:TestEntity ;
 	dct:identifier "1"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/2> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/2> a mlg:TestEntity ;
 	dct:identifier "2"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/3> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/3> a mlg:TestEntity ;
 	dct:identifier "3"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/4> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/4> a mlg:TestEntity ;
 	dct:identifier "4"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/5> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/5> a mlg:TestEntity ;
 	dct:identifier "5"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/6> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/6> a mlg:TestEntity ;
 	dct:identifier "6"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/7> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/7> a mlg:TestEntity ;
 	dct:identifier "7"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/8> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/8> a mlg:TestEntity ;
 	dct:identifier "8"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/9> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/9> a mlg:TestEntity ;
 	dct:identifier "9"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/10> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/10> a mlg:TestEntity ;
 	dct:identifier "10"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/11> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/11> a mlg:TestEntity ;
 	dct:identifier "11"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/12> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/12> a mlg:TestEntity ;
 	dct:identifier "12"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/13> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/13> a mlg:TestEntity ;
 	dct:identifier "13"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/14> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/14> a mlg:TestEntity ;
 	dct:identifier "14"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/15> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/15> a mlg:TestEntity ;
 	dct:identifier "15"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/16> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/16> a mlg:TestEntity ;
 	dct:identifier "16"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/17> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/17> a mlg:TestEntity ;
 	dct:identifier "17"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/18> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/18> a mlg:TestEntity ;
 	dct:identifier "18"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/19> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/19> a mlg:TestEntity ;
 	dct:identifier "19"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/20> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/20> a mlg:TestEntity ;
 	dct:identifier "20"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/21> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/21> a mlg:TestEntity ;
 	dct:identifier "21"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/22> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/22> a mlg:TestEntity ;
 	dct:identifier "22"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/23> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/23> a mlg:TestEntity ;
 	dct:identifier "23"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/24> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/24> a mlg:TestEntity ;
 	dct:identifier "24"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/25> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/25> a mlg:TestEntity ;
 	dct:identifier "25"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/26> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/26> a mlg:TestEntity ;
 	dct:identifier "26"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/27> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/27> a mlg:TestEntity ;
 	dct:identifier "27"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/28> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/28> a mlg:TestEntity ;
 	dct:identifier "28"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/29> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/29> a mlg:TestEntity ;
 	dct:identifier "29"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/30> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/30> a mlg:TestEntity ;
 	dct:identifier "30"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/31> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/31> a mlg:TestEntity ;
 	dct:identifier "31"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/32> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/32> a mlg:TestEntity ;
 	dct:identifier "32"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/33> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/33> a mlg:TestEntity ;
 	dct:identifier "33"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/34> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/34> a mlg:TestEntity ;
 	dct:identifier "34"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/35> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/35> a mlg:TestEntity ;
 	dct:identifier "35"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/36> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/36> a mlg:TestEntity ;
 	dct:identifier "36"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/37> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/37> a mlg:TestEntity ;
 	dct:identifier "37"^^xsd:int ;
 	dct:title "compound strings are here" .
 
-<http://molgenis.org#org_molgenis_test_TypeTest/38> rdfs:Class mlg:TestEntity ;
+<http://molgenis.org#org_molgenis_test_TypeTest/38> a mlg:TestEntity ;
 	dct:identifier "38"^^xsd:int ;
 	dct:title "compound strings are here" .
