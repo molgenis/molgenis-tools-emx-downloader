@@ -12,10 +12,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.molgenis.downloader.api.EntityConsumer;
-import org.molgenis.downloader.api.MetadataConsumer;
-import org.molgenis.downloader.api.MolgenisClient;
-import org.molgenis.downloader.api.WriteableMetadataRepository;
+import org.molgenis.downloader.api.*;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
@@ -160,7 +157,8 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (final JSONException | IOException | URISyntaxException | ParseException ex)
 		{
-			Logger.getLogger(MolgenisRestApiClient.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(MolgenisRestApiClient.class.getName())
+				  .log(Level.SEVERE, "Error streaming entity data for " + entityName, ex);
 		}
 
 	}
@@ -191,6 +189,27 @@ public class MolgenisRestApiClient implements MolgenisClient
 		catch (Exception ex)
 		{
 			writeToConsole("An error occurred:\n", ex);
+		}
+	}
+
+	@Override
+	public MetadataRepository getMetadata(MolgenisVersion version) throws IncompleteMetadataException
+	{
+		try
+		{
+			if (converter == null) initConverter(version);
+			streamEntityData(converter.getLanguagesRepositoryName(), converter::toLanguage);
+			streamEntityData(converter.getTagsRepositoryName(), converter::toTag);
+			streamEntityData(converter.getPackagesRepositoryName(), converter::toPackage);
+			streamEntityData(converter.getAttributesRepositoryName(), converter::toAttribute);
+			streamEntityData(converter.getEntitiesRepositoryName(), converter::toEntity);
+			converter.postProcess(repository);
+			return repository;
+		}
+		catch (Exception ex)
+		{
+			writeToConsole("An error occurred:\n", ex);
+			throw new IncompleteMetadataException(ex);
 		}
 	}
 

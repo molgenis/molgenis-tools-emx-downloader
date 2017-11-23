@@ -46,7 +46,8 @@ public class ConsoleWriter
 			optionParser.printHelpOn(System.out);
 		}
 
-		writeToConsole(
-				"Example: 'java -jar downloader.jar -f output.xls -a username -u molgenisserver.nl entity1 entity2 entity3]]'");
+		writeToConsole("Examples: \n"
+				+ "'java -jar downloader.jar -f output.xls -a username -u molgenisserver.nl entity1 entity2 entity3'\n"
+				+ "'java -jar downloader.jar -f export.ttl -a username -u molgenisserver.nl --rdf entity1 entity2 entity3'\n");
 	}
 }

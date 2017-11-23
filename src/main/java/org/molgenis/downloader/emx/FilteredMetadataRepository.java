@@ -7,7 +7,7 @@ import org.molgenis.downloader.api.metadata.Package;
 import java.util.*;
 import java.util.stream.Collectors;
 
-class FilteredMetadataRepository implements MetadataRepository
+public class FilteredMetadataRepository implements MetadataRepository
 {
 
 	private final Set<Entity> entities;

@@ -2,6 +2,7 @@ package org.molgenis.downloader.api;
 
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
+import org.molgenis.downloader.client.IncompleteMetadataException;
 
 import javax.naming.AuthenticationException;
 import java.io.IOException;
@@ -24,6 +25,8 @@ public interface MolgenisClient extends AutoCloseable
 	Entity getEntity(final String name) throws IOException, URISyntaxException;
 
 	void streamMetadata(final MetadataConsumer consumer, MolgenisVersion version);
+
+	MetadataRepository getMetadata(MolgenisVersion version) throws IncompleteMetadataException;
 
 	MolgenisVersion getVersion() throws IOException, URISyntaxException;
 }

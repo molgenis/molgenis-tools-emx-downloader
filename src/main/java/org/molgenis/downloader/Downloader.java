@@ -9,6 +9,9 @@ import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.client.HttpClientFactory;
 import org.molgenis.downloader.client.MolgenisRestApiClient;
 import org.molgenis.downloader.emx.EMXClient;
+import org.molgenis.downloader.rdf.RdfClient;
+import org.molgenis.downloader.rdf.RdfConfigImpl;
+import org.molgenis.downloader.util.ConsoleWriter;
 
 import java.io.File;
 import java.net.URI;
@@ -24,6 +27,7 @@ public class Downloader
 	private static final String URL = "url";
 	private static final String DATA_ONLY = "dataOnly";
 	private static final String ACCOUNT = "account";
+	@SuppressWarnings("squid:S2068")
 	private static final String PASSWORD = "password";
 	private static final String INSECURE_SSL = "insecureSSL";
 	private static final String ARGUMENTS = "[arguments]";
@@ -33,7 +37,10 @@ public class Downloader
 	private static final String DEBUG = "debug";
 	private static final String VERSION = "version";
 	private static final String SOCKET_TIMEOUT = "timeout";
+	private static final String DEFAULT_NAMESPACE = "defaultNamespace";
+	private static final String NAMESPACES = "namespaces";
 	private static final Integer DEFAULT_SOCKET_TIMEOUT = 60;
+	private static final String RDF = "rdf";
 
 	public static boolean debug;
 
@@ -68,7 +75,7 @@ public class Downloader
 			  .withRequiredArg()
 			  .ofType(File.class)
 			  .required();
-		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the exisiting file if it exists.");
+		parser.acceptsAll(asList("o", OVERWRITE), "Overwrite the file if it exists.");
 		parser.acceptsAll(asList("u", URL), "URL of the MOLGENIS instance")
 			  .withRequiredArg()
 			  .ofType(String.class)
@@ -86,13 +93,20 @@ public class Downloader
 			  .withRequiredArg()
 			  .ofType(Integer.class);
 		parser.acceptsAll(asList("d", DEBUG), "print debug logging to console");
-		parser.acceptsAll(asList("v", VERSION), "Optional parameter to override the result form '/api/v2/version/'")
+		parser.acceptsAll(asList("v", VERSION), "Overrides the result from '/api/v2/version'")
 			  .withRequiredArg()
 			  .ofType(String.class);
-		parser.acceptsAll(asList("t", SOCKET_TIMEOUT),
-				"Optional parameter to configure the socket timeout in seconds, default value is 60")
+		parser.acceptsAll(asList("t", SOCKET_TIMEOUT), "The socket timeout in seconds, default value is 60")
 			  .withRequiredArg()
 			  .ofType(Integer.class);
+		parser.accepts(DEFAULT_NAMESPACE,
+				"The default namespace for newly created IRIs in RDF download. Format is prefix:namespace. "
+						+ "Default value is mlg:http://molgenis.org/").withRequiredArg().ofType(String.class);
+		parser.accepts(NAMESPACES, "A properties file containing namespace prefixes to add to the defaults.")
+			  .withRequiredArg()
+			  .ofType(File.class);
+		parser.accepts(RDF,
+				"Specifies that the output should be in RDF format instead of EMX. Implies that only data gets exported.");
 
 		return parser;
 	}
@@ -137,17 +151,51 @@ public class Downloader
 				}
 				molgenis.login(username, password, socketTimeout);
 			}
-			final EMXClient emxClient = new EMXClient(molgenis);
-				MolgenisVersion version;
-				if (versionString != null)
+			MolgenisVersion version;
+			if (versionString != null)
+			{
+				version = MolgenisVersion.from(versionString);
+			}
+			else
+			{
+				version = molgenis.getVersion();
+			}
+
+			if (outFile.exists())
+			{
+				if (overwrite)
 				{
-					version = MolgenisVersion.from(versionString);
+					if (!outFile.delete())
+					{
+						ConsoleWriter.writeToConsole("Failed to overwrite existing output file. Aborting export.");
+						return;
+					}
 				}
 				else
 				{
-					version = molgenis.getVersion();
+					ConsoleWriter.writeToConsole(
+							"Output file already exists and overwrite options is not specified. Aborting export.");
+					return;
 				}
+			}
 
+			if (options.has(RDF))
+			{
+				RdfConfigImpl rdfConfig = new RdfConfigImpl();
+				if (options.has(NAMESPACES))
+				{
+					rdfConfig.loadAdditionalNamespaces((File) options.valueOf(NAMESPACES));
+				}
+				if (options.has(DEFAULT_NAMESPACE))
+				{
+					String[] defaultNamespace = ((String) options.valueOf(DEFAULT_NAMESPACE)).split(":", 2);
+					rdfConfig.setDefaultNamespace(defaultNamespace[0], defaultNamespace[1]);
+				}
+				new RdfClient(molgenis, rdfConfig).export(outFile, entities, pageSize, version);
+			}
+			else
+			{
+				final EMXClient emxClient = new EMXClient(molgenis);
 				boolean hasErrors = emxClient.downloadEMX(entities, Paths.get(outFile.getPath()), includeMetaData,
 						overwrite, version, pageSize);
 				if (hasErrors)
@@ -155,7 +203,9 @@ public class Downloader
 					writeToConsole("Errors occurred while writing EMX\n");
 					emxClient.getExceptions().forEach(ex -> writeToConsole("Exception: %s\n", ex));
 				}
-
+			}
 		}
+
 	}
+
 }
