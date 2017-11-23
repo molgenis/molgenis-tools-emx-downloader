@@ -1,5 +1,6 @@
 package org.molgenis.downloader;
 
+import ch.qos.logback.classic.Level;
 import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -11,7 +12,8 @@ import org.molgenis.downloader.client.MolgenisRestApiClient;
 import org.molgenis.downloader.emx.EMXClient;
 import org.molgenis.downloader.rdf.RdfClient;
 import org.molgenis.downloader.rdf.RdfConfigImpl;
-import org.molgenis.downloader.util.ConsoleWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URI;
@@ -19,11 +21,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.molgenis.downloader.util.ConsoleWriter.writeHelp;
-import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
 public class Downloader
 {
+	private static final Logger LOG = LoggerFactory.getLogger(Downloader.class);
 	private static final String URL = "url";
 	private static final String DATA_ONLY = "dataOnly";
 	private static final String ACCOUNT = "account";
@@ -42,30 +43,36 @@ public class Downloader
 	private static final Integer DEFAULT_SOCKET_TIMEOUT = 60;
 	private static final String RDF = "rdf";
 
-	public static boolean debug;
-
 	public static void main(final String[] args)
 	{
+		String implementationVersion = Downloader.class.getPackage().getImplementationVersion();
+		if (implementationVersion == null)
+		{
+			implementationVersion = "";
+		}
+		LOG.info("MOLGENIS Downloader {}", implementationVersion);
 		try
 		{
-			final Downloader app = new Downloader();
-			OptionParser parser = createOptionParser();
-			OptionSet options;
-			try
-			{
-				options = parser.parse(args);
-				app.run(options);
-			}
-			catch (OptionException ex)
-			{
-				writeToConsole("An error occurred:", ex);
-				writeHelp(parser);
-			}
+			OptionSet options = tryParseOptions(args);
+			new Downloader().run(options);
 		}
-		catch (final Exception ex)
+		catch (OptionException ex)
 		{
-			writeToConsole("An error occurred:", ex);
+			LOG.info(ex.getMessage());
+			LOG.info("Examples: \n"
+					+ "'java -jar downloader.jar -f output.xls -a username -u molgenisserver.nl entity1 entity2 entity3'\n"
+					+ "'java -jar downloader.jar -f export.ttl -a username -u molgenisserver.nl --rdf entity1 entity2 entity3'\n");
 		}
+		catch (Exception ex)
+		{
+			LOG.error("An error occurred:", ex);
+		}
+	}
+
+	private static OptionSet tryParseOptions(String[] args)
+	{
+		OptionParser parser = createOptionParser();
+		return parser.parse(args);
 	}
 
 	private static OptionParser createOptionParser()
@@ -100,8 +107,10 @@ public class Downloader
 			  .withRequiredArg()
 			  .ofType(Integer.class);
 		parser.accepts(DEFAULT_NAMESPACE,
-				"The default namespace for newly created IRIs in RDF download. Format is prefix:namespace. "
-						+ "Default value is mlg:http://molgenis.org/").withRequiredArg().ofType(String.class);
+				"The default namespace for newly created IRIs in RDF download, and the prefix to use. "
+						+ "Format is prefix:namespace. " + "Default value is 'mlg:http://molgenis.org/'.")
+			  .withRequiredArg()
+			  .ofType(String.class);
 		parser.accepts(NAMESPACES, "A properties file containing namespace prefixes to add to the defaults.")
 			  .withRequiredArg()
 			  .ofType(File.class);
@@ -127,12 +136,28 @@ public class Downloader
 		Integer socketTimeout = options.hasArgument(SOCKET_TIMEOUT) ? (Integer) options.valueOf(
 				SOCKET_TIMEOUT) : DEFAULT_SOCKET_TIMEOUT;
 
-		debug = options.has(DEBUG);
+		if (options.has(DEBUG))
+		{
+			ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(
+					"org.molgenis");
+			root.setLevel(Level.DEBUG);
+		}
 
 		final HttpClient client = HttpClientFactory.create(insecureSSL);
 
 		try (final MolgenisClient molgenis = new MolgenisRestApiClient(client, url))
 		{
+			MolgenisVersion version;
+			if (versionString != null)
+			{
+				version = MolgenisVersion.from(versionString);
+			}
+			else
+			{
+				version = molgenis.getVersion();
+			}
+			logOptionInfo(outFile, url, pageSize, includeMetaData, insecureSSL, username, overwrite, socketTimeout,
+					version);
 			if (username != null)
 			{
 				if (password == null)
@@ -144,21 +169,12 @@ public class Downloader
 					}
 					else
 					{
-						System.out.println(
+						LOG.error(
 								"An empty password is not possible for running the downloader in a 'consoleless' environment.");
 						return;
 					}
 				}
 				molgenis.login(username, password, socketTimeout);
-			}
-			MolgenisVersion version;
-			if (versionString != null)
-			{
-				version = MolgenisVersion.from(versionString);
-			}
-			else
-			{
-				version = molgenis.getVersion();
 			}
 
 			if (outFile.exists())
@@ -167,14 +183,14 @@ public class Downloader
 				{
 					if (!outFile.delete())
 					{
-						ConsoleWriter.writeToConsole("Failed to overwrite existing output file. Aborting export.");
+						LOG.error("Failed to overwrite existing output file. Aborting export.");
 						return;
 					}
+					LOG.info("Deleted existing output file.");
 				}
 				else
 				{
-					ConsoleWriter.writeToConsole(
-							"Output file already exists and overwrite options is not specified. Aborting export.");
+					LOG.error("Output file already exists and overwrite options is not specified. Aborting export.");
 					return;
 				}
 			}
@@ -184,12 +200,23 @@ public class Downloader
 				RdfConfigImpl rdfConfig = new RdfConfigImpl();
 				if (options.has(NAMESPACES))
 				{
+					LOG.info("Loading additional namespaces from {}", options.valueOf(NAMESPACES));
 					rdfConfig.loadAdditionalNamespaces((File) options.valueOf(NAMESPACES));
 				}
 				if (options.has(DEFAULT_NAMESPACE))
 				{
-					String[] defaultNamespace = ((String) options.valueOf(DEFAULT_NAMESPACE)).split(":", 2);
-					rdfConfig.setDefaultNamespace(defaultNamespace[0], defaultNamespace[1]);
+					String defaultNamespaceOption = (String) options.valueOf(DEFAULT_NAMESPACE);
+					LOG.info("Setting default namespace to {}...", defaultNamespaceOption);
+					String[] parts = defaultNamespaceOption.split(":", 2);
+					if (parts.length != 2 || !parts[1].contains(":"))
+					{
+						LOG.error("Error parsing default namespace option '{}'.\n"
+								+ "Make sure that you provide a prefix, followed by a :, followed by a valid URI.\n"
+								+ "For example: '--defaultNamespace ex:http://example.com/'", defaultNamespaceOption);
+						return;
+					}
+					LOG.info("Using default namespace {} with prefix {}", parts[1], parts[0]);
+					rdfConfig.setDefaultNamespace(parts[0], parts[1]);
 				}
 				new RdfClient(molgenis, rdfConfig).export(outFile, entities, pageSize, version);
 			}
@@ -200,12 +227,30 @@ public class Downloader
 						overwrite, version, pageSize);
 				if (hasErrors)
 				{
-					writeToConsole("Errors occurred while writing EMX\n");
-					emxClient.getExceptions().forEach(ex -> writeToConsole("Exception: %s\n", ex));
+					LOG.warn("Errors occurred while writing EMX\n");
+					emxClient.getExceptions().forEach(ex -> LOG.warn("Error: ", ex));
 				}
 			}
 		}
 
+	}
+
+	private void logOptionInfo(File outFile, URI url, Integer pageSize, boolean includeMetaData, boolean insecureSSL,
+			String username, boolean overwrite, Integer socketTimeout, MolgenisVersion version)
+	{
+		if (LOG.isInfoEnabled())
+		{
+			LOG.info("Options:");
+			LOG.info("outFile:       {}", outFile);
+			LOG.info("url:           {}", url);
+			LOG.info("account:       {}", username);
+			LOG.info("socketTimeout: {}", socketTimeout);
+			LOG.info("version:       {}", version.toVersionString());
+			if (pageSize != null) LOG.info("pageSize:      {}", pageSize);
+			if (!includeMetaData) LOG.info("* only data");
+			if (insecureSSL) LOG.info("* insecure SSL");
+			if (overwrite) LOG.info("* overwrite existing output if present");
+		}
 	}
 
 }

@@ -4,18 +4,17 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.vocabulary.RDFS;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.molgenis.downloader.api.EntityConsumer;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.Tag;
-import org.molgenis.downloader.util.ConsoleWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import java.text.MessageFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -27,7 +26,7 @@ import java.util.function.Consumer;
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toMap;
-import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
+import static org.eclipse.rdf4j.model.vocabulary.RDF.TYPE;
 
 /**
  * {@link EntityConsumer} that creates {@link Statement}s for an entity
@@ -36,6 +35,7 @@ class RdfEntityConsumer implements EntityConsumer
 {
 	static final String IS_ASSOCIATED_WITH_URI = "http://molgenis.org#isAssociatedWith";
 	static final DatatypeFactory DATATYPE_FACTORY;
+	private static final Logger LOG = LoggerFactory.getLogger(RdfEntityConsumer.class);
 
 	static
 	{
@@ -99,7 +99,7 @@ class RdfEntityConsumer implements EntityConsumer
 		}
 		catch (RuntimeException ex)
 		{
-			writeToConsole("Error consuming data, continuing...", ex);
+			LOG.warn("Error consuming data, continuing...", ex);
 		}
 	}
 
@@ -126,9 +126,7 @@ class RdfEntityConsumer implements EntityConsumer
 		}
 		catch (RuntimeException ex)
 		{
-			ConsoleWriter.writeToConsole(
-					MessageFormat.format("Error creating class tag for subject {0} and object IRI {1}", subject,
-							tag.getObjectIRI()), ex);
+			LOG.error("Error creating class tag for subject {0} and object IRI {1}", subject, tag.getObjectIRI(), ex);
 			return Optional.empty();
 		}
 	}
@@ -152,9 +150,8 @@ class RdfEntityConsumer implements EntityConsumer
 		}
 		catch (RuntimeException ex)
 		{
-			writeToConsole(MessageFormat.format(
-					"Error creating attribute value statement for subject {0}, attribute {1} and value {2}", subject,
-					attribute.getName(), attributeValue), ex);
+			LOG.error("Error creating attribute value statement for subject {0}, attribute {1} and value {2}", subject,
+					attribute.getName(), attributeValue, ex);
 		}
 	}
 

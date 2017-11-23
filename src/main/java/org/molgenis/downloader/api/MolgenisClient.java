@@ -24,7 +24,7 @@ public interface MolgenisClient extends AutoCloseable
 
 	Entity getEntity(final String name) throws IOException, URISyntaxException;
 
-	void streamMetadata(final MetadataConsumer consumer, MolgenisVersion version);
+	void streamMetadata(final MetadataConsumer consumer, MolgenisVersion version) throws IncompleteMetadataException;
 
 	MetadataRepository getMetadata(MolgenisVersion version) throws IncompleteMetadataException;
 

@@ -6,8 +6,11 @@ import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.client.IncompleteMetadataException;
 import org.molgenis.rdf.RdfTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,6 +19,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class RdfExporter
 {
+	private static final Logger LOG = LoggerFactory.getLogger(RdfExporter.class);
 	/**
 	 * The MolgenisClient to retrieve entity data
 	 */
@@ -57,10 +61,12 @@ public class RdfExporter
 			exportEntity(metadata.getEntity(fullName), pageSize);
 		}
 	}
-	
+
 	private void addNamespaces()
 	{
-		template.execute(connection -> rdfConfig.getNamespaces().forEach(connection::setNamespace));
+		Map<String, String> namespaces = rdfConfig.getNamespaces();
+		LOG.debug("Adding namespaces: {}", namespaces);
+		template.execute(connection -> namespaces.forEach(connection::setNamespace));
 	}
 
 	void exportEntity(Entity entity, Integer pageSize)

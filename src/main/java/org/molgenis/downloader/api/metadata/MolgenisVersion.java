@@ -86,6 +86,11 @@ public class MolgenisVersion implements Comparable<MolgenisVersion>
 		return "MolgenisVersion{" + "major=" + major + ", minor=" + minor + ", revison=" + revison + '}';
 	}
 
+	public String toVersionString()
+	{
+		return String.format("%d.%d.%d", major, minor, revison);
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
