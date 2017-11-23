@@ -1,22 +1,20 @@
 package org.molgenis.downloader.api.metadata;
 
-import java.net.URI;
-
 public class Tag extends Metadata
 {
 
 	private String label;
-	private URI objectIRI;
-	private URI relationIRI;
+	private String objectIRI;
+	private String relationIRI;
 	private String relationLabel;
 	private String codeSystem;
 
-	public URI getObjectIRI()
+	public String getObjectIRI()
 	{
 		return objectIRI;
 	}
 
-	public URI getRelationIRI()
+	public String getRelationIRI()
 	{
 		return relationIRI;
 	}
@@ -81,12 +79,12 @@ public class Tag extends Metadata
 		this.label = label;
 	}
 
-	public void setObjectIRI(URI objectIRI)
+	public void setObjectIRI(String objectIRI)
 	{
 		this.objectIRI = objectIRI;
 	}
 
-	public void setRelationIRI(URI relationIRI)
+	public void setRelationIRI(String relationIRI)
 	{
 		this.relationIRI = relationIRI;
 	}
