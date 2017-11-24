@@ -1,6 +1,7 @@
 package org.molgenis.downloader;
 
 import ch.qos.logback.classic.Level;
+import com.google.common.base.Charsets;
 import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -16,10 +17,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static com.google.common.base.Strings.repeat;
+import static com.google.common.io.Resources.getResource;
+import static com.google.common.io.Resources.readLines;
 import static java.util.Arrays.asList;
 
 public class Downloader
@@ -43,14 +48,9 @@ public class Downloader
 	private static final Integer DEFAULT_SOCKET_TIMEOUT = 60;
 	private static final String RDF = "rdf";
 
-	public static void main(final String[] args)
+	public static void main(final String[] args) throws IOException
 	{
-		String implementationVersion = Downloader.class.getPackage().getImplementationVersion();
-		if (implementationVersion == null)
-		{
-			implementationVersion = "";
-		}
-		LOG.info("MOLGENIS Downloader {}", implementationVersion);
+		printBanner();
 		try
 		{
 			OptionSet options = tryParseOptions(args);
@@ -67,6 +67,19 @@ public class Downloader
 		{
 			LOG.error("An error occurred:", ex);
 		}
+	}
+
+	private static void printBanner() throws IOException
+	{
+		String implementationVersion = Downloader.class.getPackage().getImplementationVersion();
+		System.out.println(repeat("-", 110));
+		for (String line : readLines(getResource("banner.txt"), Charsets.UTF_8))
+		{
+			System.out.println(line);
+		}
+		System.out.println("Version: " + (implementationVersion != null ? implementationVersion : "DEVELOPMENT"));
+		System.out.println(repeat("-", 110));
+		System.out.println();
 	}
 
 	private static OptionSet tryParseOptions(String[] args)
