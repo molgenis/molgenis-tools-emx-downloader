@@ -6,7 +6,6 @@ import org.molgenis.downloader.api.metadata.Package;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,9 +75,9 @@ public class MolgenisV3MetadataConverterTest
 		expected.setId("id");
 		expected.setLabel("label");
 		expected.setCodeSystem("codeSystem");
-		expected.setRelationIRI(URI.create("relationIRI"));
+		expected.setRelationIRI("relationIRI");
 		expected.setRelationLabel("relationLabel");
-		expected.setObjectIRI(URI.create("objectIRI"));
+		expected.setObjectIRI("objectIRI");
 
 		assertEquals(actual, expected);
 	}

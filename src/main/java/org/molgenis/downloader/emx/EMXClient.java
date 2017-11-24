@@ -50,8 +50,9 @@ public class EMXClient
 			}
 			for (final String name : target)
 			{
-				try (final EntityConsumer consumer = writer.createConsumerForEntity(molgenisClient.getEntity(name)))
+				try
 				{
+					EntityConsumer consumer = writer.createConsumerForEntity(molgenisClient.getEntity(name));
 					molgenisClient.streamEntityData(name, consumer, pageSize);
 				}
 				catch (final org.json.JSONException ex)
@@ -78,7 +79,7 @@ public class EMXClient
 		}
 		else
 		{
-			boolean fileExists = Files.exists(path);
+			boolean fileExists = path.toFile().exists();
 			if (!fileExists || overwrite)
 			{
 				if (fileExists)

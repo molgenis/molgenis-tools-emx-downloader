@@ -2,6 +2,8 @@ package org.molgenis.downloader.api.metadata;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 public final class Attribute extends Metadata implements Comparable<Attribute>
 {
 	private String entityFullname;
@@ -484,8 +486,10 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 				+ visibleExpression + '\'' + ", validationExpression='" + validationExpression + '\''
 				+ ", defaultValue='" + defaultValue + '\'' + ", orderBy='" + orderBy + '\'' + ", mappedBy=" + mappedBy
 				+ ", rangeMin=" + rangeMin + ", rangeMax=" + rangeMax + ", tags=" + tags + ", labels=" + labels
-				+ ", descriptions=" + descriptions + ", parts=" + parts + ", compound=" + compound + ", entityId='"
-				+ entityId + '\'' + '}';
+				+ ", descriptions=" + descriptions + ", parts=" + parts.stream()
+																	   .map(Attribute::getName)
+																	   .collect(toList()) + ", compound=" + compound
+				+ ", entityId='" + entityId + '\'' + '}';
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import org.molgenis.downloader.api.WriteableMetadataRepository;
 import org.molgenis.downloader.api.metadata.*;
 import org.molgenis.downloader.api.metadata.Package;
 
-import java.net.URI;
 import java.util.Map;
 
 class MolgenisV4MetadataConverter extends AbstractMetadataConverter
@@ -97,8 +96,8 @@ class MolgenisV4MetadataConverter extends AbstractMetadataConverter
 	{
 		final Tag tag = repository.createTag(getString(data, "id"));
 		setString(data, "label", tag::setLabel);
-		setData(data, "objectIRI", URI::create, tag::setObjectIRI);
-		setData(data, "relationIRI", URI::create, tag::setRelationIRI);
+		setString(data, "objectIRI", tag::setObjectIRI);
+		setString(data, "relationIRI", tag::setRelationIRI);
 		setString(data, "relationLabel", tag::setRelationLabel);
 		setString(data, "codeSystem", tag::setCodeSystem);
 		return tag;

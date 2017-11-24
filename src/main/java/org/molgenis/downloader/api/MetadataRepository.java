@@ -17,4 +17,14 @@ public interface MetadataRepository
 	Collection<Package> getPackages();
 
 	Collection<Tag> getTags();
+
+	default Entity getEntity(String fullName)
+	{
+		return getEntities().stream()
+							.filter(candidate -> candidate.getFullName().equals(fullName))
+							.findFirst()
+							.orElseThrow(() -> new IllegalArgumentException(
+									"Entity with fullName " + fullName + " not found"));
+	}
+
 }

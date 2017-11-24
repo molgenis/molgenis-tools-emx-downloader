@@ -3,7 +3,6 @@ package org.molgenis.downloader.emx.serializers;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.Tag;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +20,8 @@ public class EMXTagSerializer implements EntitySerializer<Tag>
 		fields.add(tag.getId());
 		fields.add(tag.getLabel());
 		fields.add(tag.getRelationLabel());
-		fields.add(Optional.ofNullable(tag.getObjectIRI()).map(URI::toString).orElse(""));
-		fields.add(Optional.ofNullable(tag.getRelationIRI()).map(URI::toString).orElse(""));
+		fields.add(Optional.ofNullable(tag.getObjectIRI()).orElse(""));
+		fields.add(Optional.ofNullable(tag.getRelationIRI()).orElse(""));
 		fields.add(tag.getCodeSystem());
 		return fields;
 	}

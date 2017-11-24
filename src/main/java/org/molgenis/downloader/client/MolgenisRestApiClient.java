@@ -12,15 +12,13 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.molgenis.downloader.api.EntityConsumer;
-import org.molgenis.downloader.api.MetadataConsumer;
-import org.molgenis.downloader.api.MolgenisClient;
-import org.molgenis.downloader.api.WriteableMetadataRepository;
+import org.molgenis.downloader.api.*;
 import org.molgenis.downloader.api.metadata.Attribute;
 import org.molgenis.downloader.api.metadata.DataType;
 import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
-import org.molgenis.downloader.util.ConsoleWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.AuthenticationException;
 import java.io.IOException;
@@ -28,15 +26,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.*;
-import static org.molgenis.downloader.util.ConsoleWriter.writeToConsole;
 
 public class MolgenisRestApiClient implements MolgenisClient
 {
+	private static final Logger LOG = LoggerFactory.getLogger(MolgenisRestApiClient.class);
+
 	private final HttpClient client;
 	private final WriteableMetadataRepository repository = new MetadataRepositoryImpl();
 	private MetadataConverter converter;
@@ -53,6 +50,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	public final void login(final String username, final String password, final Integer socketTimeout)
 			throws AuthenticationException
 	{
+		LOG.info("login...");
 		final JSONObject login = new JSONObject();
 		login.put("username", username);
 		login.put("password", password);
@@ -77,7 +75,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (final JSONException | IOException | URISyntaxException ex)
 		{
-			writeToConsole("An error occurred while logging in:\n", ex);
+			LOG.error("An error occurred while logging in:\n", ex);
 		}
 		if (token == null)
 		{
@@ -88,6 +86,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	@Override
 	public final boolean logout()
 	{
+		LOG.info("logout...");
 		HttpGet request = new HttpGet(uri + "/api/v1/logout");
 		if (token != null)
 		{
@@ -99,7 +98,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (IOException ex)
 		{
-			writeToConsole("An error occurred while logging out:\n", ex);
+			LOG.error("An error occurred while logging out:\n", ex);
 			return false;
 		}
 	}
@@ -133,6 +132,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 	@Override
 	public final void streamEntityData(final String entityName, final EntityConsumer consumer, Integer pageSize)
 	{
+		LOG.info("Retrieving {}...", entityName);
 		try
 		{
 			String downloadUrl = uri + "/api/v2/" + entityName;
@@ -160,7 +160,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		}
 		catch (final JSONException | IOException | URISyntaxException | ParseException ex)
 		{
-			Logger.getLogger(MolgenisRestApiClient.class.getName()).log(Level.SEVERE, null, ex);
+			LOG.error("Error streaming entity data for {}.", entityName, ex);
 		}
 
 	}
@@ -169,28 +169,41 @@ public class MolgenisRestApiClient implements MolgenisClient
 	{
 		JSONObject json;
 		String nextData = download(new URI(url));
-		ConsoleWriter.debug("downloading from: " + url);
+		LOG.debug("Downloading from: {}", url);
 		json = new JSONObject(nextData);
 		return json;
 	}
 
 	@Override
-	public void streamMetadata(MetadataConsumer consumer, MolgenisVersion version)
+	public void streamMetadata(MetadataConsumer consumer, MolgenisVersion version) throws IncompleteMetadataException
 	{
+		consumer.accept(getMetadata(version));
+	}
+
+	@Override
+	public MetadataRepository getMetadata(MolgenisVersion version) throws IncompleteMetadataException
+	{
+		LOG.info("Retrieving metadata...");
 		try
 		{
 			if (converter == null) initConverter(version);
+			LOG.info("Retrieving languages...");
 			streamEntityData(converter.getLanguagesRepositoryName(), converter::toLanguage);
+			LOG.info("Retrieving tags...");
 			streamEntityData(converter.getTagsRepositoryName(), converter::toTag);
+			LOG.info("Retrieving packages...");
 			streamEntityData(converter.getPackagesRepositoryName(), converter::toPackage);
+			LOG.info("Retrieving attributes...");
 			streamEntityData(converter.getAttributesRepositoryName(), converter::toAttribute);
+			LOG.info("Retrieving entities...");
 			streamEntityData(converter.getEntitiesRepositoryName(), converter::toEntity);
 			converter.postProcess(repository);
-			consumer.accept(repository);
+			return repository;
 		}
 		catch (Exception ex)
 		{
-			writeToConsole("An error occurred:\n", ex);
+			LOG.error("Exception retrieving metadata.", ex);
+			throw new IncompleteMetadataException(ex);
 		}
 	}
 
@@ -223,7 +236,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 
 	Map<String, String> getAttributes(final JSONObject input, Collection<Attribute> attributes)
 	{
-		List<Attribute> attributesList = new ArrayList<Attribute>(attributes);
+		List<Attribute> attributesList = new ArrayList<>(attributes);
 
 		Collections.sort(attributesList);
 		final Map<String, String> data = new HashMap<>();
@@ -357,8 +370,8 @@ public class MolgenisRestApiClient implements MolgenisClient
 			}
 			else if (version.equalsOrLargerThan(VERSION_4))
 			{
-				writeToConsole(
-						"WARNING: For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
+				LOG.warn(
+						"For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
 				converter = new MolgenisV4MetadataConverter(repository);
 			}
 		}

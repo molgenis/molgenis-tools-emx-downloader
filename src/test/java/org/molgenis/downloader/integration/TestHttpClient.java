@@ -36,73 +36,73 @@ class TestHttpClient implements HttpClient
 	{
 		HttpResponse versionHttpResponse = mock(HttpResponse.class);
 		HttpEntity versionHttpEntity = mock(HttpEntity.class);
-		when(versionHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/version.txt"));
+		when(versionHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/version.json"));
 
 		when(versionHttpResponse.getEntity()).thenReturn(versionHttpEntity);
 
 		HttpResponse languageHttpResponse = mock(HttpResponse.class);
 		HttpEntity languageHttpEntity = mock(HttpEntity.class);
-		when(languageHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/language.txt"));
+		when(languageHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/language.json"));
 		when(languageHttpResponse.getEntity()).thenReturn(languageHttpEntity);
 
 		HttpResponse tagHttpResponse = mock(HttpResponse.class);
 		HttpEntity tagHttpEntity = mock(HttpEntity.class);
-		when(tagHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/tags.txt"));
+		when(tagHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/tags.json"));
 		when(tagHttpResponse.getEntity()).thenReturn(tagHttpEntity);
 
 		HttpResponse packageHttpResponse = mock(HttpResponse.class);
 		HttpEntity packageHttpEntity = mock(HttpEntity.class);
-		when(packageHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/package.txt"));
+		when(packageHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/package.json"));
 		when(packageHttpResponse.getEntity()).thenReturn(packageHttpEntity);
 
 		HttpResponse attributeHttpResponse = mock(HttpResponse.class);
 		HttpEntity attributeHttpEntity = mock(HttpEntity.class);
 		when(attributeHttpEntity.getContent()).thenReturn(
-				getClass().getResourceAsStream("/integration/attributes.txt"));
+				getClass().getResourceAsStream("/integration/attributes.json"));
 		when(attributeHttpResponse.getEntity()).thenReturn(attributeHttpEntity);
 
 		HttpResponse attribute100HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute100HttpEntity = mock(HttpEntity.class);
 		when(attribute100HttpEntity.getContent()).thenReturn(
-				getClass().getResourceAsStream("/integration/attributes100.txt"));
+				getClass().getResourceAsStream("/integration/attributes100.json"));
 		when(attribute100HttpResponse.getEntity()).thenReturn(attribute100HttpEntity);
 
 		HttpResponse attribute200HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute200HttpEntity = mock(HttpEntity.class);
 		when(attribute200HttpEntity.getContent()).thenReturn(
-				getClass().getResourceAsStream("/integration/attributes200.txt"));
+				getClass().getResourceAsStream("/integration/attributes200.json"));
 		when(attribute200HttpResponse.getEntity()).thenReturn(attribute200HttpEntity);
 
 		HttpResponse attribute300HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute300HttpEntity = mock(HttpEntity.class);
 		when(attribute300HttpEntity.getContent()).thenReturn(
-				getClass().getResourceAsStream("/integration/attributes300.txt"));
+				getClass().getResourceAsStream("/integration/attributes300.json"));
 		when(attribute300HttpResponse.getEntity()).thenReturn(attribute300HttpEntity);
 
 		HttpResponse attribute400HttpResponse = mock(HttpResponse.class);
 		HttpEntity attribute400HttpEntity = mock(HttpEntity.class);
 		when(attribute400HttpEntity.getContent()).thenReturn(
-				getClass().getResourceAsStream("/integration/attributes400.txt"));
+				getClass().getResourceAsStream("/integration/attributes400.json"));
 		when(attribute400HttpResponse.getEntity()).thenReturn(attribute400HttpEntity);
 
 		HttpResponse entityHttpResponse = mock(HttpResponse.class);
 		HttpEntity entityHttpEntity = mock(HttpEntity.class);
-		when(entityHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/type.txt"));
+		when(entityHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/type.json"));
 		when(entityHttpResponse.getEntity()).thenReturn(entityHttpEntity);
 
 		HttpResponse dataHttpResponse = mock(HttpResponse.class);
 		HttpEntity dataHttpEntity = mock(HttpEntity.class);
-		when(dataHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/data.txt"));
+		when(dataHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/data.json"));
 		when(dataHttpResponse.getEntity()).thenReturn(dataHttpEntity);
 
 		HttpResponse locationHttpResponse = mock(HttpResponse.class);
 		HttpEntity locationHttpEntity = mock(HttpEntity.class);
-		when(locationHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/location.txt"));
+		when(locationHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/location.json"));
 		when(locationHttpResponse.getEntity()).thenReturn(locationHttpEntity);
 
 		HttpResponse refHttpResponse = mock(HttpResponse.class);
 		HttpEntity refHttpEntity = mock(HttpEntity.class);
-		when(refHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/ref.txt"));
+		when(refHttpEntity.getContent()).thenReturn(getClass().getResourceAsStream("/integration/ref.json"));
 		when(refHttpResponse.getEntity()).thenReturn(refHttpEntity);
 
 		HttpResponse response = null;
