@@ -111,7 +111,8 @@ class TestHttpClient implements HttpClient
 		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_Language")) response = languageHttpResponse;
 		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_Tag")) response = tagHttpResponse;
 		else if (httpUriRequest.getURI().getPath().equals("/api/v2/sys_md_Package")) response = packageHttpResponse;
-		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute"))
+		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?num=1") ||
+				httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?sort=id:asc"))
 			response = attributeHttpResponse;
 		else if (httpUriRequest.getURI().getSchemeSpecificPart().equals("/api/v2/sys_md_Attribute?start=100"))
 			response = attribute100HttpResponse;

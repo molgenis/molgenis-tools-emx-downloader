@@ -135,11 +135,14 @@ public class MolgenisRestApiClient implements MolgenisClient
 		LOG.info("Retrieving {}...", entityName);
 		try
 		{
+			// Fetch ID attribute
+			String uniqueSortingAttribute = getEntity(entityName).getIdAttribute().getName();
+
+			// Fetch with a sort on ID attribute
 			String downloadUrl = uri + "/api/v2/" + entityName;
-			if (pageSize != null) downloadUrl += "?num=" + pageSize;
-			JSONObject json = getJsonDataFromUrl(downloadUrl);
-			final JSONObject meta = json.getJSONObject("meta");
-			final Entity entity = entityFromJSON(meta);
+			downloadUrl += pageSize != null ? "?num=" + pageSize + "&sort=" + uniqueSortingAttribute + ":asc" : "?sort=" + uniqueSortingAttribute + ":asc";
+			JSONObject  json = getJsonDataFromUrl(downloadUrl);
+			final Entity entity = entityFromJSON(json.getJSONObject("meta"));
 
 			String nextHref;
 			do
