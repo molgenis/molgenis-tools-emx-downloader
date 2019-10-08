@@ -7,7 +7,7 @@ public enum DataType
 
 	public boolean isXReferenceType()
 	{
-		return this == XREF || this == CATEGORICAL;
+		return this == XREF || this == CATEGORICAL || this == FILE;
 	}
 
 	public boolean isMReferenceType()
