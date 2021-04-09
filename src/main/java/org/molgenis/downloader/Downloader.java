@@ -258,7 +258,9 @@ public class Downloader
 			LOG.info("url:           {}", url);
 			LOG.info("account:       {}", username);
 			LOG.info("socketTimeout: {}", socketTimeout);
-			LOG.info("version:       {}", version.toVersionString());
+			if (version != null) {
+				LOG.info("version:       {}", version.toVersionString());
+			}
 			if (pageSize != null) LOG.info("pageSize:      {}", pageSize);
 			if (!includeMetaData) LOG.info("* only data");
 			if (insecureSSL) LOG.info("* insecure SSL");

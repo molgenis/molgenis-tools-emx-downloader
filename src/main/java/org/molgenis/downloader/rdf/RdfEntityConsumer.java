@@ -55,7 +55,7 @@ class RdfEntityConsumer implements EntityConsumer
 	private final Consumer<Statement> statements;
 	private final Entity entity;
 	private final Map<String, Attribute> attributesMap;
-	private RdfConfig rdfConfig;
+	private final RdfConfig rdfConfig;
 
 	/**
 	 * Creates an {@link EntityConsumer} for an {@link Entity} and a {@link RepositoryConnection}
@@ -125,7 +125,7 @@ class RdfEntityConsumer implements EntityConsumer
 		}
 		catch (RuntimeException ex)
 		{
-			LOG.error("Error creating class tag for subject {0} and object IRI {1}", subject, tag.getObjectIRI(), ex);
+			LOG.error("Error creating class tag for subject {} and object IRI {}", subject, tag.getObjectIRI(), ex);
 			return Optional.empty();
 		}
 	}
@@ -149,7 +149,7 @@ class RdfEntityConsumer implements EntityConsumer
 		}
 		catch (RuntimeException ex)
 		{
-			LOG.error("Error creating attribute value statement for subject {0}, attribute {1} and value {2}", subject,
+			LOG.error("Error creating attribute value statement for subject {}, attribute {} and value {}", subject,
 					attribute.getName(), attributeValue, ex);
 		}
 	}
