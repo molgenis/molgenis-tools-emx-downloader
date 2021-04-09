@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 
@@ -22,13 +21,13 @@ class TestHttpClient implements HttpClient
 	@Override
 	public HttpParams getParams()
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ClientConnectionManager getConnectionManager()
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -134,45 +133,45 @@ class TestHttpClient implements HttpClient
 	@Override
 	public HttpResponse execute(HttpUriRequest httpUriRequest, HttpContext httpContext) throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest) throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public HttpResponse execute(HttpHost httpHost, HttpRequest httpRequest, HttpContext httpContext) throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> T execute(HttpUriRequest httpUriRequest, ResponseHandler<? extends T> responseHandler) throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> T execute(HttpUriRequest httpUriRequest, ResponseHandler<? extends T> responseHandler,
 			HttpContext httpContext) throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> T execute(HttpHost httpHost, HttpRequest httpRequest, ResponseHandler<? extends T> responseHandler)
 			throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> T execute(HttpHost httpHost, HttpRequest httpRequest, ResponseHandler<? extends T> responseHandler,
 			HttpContext httpContext) throws IOException
 	{
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 }
