@@ -56,7 +56,7 @@ pipeline {
                            container('maven') {
                                sh "set +x; curl -X POST -H 'Content-Type: application/json' -H 'Authorization: token $GITHUB_TOKEN' " +
                                    "--data '{\"body\":\":star: PR Preview available! Download [downloader-${PREVIEW_VERSION}.jar](https://registry.molgenis.org/repository/maven-releases/org/molgenis/downloader/${PREVIEW_VERSION}/downloader-${PREVIEW_VERSION}.jar)\"}' " +
-                                   "https://api.github.com/repos/molgenis/molgenis-frontend/issues/${CHANGE_ID}/comments"
+                                   "https://api.github.com/repos/${REPOSITORY}/issues/${CHANGE_ID}/comments"
                             }
                         }
                     }
@@ -91,6 +91,9 @@ pipeline {
                         }
                         container('maven') {
                             sh "mvn -B release:prepare"
+                            script {
+                                env.TAG = sh(script: "grep project.rel release.properties | head -n1 | cut -d'=' -f2", returnStdout: true).trim()
+                            }
                         }
                     }
                 }
@@ -98,6 +101,11 @@ pipeline {
                     steps {
                         container('maven') {
                             sh "mvn -B release:perform"
+                        }
+                    }
+                    post {
+                        success {
+                           molgenisSlack(message: "Released :star: Released [MOLGENIS EMX Downloader version ${TAG}](https://registry.molgenis.org/repository/maven-releases/org/molgenis/downloader/${TAG}/downloader-${TAG}.jar)", color: 'good', channel: 'platform')
                         }
                     }
                 }
