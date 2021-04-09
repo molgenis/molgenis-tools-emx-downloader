@@ -92,7 +92,7 @@ pipeline {
                         container('maven') {
                             sh "mvn -B release:prepare"
                             script {
-                                env.TAG = sh(script: "grep project.rel release.properties | head -n1 | cut -d'=' -f2", returnStdout: true).trim()
+                                env.RELEASE = sh(script: "grep project.rel release.properties | head -n1 | cut -d'=' -f2", returnStdout: true).trim()
                             }
                         }
                     }
@@ -105,7 +105,7 @@ pipeline {
                     }
                     post {
                         success {
-                           molgenisSlack(message: "Released :star: Released [MOLGENIS EMX Downloader version ${TAG}](https://registry.molgenis.org/repository/maven-releases/org/molgenis/downloader/${TAG}/downloader-${TAG}.jar)", color: 'good', channel: 'platform')
+                           molgenisSlack(message: ":star: Released MOLGENIS Downloader <https://registry.molgenis.org/repository/maven-releases/org/molgenis/downloader/${RELEASE}/downloader-${RELEASE}.jar|${RELEASE}>", color: 'good', channel: 'platform')
                         }
                     }
                 }
