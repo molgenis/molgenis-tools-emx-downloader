@@ -371,11 +371,17 @@ public class MolgenisRestApiClient implements MolgenisClient
 			{
 				converter = new MolgenisV3MetadataConverter(repository);
 			}
-			else if (version.equalsOrLargerThan(VERSION_4))
+			else if (version.equalsOrLargerThan(VERSION_4) && version.smallerThan(VERSION_8_7))
 			{
 				LOG.warn(
 						"For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
 				converter = new MolgenisV4MetadataConverter(repository);
+			}
+			else if (version.equalsOrLargerThan(VERSION_8_7))
+			{
+				LOG.warn(
+						"For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
+				converter = new MolgenisV8_7MetadataConverter(repository);
 			}
 		}
 	}
