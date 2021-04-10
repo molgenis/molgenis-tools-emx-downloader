@@ -381,7 +381,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 			{
 				LOG.warn(
 						"For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
-				converter = new MolgenisV8_7MetadataConverter(repository);
+				converter = new MolgenisV87MetadataConverter(repository);
 			}
 		}
 	}

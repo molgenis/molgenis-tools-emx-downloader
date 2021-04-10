@@ -10,12 +10,12 @@ import org.molgenis.downloader.api.metadata.Language;
 import org.molgenis.downloader.api.metadata.Package;
 import org.molgenis.downloader.api.metadata.Tag;
 
-class MolgenisV8_7MetadataConverter extends AbstractMetadataConverter
+class MolgenisV87MetadataConverter extends AbstractMetadataConverter
 {
 
 	private final WriteableMetadataRepository repository;
 
-	public MolgenisV8_7MetadataConverter(WriteableMetadataRepository metadataRepository)
+	public MolgenisV87MetadataConverter(WriteableMetadataRepository metadataRepository)
 	{
 		repository = metadataRepository;
 	}
