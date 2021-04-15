@@ -102,6 +102,7 @@ public class EMXAttributeSerializerV3 implements EntitySerializer<Attribute>
 	public List<String> fields()
 	{
 		final List<String> fields = new ArrayList<>(Arrays.asList(FIELDS));
+		fields.add(MAPPED_BY);
 		if (version.equalsOrLargerThan(MIN_VERSION_FOR_MAX_LENGTH))
 		{
       fields.add(MAX_LENGTH);
