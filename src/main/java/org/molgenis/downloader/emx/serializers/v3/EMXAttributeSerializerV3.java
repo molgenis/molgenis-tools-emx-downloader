@@ -15,14 +15,17 @@ public class EMXAttributeSerializerV3 implements EntitySerializer<Attribute>
 			"readOnly", "aggregateable", "visible", "unique", "partOfAttribute", "expression", "validationExpression",
 			"tags", "description", };
 
-	private static final MolgenisVersion MIN_VERSION_FOR_MAPPEDBY = new MolgenisVersion(2, 0, 0);
+	private static final MolgenisVersion MIN_VERSION_FOR_MAX_LENGTH = new MolgenisVersion(8, 7, 0);
 	private static final String AUTO = "AUTO";
 	private static final String MAPPED_BY = "mappedBy";
+  private static final String MAX_LENGTH = "maxLength";
 
+	private final MolgenisVersion version;
 	private final Collection<Language> languages;
 
-	public EMXAttributeSerializerV3(final Collection<Language> languages)
+	public EMXAttributeSerializerV3(final MolgenisVersion molgenisVersion, final Collection<Language> languages)
 	{
+		version = molgenisVersion;
 		this.languages = languages;
 	}
 
@@ -81,6 +84,12 @@ public class EMXAttributeSerializerV3 implements EntitySerializer<Attribute>
 		{
 			result.add(att.getMappedBy() != null ? att.getMappedBy().getName() : "");
 		}
+		if (fields().contains(MAX_LENGTH)) {
+      result.add(
+          Optional.ofNullable(att.getMaxLength())
+              .map(maxLength -> Integer.toString(maxLength))
+              .orElse(""));
+		}
 		languages.forEach(language ->
 		{
 			result.add(att.getDescriptions().get(language));
@@ -94,6 +103,10 @@ public class EMXAttributeSerializerV3 implements EntitySerializer<Attribute>
 	{
 		final List<String> fields = new ArrayList<>(Arrays.asList(FIELDS));
 		fields.add(MAPPED_BY);
+		if (version.equalsOrLargerThan(MIN_VERSION_FOR_MAX_LENGTH))
+		{
+      fields.add(MAX_LENGTH);
+		}
 
 		languages.forEach(language ->
 		{

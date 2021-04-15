@@ -35,7 +35,6 @@
         </developer>
     </developers>
 
-
     <properties>
         <mockito.version>3.9.0</mockito.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,12 +42,14 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <registry.id>registry.molgenis.org</registry.id>
         <project.scm.id>github</project.scm.id>
+        <jacoco.skip>${skipTests}</jacoco.skip>
 
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>molgenis</sonar.organization>
         <sonar.github.repository>molgenis/molgenis-tools-emx-downloader</sonar.github.repository>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
+        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -102,7 +103,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
+                <version>${jacoco-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>pre-unit-test</id>
@@ -110,7 +111,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                         <configuration>
-                            <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
                             <propertyName>surefireArgLine</propertyName>
                         </configuration>
                     </execution>
@@ -120,10 +120,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

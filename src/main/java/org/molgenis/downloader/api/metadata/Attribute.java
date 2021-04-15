@@ -28,6 +28,7 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 	private String defaultValue;
 	private String orderBy;
 	private Attribute mappedBy;
+	private Integer maxLength;
 	private Integer rangeMin;
 	private Integer rangeMax;
 	private final Set<Tag> tags;
@@ -100,6 +101,7 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 			return false;
 		if (orderBy != null ? !orderBy.equals(attribute.orderBy) : attribute.orderBy != null) return false;
 		if (mappedBy != null ? !mappedBy.equals(attribute.mappedBy) : attribute.mappedBy != null) return false;
+		if (maxLength != null ? !maxLength.equals(attribute.maxLength) : attribute.maxLength != null) return false;
 		if (rangeMin != null ? !rangeMin.equals(attribute.rangeMin) : attribute.rangeMin != null) return false;
 		if (rangeMax != null ? !rangeMax.equals(attribute.rangeMax) : attribute.rangeMax != null) return false;
 		if (tags != null ? !tags.equals(attribute.tags) : attribute.tags != null) return false;
@@ -137,6 +139,7 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 		result = 31 * result + (defaultValue != null ? defaultValue.hashCode() : 0);
 		result = 31 * result + (orderBy != null ? orderBy.hashCode() : 0);
 		result = 31 * result + (mappedBy != null ? mappedBy.hashCode() : 0);
+		result = 31 * result + (maxLength != null ? maxLength.hashCode() : 0);
 		result = 31 * result + (rangeMin != null ? rangeMin.hashCode() : 0);
 		result = 31 * result + (rangeMax != null ? rangeMax.hashCode() : 0);
 		result = 31 * result + (tags != null ? tags.hashCode() : 0);
@@ -230,6 +233,10 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 	public boolean isAggregateable()
 	{
 		return aggregateable;
+	}
+
+	public Integer getMaxLength() {
+		return maxLength;
 	}
 
 	public Integer getRangeMin()
@@ -430,6 +437,12 @@ public final class Attribute extends Metadata implements Comparable<Attribute>
 	public Attribute setDefaultValue(String defaultValue)
 	{
 		this.defaultValue = defaultValue;
+		return this;
+	}
+
+	public Attribute setMaxLength(Integer maxLength)
+	{
+		this.maxLength = maxLength;
 		return this;
 	}
 
