@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.molgenis</groupId>
     <artifactId>downloader</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.4.0</version>
     <packaging>jar</packaging>
 
     <!-- More Project Information -->
@@ -21,7 +21,7 @@
         <connection>scm:git:https://github.com/molgenis/molgenis-tools-emx-downloader.git</connection>
         <developerConnection>scm:git:https://github.com/molgenis/molgenis-tools-emx-downloader.git</developerConnection>
         <url>https://github.com/molgenis/molgenis-tools-emx-downloader</url>
-        <tag>HEAD</tag>
+        <tag>downloader-1.4.0</tag>
     </scm>
 
     <developers>
