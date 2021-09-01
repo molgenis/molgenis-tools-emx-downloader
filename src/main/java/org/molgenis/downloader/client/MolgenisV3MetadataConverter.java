@@ -90,7 +90,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 		setData(data, "mappedBy", repository::createAttribute, att::setMappedBy);
 		setString(data, "orderBy", att::setOrderBy);
 		setString(data, "expression", att::setExpression);
-		setBoolean(data, "isNullable", att::setNilleble);
+		setBoolean(data, "isNullable", att::setNillable);
 		setBoolean(data, "isVisible", att::setVisible);
 		setString(data, "label", att::setLabel);
 		setString(data, "description", att::setDescription);
@@ -103,6 +103,7 @@ class MolgenisV3MetadataConverter extends AbstractMetadataConverter
 		setBoolean(data, "isAuto", att::setAuto);
 		setList(data, "tags", repository::createTag, att::addTag);
 		setString(data, "visibleExpression", att::setVisibleExpression);
+		setString(data, "nullableExpression", att::setNullableExpression);
 		setString(data, "validationExpression", att::setValidationExpression);
 		setString(data, "defaultValue", att::setDefaultValue);
 

@@ -41,7 +41,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter
 		});
 		setData(data, "refEntity", repository::createEntity, att::setRefEntity);
 		setString(data, "expression", att::setExpression);
-		setBoolean(data, "nillable", att::setNilleble);
+		setBoolean(data, "nillable", att::setNillable);
 		setBoolean(data, "auto", att::setAuto);
 		setBoolean(data, "visible", att::setVisible);
 		setString(data, "label", att::setLabel);
@@ -54,6 +54,7 @@ class MolgenisV1MetadataConverter extends AbstractMetadataConverter
 		setBoolean(data, "unique", att::setUnique);
 		setList(data, "tags", repository::createTag, att::addTag);
 		setString(data, "visibleExpression", att::setVisibleExpression);
+		setString(data, "nullableExpression", att::setNullableExpression);
 		setString(data, "validationExpression", att::setValidationExpression);
 		setString(data, "defaultValue", att::setDefaultValue);
 		repository.getLanguages()

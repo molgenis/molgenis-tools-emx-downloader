@@ -344,7 +344,7 @@ public class MolgenisRestApiClient implements MolgenisClient
 		else
 		{
 			final boolean nillable = meta.getBoolean("nillable");
-			att.setNilleble(nillable);
+			att.setNillable(nillable);
 			if (type.isReferenceType())
 			{
 				final JSONObject refEntity = meta.getJSONObject("refEntity");

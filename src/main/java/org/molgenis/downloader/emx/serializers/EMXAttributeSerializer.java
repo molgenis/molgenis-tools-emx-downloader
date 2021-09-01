@@ -38,7 +38,11 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute>
 		result.add(att.getLabel());
 		result.add(att.getDataType().name().toLowerCase());
 		result.add(Optional.ofNullable(att.getRefEntity()).map(Entity::getFullName).orElse(""));
-		result.add(Boolean.toString(att.isNillable()));
+		if (att.getNullableExpression() != null) {
+			result.add(att.getNullableExpression());
+		} else {
+			result.add(Boolean.toString(att.isNillable()));
+		}
 		final boolean isAutoIdAttriubte = att.isAuto();
 		final boolean isIdAttribute = att.isIdAttribute();
 		if (isIdAttribute && isAutoIdAttriubte)
@@ -72,7 +76,11 @@ public class EMXAttributeSerializer implements EntitySerializer<Attribute>
 		result.add(Boolean.toString(att.isLabelAttribute()));
 		result.add(Boolean.toString(att.isReadOnly()));
 		result.add(Boolean.toString(att.isAggregateable()));
-		result.add(Boolean.toString(att.isVisible()));
+		if (att.getVisibleExpression() != null) {
+			result.add(att.getVisibleExpression());
+		} else {
+			result.add(Boolean.toString(att.isVisible()));
+		}
 		result.add(Boolean.toString(att.isUnique()));
 		result.add(Optional.ofNullable(att.getCompound()).map(Attribute::getName).orElse(""));
 		result.add(att.getExpression());
