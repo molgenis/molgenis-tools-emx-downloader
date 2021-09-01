@@ -1,25 +1,19 @@
 package org.molgenis.rdf;
 
+import java.util.Objects;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 
-import java.util.Objects;
+public class RdfTemplate {
+  private final Repository repository;
 
-public class RdfTemplate
-{
-	private Repository repository;
+  public RdfTemplate(Repository repository) {
+    this.repository = Objects.requireNonNull(repository);
+  }
 
-	public RdfTemplate(Repository repository)
-	{
-		this.repository = Objects.requireNonNull(repository);
-	}
-
-	public void execute(ConnectionCallback callback)
-	{
-		try (RepositoryConnection connection = repository.getConnection())
-		{
-			callback.doInConnection(connection);
-		}
-	}
+  public void execute(ConnectionCallback callback) {
+    try (RepositoryConnection connection = repository.getConnection()) {
+      callback.doInConnection(connection);
+    }
+  }
 }
-

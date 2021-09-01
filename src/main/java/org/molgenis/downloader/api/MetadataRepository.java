@@ -1,30 +1,29 @@
 package org.molgenis.downloader.api;
 
-import org.molgenis.downloader.api.metadata.*;
-import org.molgenis.downloader.api.metadata.Package;
-
 import java.util.Collection;
+import org.molgenis.downloader.api.metadata.Attribute;
+import org.molgenis.downloader.api.metadata.Entity;
+import org.molgenis.downloader.api.metadata.Language;
+import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.api.metadata.Tag;
 
-public interface MetadataRepository
-{
+public interface MetadataRepository {
 
-	Collection<Attribute> getAttributes();
+  Collection<Attribute> getAttributes();
 
-	Collection<Entity> getEntities();
+  Collection<Entity> getEntities();
 
-	Collection<Language> getLanguages();
+  Collection<Language> getLanguages();
 
-	Collection<Package> getPackages();
+  Collection<Package> getPackages();
 
-	Collection<Tag> getTags();
+  Collection<Tag> getTags();
 
-	default Entity getEntity(String fullName)
-	{
-		return getEntities().stream()
-							.filter(candidate -> candidate.getFullName().equals(fullName))
-							.findFirst()
-							.orElseThrow(() -> new IllegalArgumentException(
-									"Entity with fullName " + fullName + " not found"));
-	}
-
+  default Entity getEntity(String fullName) {
+    return getEntities().stream()
+        .filter(candidate -> candidate.getFullName().equals(fullName))
+        .findFirst()
+        .orElseThrow(
+            () -> new IllegalArgumentException("Entity with fullName " + fullName + " not found"));
+  }
 }
