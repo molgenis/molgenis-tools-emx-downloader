@@ -5,6 +5,7 @@ import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_4;
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_8_7;
 
+import com.google.common.graph.Traverser;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -279,6 +280,13 @@ public class MolgenisRestApiClient implements MolgenisClient {
               final JSONObject attributeMetadata = (JSONObject) object;
               final Attribute attribute = attributeFromJSON(ent, attributeMetadata);
               ent.addAttribute(attribute);
+            });
+
+    // search through compounds for the id attribute
+    Traverser.forTree(Attribute::getParts)
+        .breadthFirst(ent.getAttributes())
+        .forEach(
+            attribute -> {
               if (idAttribute.equals(attribute.getName())) {
                 ent.setIdAttribute(attribute);
               }
