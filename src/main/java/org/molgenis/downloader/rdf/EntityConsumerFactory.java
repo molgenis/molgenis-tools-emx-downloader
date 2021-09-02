@@ -5,7 +5,6 @@ import org.molgenis.downloader.api.EntityConsumer;
 import org.molgenis.downloader.api.metadata.Entity;
 
 @FunctionalInterface
-public interface EntityConsumerFactory
-{
-	EntityConsumer create(Entity entity, RepositoryConnection connection, RdfConfig rdfConfig);
+public interface EntityConsumerFactory {
+  EntityConsumer create(Entity entity, RepositoryConnection connection, RdfConfig rdfConfig);
 }

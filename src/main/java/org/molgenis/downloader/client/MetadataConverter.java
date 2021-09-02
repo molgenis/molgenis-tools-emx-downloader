@@ -1,37 +1,34 @@
 package org.molgenis.downloader.client;
 
-import org.molgenis.downloader.api.WriteableMetadataRepository;
-import org.molgenis.downloader.api.metadata.*;
-import org.molgenis.downloader.api.metadata.Package;
-
 import java.util.Map;
+import org.molgenis.downloader.api.WriteableMetadataRepository;
+import org.molgenis.downloader.api.metadata.Attribute;
+import org.molgenis.downloader.api.metadata.Entity;
+import org.molgenis.downloader.api.metadata.Language;
+import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.api.metadata.Tag;
 
-interface MetadataConverter
-{
+interface MetadataConverter {
 
-	Attribute toAttribute(final Map<String, String> data);
+  Attribute toAttribute(final Map<String, String> data);
 
-	Entity toEntity(final Map<String, String> data);
+  Entity toEntity(final Map<String, String> data);
 
-	Package toPackage(final Map<String, String> data);
+  Package toPackage(final Map<String, String> data);
 
-	Tag toTag(final Map<String, String> data);
+  Tag toTag(final Map<String, String> data);
 
-	Language toLanguage(final Map<String, String> data);
+  Language toLanguage(final Map<String, String> data);
 
-	String getTagsRepositoryName();
+  String getTagsRepositoryName();
 
-	String getPackagesRepositoryName();
+  String getPackagesRepositoryName();
 
-	String getEntitiesRepositoryName();
+  String getEntitiesRepositoryName();
 
-	String getAttributesRepositoryName();
+  String getAttributesRepositoryName();
 
-	String getLanguagesRepositoryName();
+  String getLanguagesRepositoryName();
 
-	default void postProcess(WriteableMetadataRepository repository)
-	{
-	}
-
-	;
+  default void postProcess(WriteableMetadataRepository repository) {}
 }

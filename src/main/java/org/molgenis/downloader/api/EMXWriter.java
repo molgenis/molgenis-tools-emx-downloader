@@ -1,22 +1,20 @@
 package org.molgenis.downloader.api;
 
-import org.molgenis.downloader.api.metadata.Entity;
-
 import java.io.IOException;
 import java.util.List;
+import org.molgenis.downloader.api.metadata.Entity;
 
-public interface EMXWriter
-{
+public interface EMXWriter {
 
-	EntityConsumer createConsumerForEntity(final Entity entity) throws IOException;
+  EntityConsumer createConsumerForEntity(final Entity entity) throws IOException;
 
-	MetadataConsumer createMetadataConsumer();
+  MetadataConsumer createMetadataConsumer();
 
-	EMXDataStore createDataStore(final String name) throws IOException;
+  EMXDataStore createDataStore(final String name) throws IOException;
 
-	boolean hasExceptions();
+  boolean hasExceptions();
 
-	List<Exception> getExceptions();
+  List<Exception> getExceptions();
 
-	void addException(final Exception ex);
+  void addException(final Exception ex);
 }
