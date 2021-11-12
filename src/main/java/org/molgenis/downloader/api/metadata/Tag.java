@@ -1,11 +1,14 @@
 package org.molgenis.downloader.api.metadata;
 
+import java.util.Objects;
+
 public class Tag extends Metadata {
 
   private String label;
   private String objectIRI;
   private String relationIRI;
   private String relationLabel;
+  private String value;
   private String codeSystem;
 
   public Tag(final String id) {
@@ -43,6 +46,14 @@ public class Tag extends Metadata {
     this.relationLabel = relationLabel;
   }
 
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
+  }
+
   public String getCodeSystem() {
     return codeSystem;
   }
@@ -61,29 +72,30 @@ public class Tag extends Metadata {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Tag)) return false;
-
-    Tag tag = (Tag) o;
-
-    if (label != null ? !label.equals(tag.label) : tag.label != null) return false;
-    if (objectIRI != null ? !objectIRI.equals(tag.objectIRI) : tag.objectIRI != null) return false;
-    if (relationIRI != null ? !relationIRI.equals(tag.relationIRI) : tag.relationIRI != null)
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
-    if (relationLabel != null
-        ? !relationLabel.equals(tag.relationLabel)
-        : tag.relationLabel != null) return false;
-    return codeSystem != null ? codeSystem.equals(tag.codeSystem) : tag.codeSystem == null;
+    }
+    Tag tag = (Tag) o;
+    return Objects.equals(getLabel(), tag.getLabel())
+        && Objects.equals(getObjectIRI(), tag.getObjectIRI())
+        && Objects.equals(getRelationIRI(), tag.getRelationIRI())
+        && Objects.equals(getRelationLabel(), tag.getRelationLabel())
+        && Objects.equals(getValue(), tag.getValue())
+        && Objects.equals(getCodeSystem(), tag.getCodeSystem());
   }
 
   @Override
   public int hashCode() {
-    int result = label != null ? label.hashCode() : 0;
-    result = 31 * result + (objectIRI != null ? objectIRI.hashCode() : 0);
-    result = 31 * result + (relationIRI != null ? relationIRI.hashCode() : 0);
-    result = 31 * result + (relationLabel != null ? relationLabel.hashCode() : 0);
-    result = 31 * result + (codeSystem != null ? codeSystem.hashCode() : 0);
-    return result;
+    return Objects.hash(
+        getLabel(),
+        getObjectIRI(),
+        getRelationIRI(),
+        getRelationLabel(),
+        getValue(),
+        getCodeSystem());
   }
 
   @Override
@@ -95,12 +107,17 @@ public class Tag extends Metadata {
         + ", label='"
         + label
         + '\''
-        + ", objectIRI="
+        + ", objectIRI='"
         + objectIRI
-        + ", relationIRI="
+        + '\''
+        + ", relationIRI='"
         + relationIRI
+        + '\''
         + ", relationLabel='"
         + relationLabel
+        + '\''
+        + ", value='"
+        + value
         + '\''
         + ", codeSystem='"
         + codeSystem
