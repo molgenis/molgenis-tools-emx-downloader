@@ -6,6 +6,7 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
   public static final MolgenisVersion VERSION_3 = new MolgenisVersion(3, 0, 0);
   public static final MolgenisVersion VERSION_4 = new MolgenisVersion(4, 0, 0);
   public static final MolgenisVersion VERSION_8_7 = new MolgenisVersion(8, 7, 0);
+  public static final MolgenisVersion VERSION_9_2 = new MolgenisVersion(9, 2, 0);
   private final int major;
   private final int minor;
   private final int revison;
@@ -52,18 +53,6 @@ public class MolgenisVersion implements Comparable<MolgenisVersion> {
 
   public boolean equalsOrSmallerThan(final MolgenisVersion that) {
     return this.equals(that) || this.smallerThan(that);
-  }
-
-  public int getMajor() {
-    return major;
-  }
-
-  public int getMinor() {
-    return minor;
-  }
-
-  public int getRevison() {
-    return revison;
   }
 
   @Override

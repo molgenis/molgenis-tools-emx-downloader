@@ -4,6 +4,7 @@ import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_2;
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_3;
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_4;
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_8_7;
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_9_2;
 
 import com.google.common.graph.Traverser;
 import java.io.IOException;
@@ -199,7 +200,7 @@ public class MolgenisRestApiClient implements MolgenisClient {
   }
 
   @Override
-  public void close() throws Exception {
+  public void close() {
     try {
       if (token != null) {
         logout();
@@ -323,6 +324,12 @@ public class MolgenisRestApiClient implements MolgenisClient {
 
   private void initConverter(MolgenisVersion version) throws IOException, URISyntaxException {
     if (version == null) getVersion();
+
+    if (version != null && version.equalsOrLargerThan(VERSION_4)) {
+      LOG.warn(
+          "For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
+    }
+
     if (converter == null) {
       if (version == null || version.smallerThan(VERSION_2)) {
         converter = new MolgenisV1MetadataConverter(repository);
@@ -331,13 +338,11 @@ public class MolgenisRestApiClient implements MolgenisClient {
       } else if (version.equalsMajor(VERSION_3)) {
         converter = new MolgenisV3MetadataConverter(repository);
       } else if (version.equalsOrLargerThan(VERSION_4) && version.smallerThan(VERSION_8_7)) {
-        LOG.warn(
-            "For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
         converter = new MolgenisV4MetadataConverter(repository);
-      } else if (version.equalsOrLargerThan(VERSION_8_7)) {
-        LOG.warn(
-            "For MOLGENIS V4.x.x and higher the 'name' attribute is reconstructed from the id, this won't work for IDs that do not follow the scheme 'package'+'_'+'name'");
+      } else if (version.equalsOrLargerThan(VERSION_8_7) && version.smallerThan(VERSION_9_2)) {
         converter = new MolgenisV87MetadataConverter(repository);
+      } else if (version.equalsOrLargerThan(VERSION_9_2)) {
+        converter = new MolgenisV92MetadataConverter(repository);
       }
     }
   }

@@ -1,4 +1,4 @@
-package org.molgenis.downloader.emx.serializers;
+package org.molgenis.downloader.emx.serializers.v9;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.molgenis.downloader.api.EntitySerializer;
 import org.molgenis.downloader.api.metadata.Tag;
 
-public class EMXTagSerializer implements EntitySerializer<Tag> {
+public class EMXTagSerializerV92 implements EntitySerializer<Tag> {
   private static final String[] FIELDS = {
-    "identifier", "label", "relationLabel", "objectIRI", "relationIRI", "codeSystem"
+    "identifier", "label", "relationLabel", "objectIRI", "relationIRI", "value", "codeSystem"
   };
 
   @SuppressWarnings("DuplicatedCode")
@@ -21,6 +21,7 @@ public class EMXTagSerializer implements EntitySerializer<Tag> {
     fields.add(tag.getRelationLabel());
     fields.add(Optional.ofNullable(tag.getObjectIRI()).orElse(""));
     fields.add(Optional.ofNullable(tag.getRelationIRI()).orElse(""));
+    fields.add(Optional.ofNullable(tag.getValue()).orElse(""));
     fields.add(tag.getCodeSystem());
     return fields;
   }

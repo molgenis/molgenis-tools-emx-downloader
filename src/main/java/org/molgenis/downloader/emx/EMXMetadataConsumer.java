@@ -1,6 +1,7 @@
 package org.molgenis.downloader.emx;
 
 import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_2;
+import static org.molgenis.downloader.api.metadata.MolgenisVersion.VERSION_9_2;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -14,6 +15,7 @@ import org.molgenis.downloader.api.metadata.Entity;
 import org.molgenis.downloader.api.metadata.Metadata;
 import org.molgenis.downloader.api.metadata.MolgenisVersion;
 import org.molgenis.downloader.api.metadata.Package;
+import org.molgenis.downloader.api.metadata.Tag;
 import org.molgenis.downloader.emx.serializers.EMXAttributeSerializer;
 import org.molgenis.downloader.emx.serializers.EMXEntitySerializer;
 import org.molgenis.downloader.emx.serializers.EMXPackageSerializer;
@@ -21,6 +23,7 @@ import org.molgenis.downloader.emx.serializers.EMXTagSerializer;
 import org.molgenis.downloader.emx.serializers.v3.EMXAttributeSerializerV3;
 import org.molgenis.downloader.emx.serializers.v3.EMXEntitySerializerV3;
 import org.molgenis.downloader.emx.serializers.v3.EMXPackageSerializerV3;
+import org.molgenis.downloader.emx.serializers.v9.EMXTagSerializerV92;
 
 class EMXMetadataConsumer implements MetadataConsumer {
 
@@ -55,7 +58,12 @@ class EMXMetadataConsumer implements MetadataConsumer {
       writeMetadata(ENTITIES, entitiesSerializer, repository.getEntities());
       writeMetadata(PACKAGES, packagesSerializer, repository.getPackages());
 
-      EMXTagSerializer tagSerializer = new EMXTagSerializer();
+      EntitySerializer<Tag> tagSerializer;
+      if (version.equalsOrLargerThan(VERSION_9_2)) {
+        tagSerializer = new EMXTagSerializerV92();
+      } else {
+        tagSerializer = new EMXTagSerializer();
+      }
       writeMetadata(TAGS, tagSerializer, repository.getTags());
     } catch (final IOException ex) {
       writer.addException(ex);
